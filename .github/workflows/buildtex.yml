@@ -31,4 +31,3 @@ jobs:
         with:
           commit_message: 'Add/Update PDFs from changed LaTeX files'
           file_pattern: 'docs/*.pdf'
-          branch: main
