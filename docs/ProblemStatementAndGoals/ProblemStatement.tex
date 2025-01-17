@@ -7,7 +7,7 @@
 
 \author{\authname}
 
-\date{}
+\date{January 16, 2025}
 
 \input{../Comments}
 \input{../Common}
@@ -22,34 +22,40 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+January 16, 2025 & Junwei Lin & Creation\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{Problem Statement}
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.} 
-
-\wss{You can change the section headings, as long as you include the required
-information.}
+R-wave detection is a critical task in ECG (electrocardiogram) signal processing, serving important purposes such as heart rate calculation, arrhythmia analysis, cardiac conduction evaluation, and heart disease diagnosis. The patient's ECG signal is sampled by the sensor and converted into a digital signal, where we can detect R-waves. However, since the sampling is not under an ideal condition, a large amount of clutter wave is mixed into the original signal, such as utility frequency. So we need a strong filtering algorithm to filter out redundant signals, and then accurately capture the peaks of R-waves.
 
 \subsection{Problem}
 
+Given a single channel unfiltered ECG signal, find the index of each R wave peak.
+
 \subsection{Inputs and Outputs}
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+\subsubsection{Inputs}
+
+\begin{enumerate}
+    \item Sampling frequency
+    \item Sampling data file
+\end{enumerate}
+
+\subsubsection{Outputs}
+
+\begin{enumerate}
+    \item Index of R-wave peaks
+    \item A graph that shows all the R-wave peaks
+\end{enumerate}
 
 \subsection{Stakeholders}
 
 \subsection{Environment}
 
-\wss{Hardware and software environment}
+debian-12.9.0-amd64
 
 \section{Goals}
 
