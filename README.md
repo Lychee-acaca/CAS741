@@ -1,10 +1,10 @@
-# Project Name
+# RwaveDetection
 
-Developer Names:
+Developer Names: Junwei Lin
 
-Date of project start:
+Date of project start: January 16, 2025
 
-This project is ...
+This project is a tool for ECG signal processing and R-wave detection.
 
 The folders and files for this project are as follows:
 
