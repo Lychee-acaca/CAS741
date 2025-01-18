@@ -38,8 +38,9 @@ R-wave detection is a critical task in ECG (electrocardiogram) signal processing
 \subsubsection{Inputs}
 
 \begin{enumerate}
-    \item Sampling frequency
-    \item Sampling data file
+    \item Sampling data file, comes from \href{https://physionet.org/content/mitdb/1.0.0/} {MIT-BIH Arrhythmia Database}
+    \item Sampling frequency of the data file
+    \item (Optional) Annotated data from cardiologists, used to evaluate program detecting accuracy
 \end{enumerate}
 
 \subsubsection{Outputs}
@@ -47,6 +48,7 @@ R-wave detection is a critical task in ECG (electrocardiogram) signal processing
 \begin{enumerate}
     \item Index of R-wave peaks
     \item A graph that shows all the R-wave peaks
+    \item (Optional) RMSE between each detected R-wave peak time and annotated time from cardiologists
 \end{enumerate}
 
 \subsection{Stakeholders}
