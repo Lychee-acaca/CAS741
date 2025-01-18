@@ -29,19 +29,20 @@ January 16, 2025 & Junwei Lin & Creation\\
 
 \section{Problem Statement}
 
-R-wave detection is a critical task in ECG (electrocardiogram) signal processing, serving important purposes such as heart rate calculation, arrhythmia analysis, cardiac conduction evaluation, and heart disease diagnosis. The patient's ECG signal is sampled by the sensor and converted into a digital signal, where we can detect R-waves. However, since the sampling is not under an ideal condition, a large amount of clutter wave is mixed into the original signal, such as utility frequency. So we need a strong filtering algorithm to filter out redundant signals, and then accurately capture the peaks of R-waves.
+R-wave detection is a critical task in Electrocardiogram (ECG) signal processing, serving important purposes such as heart rate calculation, arrhythmia analysis, cardiac conduction evaluation, and heart disease diagnosis. The patient's ECG signal is sampled by the sensor and converted into a digital signal, where we can detect R-waves. However, since the sampling is not under an ideal condition, a large amount of clutter wave is mixed into the original signal, such as electrical noises and utility frequency.
 
 \subsection{Problem}
 
-Given a single channel unfiltered ECG signal, find the index of each R wave peak.
+A strong filtering algorithm is needed to filter out redundant signals, and then accurately capture the index of R-wave peaks.
 
 \subsection{Inputs and Outputs}
 
 \subsubsection{Inputs}
 
 \begin{enumerate}
-    \item Sampling frequency
-    \item Sampling data file
+    \item Sampling data file, comes from \href{https://physionet.org/content/mitdb/1.0.0/} {MIT-BIH Arrhythmia Database}
+    \item Sampling frequency of the data file
+    \item (Optional) Annotated data from cardiologists, used to evaluate program detecting accuracy
 \end{enumerate}
 
 \subsubsection{Outputs}
@@ -49,51 +50,30 @@ Given a single channel unfiltered ECG signal, find the index of each R wave peak
 \begin{enumerate}
     \item Index of R-wave peaks
     \item A graph that shows all the R-wave peaks
+    \item (Optional) Root Mean Square Error (RMSE) between each detected R-wave peak time and annotated time from cardiologists
 \end{enumerate}
 
 \subsection{Stakeholders}
 
+The stakeholders include but are not limited to patients, doctors, cardiologists, nurses, technicians, medical device manufacturers, researchers, all of whom rely on accurate, reliable, and efficient ECG signal processing for diagnosis, treatment, innovation, and patient care.
+
 \subsection{Environment}
 
-debian-12.9.0-amd64
+The project will be compiled on amd64 Debian 12.9 and Windows 10. Meanwhile, most light-weight embedding systems are able to run it theoretically.
 
 \section{Goals}
 
+\begin{enumerate}
+    \item Given a single-channel unfiltered ECG signal, find the index of each R-wave peak.
+    \item Given correct annotated data, calculate the RMSE between each detected R-wave peak time and annotated time.
+\end{enumerate}
+
 \section{Stretch Goals}
+
+Implements a variety of R-wave detection algorithms for users to choose from.
 
 \section{Challenge Level and Extras}
 
-\wss{State your expected challenge level (advanced, general or basic).  The
-challenge can come through the required domain knowledge, the implementation or
-something else.  Usually the greater the novelty of a project the greater its
-challenge level.  You should include your rationale for the selected level.
-Approval of the level will be part of the discussion with the instructor for
-approving the project.  The challenge level, with the approval (or request) of
-the instructor, can be modified over the course of the term.}
-
-\wss{Teams may wish to include extras as either potential bonus grades, or to
-make up for a less advanced challenge level.  Potential extras include usability
-testing, code walkthroughs, user documentation, formal proof, GenderMag
-personas, Design Thinking, etc.  Normally the maximum number of extras will be
-two.  Approval of the extras will be part of the discussion with the instructor
-for approving the project.  The extras, with the approval (or request) of the
-instructor, can be modified over the course of the term.}
-
-\newpage{}
-
-\section*{Appendix --- Reflection}
-
-\wss{Not required for CAS 741}
-
-\input{../Reflection.tex}
-
-\begin{enumerate}
-    \item What went well while writing this deliverable? 
-    \item What pain points did you experience during this deliverable, and how
-    did you resolve them?
-    \item How did you and your team adjust the scope of your goals to ensure
-    they are suitable for a Capstone project (not overly ambitious but also of
-    appropriate complexity for a senior design project)?
-\end{enumerate}  
+This is a problem with a general-level challenge. It is not a research project, but it still requires knowledge of IIR and FIR filter design. Additionally, solving this problem requires understanding some algorithms belonging to this field. Doxygen will be widely used to generate the required documentation, which could be a potential extra.
 
 \end{document}
