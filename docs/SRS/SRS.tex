@@ -1,5 +1,5 @@
-% THIS DOCUMENT IS TAILORED TO REQUIREMENTS FOR SCIENTIFIC COMPUTING.  IT SHOULDN'T
-% BE USED FOR NON-SCIENTIFIC COMPUTING PROJECTS
+% THIS DOCUMENT IS TAILORED TO REQUIREMENTS FOR SCIENTIFIC COMPUTING.  IT
+% SHOULDN'T BE USED FOR NON-SCIENTIFIC COMPUTING PROJECTS
 \documentclass[12pt]{article}
 
 \usepackage{amsmath, mathtools}
@@ -23,10 +23,10 @@
 
 %\usepackage{refcheck}
 
-\hypersetup{
-    bookmarks=true,         % show bookmarks bar?
+\hypersetup{ bookmarks=true,         % show bookmarks bar?
       colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    linkcolor=red,          % color of internal links (change box color with
+                            % linkbordercolor)
     citecolor=green,        % color of links to bibliography
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
@@ -49,32 +49,23 @@
 % Used so that cross-references have a meaningful prefix
 \newcounter{defnum} %Definition Number
 \newcommand{\dthedefnum}{GD\thedefnum}
-\newcommand{\dref}[1]{GD\ref{#1}}
-\newcounter{datadefnum} %Datadefinition Number
+\newcommand{\dref}[1]{GD\ref{#1}} \newcounter{datadefnum} %Datadefinition Number
 \newcommand{\ddthedatadefnum}{DD\thedatadefnum}
-\newcommand{\ddref}[1]{DD\ref{#1}}
-\newcounter{theorynum} %Theory Number
+\newcommand{\ddref}[1]{DD\ref{#1}} \newcounter{theorynum} %Theory Number
 \newcommand{\tthetheorynum}{TM\thetheorynum}
-\newcommand{\tref}[1]{TM\ref{#1}}
-\newcounter{tablenum} %Table Number
+\newcommand{\tref}[1]{TM\ref{#1}} \newcounter{tablenum} %Table Number
 \newcommand{\tbthetablenum}{TB\thetablenum}
-\newcommand{\tbref}[1]{TB\ref{#1}}
-\newcounter{assumpnum} %Assumption Number
+\newcommand{\tbref}[1]{TB\ref{#1}} \newcounter{assumpnum} %Assumption Number
 \newcommand{\atheassumpnum}{A\theassumpnum}
-\newcommand{\aref}[1]{A\ref{#1}}
-\newcounter{goalnum} %Goal Number
+\newcommand{\aref}[1]{A\ref{#1}} \newcounter{goalnum} %Goal Number
 \newcommand{\gthegoalnum}{GS\thegoalnum}
-\newcommand{\gsref}[1]{GS\ref{#1}}
-\newcounter{instnum} %Instance Number
+\newcommand{\gsref}[1]{GS\ref{#1}} \newcounter{instnum} %Instance Number
 \newcommand{\itheinstnum}{IM\theinstnum}
-\newcommand{\iref}[1]{IM\ref{#1}}
-\newcounter{reqnum} %Requirement Number
+\newcommand{\iref}[1]{IM\ref{#1}} \newcounter{reqnum} %Requirement Number
 \newcommand{\rthereqnum}{R\thereqnum}
-\newcommand{\rref}[1]{R\ref{#1}}
-\newcounter{nfrnum} %NFR Number
+\newcommand{\rref}[1]{R\ref{#1}} \newcounter{nfrnum} %NFR Number
 \newcommand{\rthenfrnum}{NFR\thenfrnum}
-\newcommand{\nfrref}[1]{NFR\ref{#1}}
-\newcounter{lcnum} %Likely change number
+\newcommand{\nfrref}[1]{NFR\ref{#1}} \newcounter{lcnum} %Likely change number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
 
@@ -144,8 +135,8 @@
 
 \section*{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X} \toprule {\bf Date} & {\bf Version}
+& {\bf Notes}\\
 \midrule
 January 16, 2025 & 1.0 & Creation\\
 \bottomrule
@@ -169,8 +160,7 @@ This section records information for easy reference.
 Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is employed
 as the unit system.  In addition to the basic units, several derived units are
 used as described below.  For each unit, the symbol is given followed by a
-description of the unit and the SI name.
-~\newline
+description of the unit and the SI name.  ~\newline
 
 \renewcommand{\arraystretch}{1.2}
 %\begin{table}[ht]
@@ -188,9 +178,9 @@ description of the unit and the SI name.
 
 \plt{Only include the units that your SRS actually uses.}
 
-\plt{Derived units, like newtons, pascal, etc, should show their derivation
-    (the units they are derived from) if their constituent units are in the
-    table of units (that is, if the units they are derived from are used in the
+\plt{Derived units, like newtons, pascal, etc, should show their derivation (the
+    units they are derived from) if their constituent units are in the table of
+    units (that is, if the units they are derived from are used in the
     document).  For instance, the derivation of pascals as
     $\si{\pascal}=\si{\newton\per\square\meter}$ is shown if newtons and m are
     both in the table.  The derivations of newtons would not be shown if kg and
@@ -204,8 +194,8 @@ description of the unit and the SI name.
   \href{https://www.nist.gov/pml/weights-and-measures/writing-metric-units}
   {NIST} web-page.}
 
-\noindent Exceptionally, some units officially accepted for use with the SI are used as described below.
-~\newline
+\noindent Exceptionally, some units officially accepted for use with the SI are
+used as described below.  ~\newline
 
 \renewcommand{\arraystretch}{1.2}
 %\begin{table}[ht]
@@ -222,12 +212,14 @@ description of the unit and the SI name.
 \subsection{Table of Symbols}
 
 The table that follows summarizes the symbols used in this document along with
-their units.  The choice of symbols was made to be consistent with the existing documentation for the R-wave detector.  The symbols are listed in alphabetical order.
+their units.  The choice of symbols was made to be consistent with the existing
+documentation for the R-wave detector.  The symbols are listed in alphabetical
+order.
 
 \renewcommand{\arraystretch}{1.2}
 %\noindent \begin{tabularx}{1.0\textwidth}{l l X}
-\noindent \begin{longtable*}{l l p{12cm}} \toprule
-\textbf{symbol} & \textbf{unit} & \textbf{description}\\
+\noindent \begin{longtable*}{l l p{12cm}} \toprule \textbf{symbol} &
+\textbf{unit} & \textbf{description}\\
 \midrule 
 $A(n)$ & \si{\mV} & Index of the annotated n-th R wave \\
 $f_c$ & \si{\hertz} & cutoff frequency of the filter \\
@@ -297,11 +289,11 @@ $u(n)$ & \si{\mV} & Discrete-time ECG signal at sample n \\
 
 \plt{This template document assumes that a single program is being documented.
   If you are documenting a family of models, you should start with a commonality
-  analysis.  A separate template is provided for this.  For program
-  families you should look at \cite{Smith2006, SmithMcCutchanAndCarette2017}.
-  Single family member programs are often programs based on a single physical
-  model.  General purpose tools are usually documented as a family.  Families of
-  physical models also come up.}
+  analysis.  A separate template is provided for this.  For program families you
+  should look at \cite{Smith2006, SmithMcCutchanAndCarette2017}.  Single family
+  member programs are often programs based on a single physical model.  General
+  purpose tools are usually documented as a family.  Families of physical models
+  also come up.}
 
 \plt{The SRS is not generally written, or read, sequentially.  The SRS is a
   reference document.  It is generally read in an ad hoc order, as the need
@@ -349,15 +341,25 @@ $u(n)$ & \si{\mV} & Discrete-time ECG signal at sample n \\
 
 \section{Introduction}
 
-R-wave detection is a critical task in ECG signal processing, serving important purposes such as heart rate calculation, arrhythmia analysis, cardiac conduction evaluation, and heart disease diagnosis.  The patient's ECG signal is sampled by the sensor and converted into a digital signal, where we can detect R-waves.  However, since the sampling is not under an ideal condition, a large amount of clutter wave is mixed into the original signal, such as electrical noises and utility frequency.
+R-wave detection is a critical task in ECG signal processing, serving important
+purposes such as heart rate calculation, arrhythmia analysis, cardiac conduction
+evaluation, and heart disease diagnosis.  The patient's ECG signal is sampled by
+the sensor and converted into a digital signal, where we can detect R-waves.
+However, since the sampling is not under an ideal condition, a large amount of
+clutter wave is mixed into the original signal, such as electrical noises and
+utility frequency.
 
-There are many algorithms for detecting R-waves.  This project will focus on reimplementing the \href{https://ieeexplore.ieee.org/document/4122029} {Pan-Tompkins} algorithm.  All filter parameters used in the algorithm will be automatically derived according to requirements without relying on external libraries.
+There are many algorithms for detecting R-waves.  This project will focus on
+reimplementing the \href{https://ieeexplore.ieee.org/document/4122029}
+{Pan-Tompkins} algorithm.  All filter parameters used in the algorithm will be
+automatically derived according to requirements without relying on external
+libraries.
 
 \plt{The introduction section is written to introduce the problem.  It starts
   general and focuses on the problem domain. The general advice is to start with
-a paragraph or two that describes the problem, followed by a ``roadmap''
-paragraph.  A roadmap orients the reader by telling them what sub-sections to
-expect in the Introduction section.}
+  a paragraph or two that describes the problem, followed by a ``roadmap''
+  paragraph.  A roadmap orients the reader by telling them what sub-sections to
+  expect in the Introduction section.}
 
 \subsection{Purpose of Document}
 
@@ -392,14 +394,14 @@ expect in the Introduction section.}
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
-\plt{This section summarizes the skills and knowledge of the readers of the
-  SRS.  It does NOT have the same purpose as the ``User Characteristics''
-  section (Section~\ref{SecUserCharacteristics}).  The intended readers are the
-  people that will read, review and maintain the SRS.  They are the people that
-  will conceivably design the software that is intended to meet the
-  requirements.  The user, on the other hand, is the person that uses the
-  software that is built.  They may never read this SRS document.  Of course,
-  the same person could be a ``user'' and an ``intended reader.''}
+\plt{This section summarizes the skills and knowledge of the readers of the SRS.
+  It does NOT have the same purpose as the ``User Characteristics'' section
+  (Section~\ref{SecUserCharacteristics}).  The intended readers are the people
+  that will read, review and maintain the SRS.  They are the people that will
+  conceivably design the software that is intended to meet the requirements.
+  The user, on the other hand, is the person that uses the software that is
+  built.  They may never read this SRS document.  Of course, the same person
+  could be a ``user'' and an ``intended reader.''}
 
 \plt{The intended reader characteristics should be written as unambiguously and
   as specifically as possible.  Rather than say, the user should have an
@@ -419,7 +421,7 @@ expect in the Introduction section.}
 This section provides general information about the system.  It identifies the
 interfaces between the system and its environment, describes the user
 characteristics and lists the system constraints.  \plt{This text can likely be
-  borrowed verbatim.}
+borrowed verbatim.}
 
 \plt{The purpose of this section is to provide general information about the
   system so the specific requirements in the next section will be easier to
@@ -431,7 +433,11 @@ characteristics and lists the system constraints.  \plt{This text can likely be
 
 \subsection{System Context}
 
-The RwaveDetecion system receives sample frequency $f_s$ and discrete time domain ECG signal $u(n)$ from the ADC.  Based on this information, the index of each R-wave peak $R(n)$ can be calculated and returned to the user.  If the user provides annotated data $A(n)$, which is optional, the system will return the $RMSE$ between $A(n)$ and $R(n)$ additionally.
+The RwaveDetecion system receives sample frequency $f_s$ and discrete time
+domain ECG signal $u(n)$ from the ADC.  Based on this information, the index of
+each R-wave peak $R(n)$ can be calculated and returned to the user.  If the user
+provides annotated data $A(n)$, which is optional, the system will return the
+$RMSE$ between $A(n)$ and $R(n)$ additionally.
 
 \plt{Your system context will include a figure that shows the abstract view of
   the software.  Often in a scientific context, the program can be viewed
@@ -516,10 +522,10 @@ automotive hazard analyses.}
 \section{Specific System Description}
 
 This section first presents the problem description, which gives a high-level
-view of the problem to be solved.  This is followed by the solution characteristics
-specification, which presents the assumptions, theories, definitions and finally
-the instance models.  \plt{Add any project specific details that are relevant
-  for the section overview.}
+view of the problem to be solved.  This is followed by the solution
+characteristics specification, which presents the assumptions, theories,
+definitions and finally the instance models.  \plt{Add any project specific
+details that are relevant for the section overview.}
 
 \subsection{Problem Description} \label{Sec_pd}
 
@@ -530,9 +536,9 @@ The description here should be in the problem space, not the solution space.}
 
 \plt{This section is expressed in words, not with equations.  It provide the
   meaning of the different words and phrases used in the domain of the problem.
-The terminology is used to introduce concepts from the world outside of the
-mathematical model  The terminology provides a real world connection to give the
-mathematical model meaning.}
+  The terminology is used to introduce concepts from the world outside of the
+  mathematical model  The terminology provides a real world connection to give
+  the mathematical model meaning.}
 
 This subsection provides a list of terms that are used in the subsequent
 sections and their meaning, with the purpose of reducing ambiguity and making it
@@ -563,8 +569,8 @@ easier to correctly understand the requirements:
 physical entity.  They can be conceptual.  This is particularly important when
 the documentation is for a numerical method. }
 
-The physical system of \progname{}, as shown in Figure~?,
-includes the following elements:
+The physical system of \progname{}, as shown in Figure~?, includes the following
+elements:
 
 \begin{itemize}
 
@@ -576,23 +582,19 @@ includes the following elements:
 
 \plt{A figure here makes sense for most SRS documents}
 
-% \begin{figure}[h!]
-% \begin{center}
-% %\rotatebox{-90}
+% \begin{figure}[h!] \begin{center} %\rotatebox{-90}
 % {
 %  \includegraphics[width=0.5\textwidth]{<FigureName>}
 % }
-% \caption{\label{<Label>} <Caption>}
-% \end{center}
-% \end{figure}
+% \caption{\label{<Label>} <Caption>} \end{center} \end{figure}
 
 \subsubsection{Goal Statements}
 
 \plt{The goal statements refine the ``Problem Description''
   (Section~\ref{Sec_pd}).  A goal is a functional objective the system under
   consideration should achieve. Goals provide criteria for sufficient
-  completeness of a requirements specification and for requirements
-  pertinence. Goals will be refined in Section “Instanced Models”
+  completeness of a requirements specification and for requirements pertinence.
+  Goals will be refined in Section “Instanced Models”
   (Section~\ref{sec_instance}). Large and complex goals should be decomposed
   into smaller sub-goals.  The goals are written abstractly, with a minimal
   amount of technical language.  They should be understandable by non-domain
@@ -611,13 +613,12 @@ includes the following elements:
 \subsection{Solution Characteristics Specification}
 
 \plt{This section specifies the information in the solution domain of the system
-  to be developed. This section is intended to express what is required in
-  such a way that analysts and stakeholders get a clear picture, and the
-  latter will accept it. The purpose of this section is to reduce the problem
-  into one expressed in mathematical terms. Mathematical expertise is used to
-  extract the essentials from the underlying physical description of the
-  problem, and to collect and substantiate all physical data pertinent to the
-  problem.}
+  to be developed. This section is intended to express what is required in such
+  a way that analysts and stakeholders get a clear picture, and the latter will
+  accept it. The purpose of this section is to reduce the problem into one
+  expressed in mathematical terms. Mathematical expertise is used to extract the
+  essentials from the underlying physical description of the problem, and to
+  collect and substantiate all physical data pertinent to the problem.}
 
 \plt{This section presents the solution characteristics by successively refining
   models.  It starts with the abstract/general Theoretical Models (TMs) and
@@ -678,14 +679,14 @@ understand.}
 \plt{The assumptions are a refinement of the scope.  The scope is general, where
   the assumptions are specific.  All assumptions should be listed, even those
   that domain experts know so well that they are rarely (if ever) written down.}
-\plt{The document should not take for granted that the reader knows which
+  \plt{The document should not take for granted that the reader knows which
   assumptions have been made. In the case of unusual assumptions, it is
   recommended that the documentation either include, or point to, an explanation
-  and justification for the assumption.} 
-\plt{If it helps with the organization and understandability, the assumptions
-can be presented as sub sections.  The following sub-sections are options:
-background theory assumptions, helper theory assumptions, generic theory
-assumptions, problem specific assumptions, and rationale assumptions}
+  and justification for the assumption.} \plt{If it helps with the organization
+  and understandability, the assumptions can be presented as sub sections.  The
+  following sub-sections are options: background theory assumptions, helper
+  theory assumptions, generic theory assumptions, problem specific assumptions,
+  and rationale assumptions}
 
 This section simplifies the original problem and helps in developing the
 theoretical model by filling in the missing information for the physical system.
@@ -696,11 +697,11 @@ change [LC], in which the respective assumption is used.
 \begin{itemize}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_meaningfulLabel}:]
-  \plt{Short description of each assumption.  Each assumption
-    should have a meaningful label.  Use cross-references to identify the
-    appropriate traceability to TM, GD, DD etc., using commands like dref, ddref
-    etc.  Each assumption should be atomic - that is, there should not be an
-    explicit (or implicit) ``and'' in the text of an assumption.}
+  \plt{Short description of each assumption.  Each assumption should have a
+    meaningful label.  Use cross-references to identify the appropriate
+    traceability to TM, GD, DD etc., using commands like dref, ddref etc.  Each
+    assumption should be atomic - that is, there should not be an explicit (or
+    implicit) ``and'' in the text of an assumption.}
 
 \end{itemize}
 
@@ -719,7 +720,7 @@ rationale theories.}
 
 This section focuses on the general equations and laws that \progname{} is based
 on.  \plt{Modify the examples below for your problem, and add additional models
-  as appropriate.}
+as appropriate.}
 
 ~\newline
 
@@ -730,25 +731,20 @@ on.  \plt{Modify the examples below for your problem, and add additional models
 % #3 label
 {Conservation of thermal energy}
 % #4 equation
-{
-  $-{\bf \nabla \cdot q} + g$ = $\rho C \frac{\partial T}{\partial t}$
-}
+{ $-{\bf \nabla \cdot q} + g$ = $\rho C \frac{\partial T}{\partial t}$ }
 % #5 description
-{
-  The above equation gives the conservation of energy for transient heat transfer in a material
-  of specific heat capacity $C$ (\si{\joule\per\kilogram\per\celsius}) and density $\rho$ 
-  (\si{\kilogram\per\cubic\metre}), where $\bf q$ is the thermal flux vector (\si{\watt\per\square\metre}),
-  $g$ is the volumetric heat generation
-  (\si{\watt\per\cubic\metre}), $T$ is the temperature
-  (\si{\celsius}),  $t$ is time (\si{\second}), and $\nabla$ is
-  the gradient operator.  For this equation to apply, other forms
-  of energy, such as mechanical energy, are assumed to be negligible in the
-  system (\aref{A_OnlyThermalEnergy}).  In general, the material properties ($\rho$ and $C$) depend on temperature.
-}
+{ The above equation gives the conservation of energy for transient heat
+  transfer in a material of specific heat capacity $C$
+  (\si{\joule\per\kilogram\per\celsius}) and density $\rho$
+  (\si{\kilogram\per\cubic\metre}), where $\bf q$ is the thermal flux vector
+  (\si{\watt\per\square\metre}), $g$ is the volumetric heat generation
+  (\si{\watt\per\cubic\metre}), $T$ is the temperature (\si{\celsius}),  $t$ is
+  time (\si{\second}), and $\nabla$ is the gradient operator.  For this equation
+  to apply, other forms of energy, such as mechanical energy, are assumed to be
+  negligible in the system (\aref{A_OnlyThermalEnergy}).  In general, the
+  material properties ($\rho$ and $C$) depend on temperature.  }
 % #6 Notes
-{
-None.
-}
+{ None.  }
 % #7 Source
 {
   \url{http://www.efunda.com/formulae/heat_transfer/conduction/overview_cond.cfm}
@@ -758,9 +754,7 @@ None.
   \dref{ROCT}
 }
 % #9 Preconditions
-{
-None
-}
+{ None }
 % #1 derivation - not applicable by default
 {}
 
@@ -770,8 +764,8 @@ None
   This information is given for traceability.  Ref. By provides a pointer in the
   opposite direction to what we commonly do.  You still need to have a reference
   in the other direction pointing to the current model, definition or
-  assumption.  As an example, if TM1 is referenced by GD2, that means that GD2 will
-  explicitly include a reference to TM1.}
+  assumption.  As an example, if TM1 is referenced by GD2, that means that GD2
+  will explicitly include a reference to TM1.}
 
 ~\newline
 
@@ -808,17 +802,15 @@ SI Units&\si{\watt\per\square\metre}\\
 \hline
 Equation&$ q(t) = h \Delta T(t)$  \\
 \hline
-Description &
-Newton's law of cooling describes convective cooling from a surface.  The law is
-stated as: the rate of heat loss from a body is proportional to the difference
-in temperatures between the body and its surroundings.
-\\
+Description & Newton's law of cooling describes convective cooling from a
+surface.  The law is stated as: the rate of heat loss from a body is
+proportional to the difference in temperatures between the body and its
+surroundings.  \\
 & $q(t)$ is the thermal flux (\si{\watt\per\square\metre}).\\
-& $h$ is the heat transfer coefficient, assumed independent of $T$ (\aref{A_hcoeff})
-	(\si{\watt\per\square\metre\per\celsius}).\\
-&$\Delta T(t)$= $T(t) - T_{\text{env}}(t)$ is the time-dependent thermal gradient
-between the environment and the object (\si{\celsius}).
-\\
+& $h$ is the heat transfer coefficient, assumed independent of $T$
+	(\aref{A_hcoeff}) (\si{\watt\per\square\metre\per\celsius}).\\
+&$\Delta T(t)$= $T(t) - T_{\text{env}}(t)$ is the time-dependent thermal
+gradient between the environment and the object (\si{\celsius}).  \\
 \hline
   Source & Citation here \\
   \hline
@@ -830,9 +822,8 @@ between the environment and the object (\si{\celsius}).
 \subsubsection*{Detailed derivation of simplified rate of change of temperature}
 
 \plt{This may be necessary when the necessary information does not fit in the
-  description field.}
-\plt{Derivations are important for justifying a given GD.  You want it to be
-  clear where the equation came from.}
+  description field.} \plt{Derivations are important for justifying a given GD.
+  You want it to be clear where the equation came from.}
 
 \subsubsection{Data Definitions}\label{sec_datadef}
 
@@ -847,7 +838,7 @@ between the environment and the object (\si{\celsius}).
 
 This section collects and defines all the data needed to build the instance
 models. The dimension of each quantity is also given.  \plt{Modify the examples
-  below for your problem, and add additional definitions as appropriate.}
+below for your problem, and add additional definitions as appropriate.}
 
 ~\newline
 
@@ -869,17 +860,17 @@ Symbol &$q_C$\\
   \hline
   Equation&$q_C(t) = h_C (T_C - T_W(t))$, over area $A_C$\\
   \hline
-  Description & 
-                $T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is the temperature of the water (\si{\celsius}).  
-                The heat flux out of the coil, $q_C$ (\si{\watt\per\square\metre}), is found by
-                assuming that Newton's Law 
-                of Cooling applies (\aref{A_Newt_coil}).  This law (\dref{NL}) is used on the surface of
-                the coil, which has area $A_C$ (\si{\square\metre}) and heat 
-                transfer coefficient $h_C$
+  Description & $T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is
+                the temperature of the water (\si{\celsius}).  
+                The heat flux out of the coil, $q_C$
+                (\si{\watt\per\square\metre}), is found by assuming that
+                Newton's Law of Cooling applies (\aref{A_Newt_coil}).  This law
+                (\dref{NL}) is used on the surface of the coil, which has area
+                $A_C$ (\si{\square\metre}) and heat transfer coefficient $h_C$
                 (\si{\watt\per\square\metre\per\celsius}).  This equation
-                assumes that the temperature of the coil is constant over time (\aref{A_tcoil}) and that it does not vary along the length
-                of the coil (\aref{A_tlcoil}).
-  \\
+                assumes that the temperature of the coil is constant over time
+                (\aref{A_tcoil}) and that it does not vary along the length of
+                the coil (\aref{A_tlcoil}).  \\
   \hline
   Sources& Citation here \\
   \hline
@@ -905,7 +896,7 @@ Symbol &$q_C$\\
 
 This section collects and defines all the data types needed to document the
 models. \plt{Modify the examples below for your problem, and add additional
-  definitions as appropriate.}
+definitions as appropriate.}
 
 ~\newline
 
@@ -919,8 +910,7 @@ models. \plt{Modify the examples below for your problem, and add additional
   \hline
   Type Def & mathematical definition of the type\\
   \hline
-  Description & description here
-  \\
+  Description & description here \\
   \hline
   Sources & Citation here, if the type is borrowed from another source\\
   \hline
@@ -935,14 +925,14 @@ models. \plt{Modify the examples below for your problem, and add additional
   GDs.  This section should remain abstract.  The SRS should specify the
   requirements without considering the implementation.}
 
-This section transforms the problem defined in Section~\ref{Sec_pd} into 
-one which is expressed in mathematical terms. It uses concrete symbols defined 
-in Section~\ref{sec_datadef} to replace the abstract symbols in the models 
+This section transforms the problem defined in Section~\ref{Sec_pd} into one
+which is expressed in mathematical terms. It uses concrete symbols defined in
+Section~\ref{sec_datadef} to replace the abstract symbols in the models
 identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
 
 The goals \plt{reference your goals} are solved by \plt{reference your instance
   models}.  \plt{other details, with cross-references where appropriate.}
-\plt{Modify the examples below for your problem, and add additional models as
+  \plt{Modify the examples below for your problem, and add additional models as
   appropriate.}
 
 ~\newline
@@ -959,13 +949,16 @@ The goals \plt{reference your goals} are solved by \plt{reference your instance
   \hline
   Label& \bf Energy balance on water to find $T_W$\\
   \hline
-  Input&$m_W$, $C_W$, $h_C$, $A_C$, $h_P$, $A_P$, $t_\text{final}$, $T_C$, 
+  Input&$m_W$, $C_W$, $h_C$, $A_C$, $h_P$, $A_P$, $t_\text{final}$, $T_C$,
   $T_\text{init}$, $T_P(t)$ from \iref{epcm}\\
-  & The input is constrained so that $T_\text{init} \leq T_C$ (\aref{A_charge})\\
+  & The input is constrained so that $T_\text{init} \leq T_C$
+  (\aref{A_charge})\\
   \hline
   Output&$T_W(t)$, $0\leq t \leq t_\text{final}$, such that\\
-  &$\frac{dT_W}{dt} = \frac{1}{\tau_W}[(T_C - T_W(t)) + {\eta}(T_P(t) - T_W(t))]$,\\
-  &$T_W(0) = T_P(0) = T_\text{init}$ (\aref{A_InitTemp}) and $T_P(t)$ from \iref{epcm} \\
+  &$\frac{dT_W}{dt} = \frac{1}{\tau_W}[(T_C - T_W(t)) + {\eta}(T_P(t) -
+  T_W(t))]$,\\
+  &$T_W(0) = T_P(0) = T_\text{init}$ (\aref{A_InitTemp}) and $T_P(t)$ from
+  \iref{epcm} \\
   \hline
   Description&$T_W$ is the water temperature (\si{\celsius}).\\
   &$T_P$ is the PCM temperature (\si{\celsius}).\\
@@ -974,8 +967,8 @@ The goals \plt{reference your goals} are solved by \plt{reference your instance
   &$\eta = \frac{h_P A_P}{h_C A_C}$ is a constant (dimensionless).\\
   & The above equation applies as long as the water is in liquid form,
   $0<T_W<100^o\text{C}$, where $0^o\text{C}$ and $100^o\text{C}$ are the melting
-  and boiling points of water, respectively (\aref{A_OpRange}, \aref{A_Pressure}).
-  \\
+  and boiling points of water, respectively (\aref{A_OpRange},
+  \aref{A_Pressure}).  \\
   \hline
   Sources& Citation here \\
   \hline
@@ -1017,8 +1010,8 @@ Table~\ref{TblSpecParams}.
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} &
                              \textbf{Typical Value} & \textbf{Uncertainty}\\
   \midrule 
-  $L$ & $L > 0$ & $L_{\text{min}} \leq L \leq L_{\text{max}}$ & 1.5 \si[per-mode=symbol] {\metre} & 10\%
-  \\
+  $L$ & $L > 0$ & $L_{\text{min}} \leq L \leq L_{\text{max}}$ & 1.5
+  \si[per-mode=symbol] {\metre} & 10\% \\
   \bottomrule
 \end{longtable*}
 \end{table}
@@ -1057,8 +1050,7 @@ A correct solution must exhibit \plt{fill in the details}.  \plt{These
   \toprule
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
-  $T_W$ & $T_\text{init} \leq T_W \leq T_C$ (by~\aref{A_charge})
-  \\
+  $T_W$ & $T_\text{init} \leq T_W \leq T_C$ (by~\aref{A_charge}) \\
   \bottomrule
 \end{longtable*}
 \end{table}
@@ -1105,21 +1097,21 @@ qualities that the software is expected to exhibit.
 \subsection{Nonfunctional Requirements}
 
 \plt{List your nonfunctional requirements.  You may consider using a fit
-  criterion to make them verifiable.}
-\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
-  and verifiable.  This isn't easy to show succinctly, so a good strategy may be
-to give a ``high level'' view of the requirement, but allow for the details to
-be covered in the Verification and Validation document.}
-\plt{An absolute requirement on a quality of the system is rarely needed.  For
-  instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
-  for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
-  describing now well the quality is achieved, through experimentation, and
-  possibly theory, rather than meeting some bar that was defined a priori.}
-\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
-  SRS is to record the requirements that need to be satisfied for correctness.
-  Any statement of correctness would just be redundant. Rather than discuss
-  correctness, you can characterize how far away from the correct (true)
-  solution you are allowed to be.  This is discussed under accuracy.}
+  criterion to make them verifiable.} \plt{The goal is for the nonfunctional
+  requirements to be unambiguous, abstract and verifiable.  This isn't easy to
+  show succinctly, so a good strategy may be to give a ``high level'' view of
+  the requirement, but allow for the details to be covered in the Verification
+  and Validation document.} \plt{An absolute requirement on a quality of the
+  system is rarely needed.  For instance, an accuracy of 0.0101 \% is likely
+  fine, even if the requirement is for 0.01 \% accuracy.  Therefore, the
+  emphasis will often be more on describing now well the quality is achieved,
+  through experimentation, and possibly theory, rather than meeting some bar
+  that was defined a priori.} \plt{You do not need an entry for correctness in
+  your NFRs.  The purpose of the SRS is to record the requirements that need to
+  be satisfied for correctness.  Any statement of correctness would just be
+  redundant. Rather than discuss correctness, you can characterize how far away
+  from the correct (true) solution you are allowed to be.  This is discussed
+  under accuracy.}
 
 \noindent \begin{itemize}
 
@@ -1131,12 +1123,12 @@ be covered in the Verification and Validation document.}
     described following the procedure given in Section~X of the Verification and
     Validation Plan.''  A link to the VnV plan would be a nice extra.}
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability}
-  \plt{Characterize the usability by giving the context/use for the software.
-    You should likely reference the user characteristics section.  The level of
-    usability achieved by the software shall be described following the
-    procedure given in Section~X of the Verification and Validation Plan.  A
-    link to the VnV plan would be a nice extra.}
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:]
+  \textbf{Usability} \plt{Characterize the usability by giving the context/use
+  for the software.  You should likely reference the user characteristics
+  section.  The level of usability achieved by the software shall be described
+  following the procedure given in Section~X of the Verification and Validation
+  Plan.  A link to the VnV plan would be a nice extra.}
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
   \textbf{Maintainability} \plt{The effort required to make any of the likely
@@ -1168,7 +1160,8 @@ typical values.}
 \noindent \begin{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the likely changes, with a reference to the related assumption (aref), as appropriate.}
+    the likely changes, with a reference to the related assumption (aref), as
+    appropriate.}
 
 \end{itemize}
 
@@ -1187,9 +1180,9 @@ typical values.}
 The purpose of the traceability matrices is to provide easy references on what
 has to be additionally modified if a certain component is changed.  Every time a
 component is changed, the items in the column of that component that are marked
-with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
-dependencies of theoretical models, general definitions, data definitions, and
-instance models with each other. Table~\ref{Table:R_trace} shows the
+with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows
+the dependencies of theoretical models, general definitions, data definitions,
+and instance models with each other. Table~\ref{Table:R_trace} shows the
 dependencies of instance models, requirements, and data constraints on each
 other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
 general definitions, data definitions, instance models, and likely changes on
@@ -1210,7 +1203,11 @@ the assumptions.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}& \aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}& \aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}& \aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}& \aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
+	& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}&
+	\aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}&
+	\aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}&
+	\aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}&
+	\aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
 \hline
 \tref{T_COE}        & X& & & & & & & & & & & & & & & & & & \\ \hline
 \tref{T_SHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
@@ -1243,7 +1240,9 @@ the assumptions.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline        
-	& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} & \ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
+	& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} &
+	\ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}&
+	\iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
 \hline
 \tref{T_COE}     & & & & & & & & & & & & & \\ \hline
 \tref{T_SHE}     & & & X& & & & & & & & & & \\ \hline
@@ -1268,7 +1267,8 @@ the assumptions.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-	& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}& \ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
+	& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}&
+	\ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
 \hline
 \iref{ewat}            & & X& & & & X& X \\ \hline
 \iref{epcm}            & X& & & X& & X& X \\ \hline
@@ -1295,32 +1295,26 @@ The purpose of the traceability graphs is also to provide easy references on
 what has to be additionally modified if a certain component is changed.  The
 arrows in the graphs represent dependencies. The component at the tail of an
 arrow is depended on by the component at the head of that arrow. Therefore, if a
-component is changed, the components that it points to should also be
-changed. Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
-general definitions, data definitions, instance models, likely changes, and
-assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
-instance models, requirements, and data constraints on each other.
+component is changed, the components that it points to should also be changed.
+Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models, general
+definitions, data definitions, instance models, likely changes, and assumptions
+on each other. Figure~\ref{Fig_RTrace} shows the dependencies of instance
+models, requirements, and data constraints on each other.
 
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=\textwidth]{ATrace.png}
-% 		}
-% 		\caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections Between Items of Different Sections}
-% 	\end{center}
-% \end{figure}
+% \begin{figure}[h!] \begin{center} %\rotatebox{-90}
+%     {
+%       \includegraphics[width=\textwidth]{ATrace.png}
+%     }
+%     \caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections Between Items of Different Sections}
+%   \end{center} \end{figure}
 
 
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=0.7\textwidth]{RTrace.png}
-% 		}
-% 		\caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections Between Requirements, Instance Models, and Data Constraints}
-% 	\end{center}
-% \end{figure}
+% \begin{figure}[h!] \begin{center} %\rotatebox{-90}
+%     {
+%       \includegraphics[width=0.7\textwidth]{RTrace.png}
+%     }
+%     \caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections Between Requirements, Instance Models, and Data Constraints}
+%   \end{center} \end{figure}
 
 \section{Development Plan}
 
@@ -1336,8 +1330,9 @@ instance models, requirements, and data constraints on each other.
 
 \plt{Show the values of the symbolic parameters introduced in the report.}
 
-\plt{The definition of the requirements will likely call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.}
+\plt{The definition of the requirements will likely call for
+SYMBOLIC\_CONSTANTS.  Their values are defined in this section for easy
+maintenance.}
 
 \plt{The value of FRACTION, for the Maintainability NFR would be given here.}
 
@@ -1348,8 +1343,8 @@ Their values are defined in this section for easy maintenance.}
 
 \newpage
 
-\noindent \plt{The following is not part of the template, just some things to consider
-  when filing in the template.}
+\noindent \plt{The following is not part of the template, just some things to
+  consider when filing in the template.}
 
 \noindent \plt{Grammar, flow and \LaTeX advice:
 \begin{itemize}
@@ -1375,8 +1370,8 @@ Their values are defined in this section for easy maintenance.}
 \noindent \plt{Advice on using the template:
 \begin{itemize}
 \item Difference between physical and software constraints
-\item Properties of a correct solution means \emph{additional} properties, not
-  a restating of the requirements (may be ``not applicable'' for your problem).
+\item Properties of a correct solution means \emph{additional} properties, not a
+  restating of the requirements (may be ``not applicable'' for your problem).
   If you have a table of output constraints, then these are properties of a
   correct solution.
 \item Assumptions have to be invoked somewhere
