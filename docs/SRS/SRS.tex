@@ -18,8 +18,9 @@
 \usepackage{caption}
 \usepackage{pdflscape}
 \usepackage{afterpage}
+\usepackage{cite}
 
-\usepackage[round]{natbib}
+%\usepackage[round]{natbib}
 
 %\usepackage{refcheck}
 
@@ -275,7 +276,7 @@ $u(n)$ & \si{\mV} & Discrete-time ECG signal at sample n \\
 
 \pagenumbering{arabic}
 
-\plt{This SRS template is based on \citet{SmithAndLai2005, SmithEtAl2007,
+\plt{This SRS template is based on \cite{SmithAndLai2005, SmithEtAl2007,
   SmithAndKoothoor2016}.  It will get you started.  You should not modify the
   section headings, without first discussing the change with the course
   instructor.  Modification means you are not following the template, which
@@ -350,10 +351,9 @@ clutter wave is mixed into the original signal, such as electrical noises and
 utility frequency.
 
 There are many algorithms for detecting R-waves.  This project will focus on
-reimplementing the \href{https://ieeexplore.ieee.org/document/4122029}
-{Pan-Tompkins} algorithm.  All filter parameters used in the algorithm will be
-automatically derived according to requirements without relying on external
-libraries.
+reimplementing the Pan-Tompkins\cite{4122029} algorithm.  All filter parameters
+used in the algorithm will be automatically derived according to requirements
+without relying on external libraries.
 
 \plt{The introduction section is written to introduce the problem.  It starts
   general and focuses on the problem domain. The general advice is to start with
@@ -557,7 +557,9 @@ easier to correctly understand the requirements:
 
 \begin{itemize}
 
-\item 
+\item QRS complex: the combination of three of the graphical deflections seen on
+a typical electrocardiogram (ECG or EKG)\cite{wiki:QRS_complex}
+\item R-wave: 
 
 \end{itemize}
 
@@ -903,7 +905,7 @@ Symbol &$q_C$\\
 \plt{All data types must be used by at least one of the models.}
 
 \plt{For the mathematical notation for expressing types, the recommendation is
-  to use the notation of~\citet{HoffmanAndStrooper1995}.}
+  to use the notation of~\cite{HoffmanAndStrooper1995}.}
 
 This section collects and defines all the data types needed to document the
 models. \plt{Modify the examples below for your problem, and add additional
@@ -1349,8 +1351,9 @@ maintenance.}
 
 \newpage
 
-\bibliographystyle {plainnat}
-\bibliography {../../refs/References}
+%\bibliographystyle {plainnat}
+\bibliography {../../refs/References, ../../refs/bib}
+\bibliographystyle{unsrt}
 
 \newpage
 
