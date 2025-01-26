@@ -346,6 +346,10 @@ $u(n)$ & \si{\mV} & Discrete-time ECG signal at sample n \\
 
 \section{Introduction}
 
+R-wave detection is a critical task in ECG signal processing, serving important purposes such as heart rate calculation, arrhythmia analysis, cardiac conduction evaluation, and heart disease diagnosis.  The patient's ECG signal is sampled by the sensor and converted into a digital signal, where we can detect R-waves.  However, since the sampling is not under an ideal condition, a large amount of clutter wave is mixed into the original signal, such as electrical noises and utility frequency.
+
+There are many algorithms for detecting R-waves.  This project will focus on reimplementing the \href{https://ieeexplore.ieee.org/document/4122029} {Pan-Tompkins} algorithm.  All filter parameters used in the algorithm will be automatically derived according to requirements without relying on external libraries.
+
 \plt{The introduction section is written to introduce the problem.  It starts
   general and focuses on the problem domain. The general advice is to start with
 a paragraph or two that describes the problem, followed by a ``roadmap''
