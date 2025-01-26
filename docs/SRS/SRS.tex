@@ -229,8 +229,10 @@ their units.  The choice of symbols was made to be consistent with the existing 
 \noindent \begin{longtable*}{l l p{12cm}} \toprule
 \textbf{symbol} & \textbf{unit} & \textbf{description}\\
 \midrule 
+$A(n)$ & \si{\mV} & Index of the annotated n-th R wave \\
 $f_c$ & \si{\hertz} & cutoff frequency of the filter \\
 $f_s$ & \si{\hertz} & sampling frequency of the ECG signal \\
+$R(n)$ & N/A & Index of the calculated n-th R wave \\
 $u(n)$ & \si{\mV} & Discrete-time ECG signal at sample n \\
 \bottomrule
 \end{longtable*}
@@ -256,6 +258,7 @@ $u(n)$ & \si{\mV} & Discrete-time ECG signal at sample n \\
   \progname{} & R-wave Detection\\
   TM & Theoretical Model\\
   ECG & Electrocardiography\\
+  ADC & Analog-to-Digital Converter \\
   RMSE & Root Mean Square Error\\
   \bottomrule
 \end{tabular}\\
@@ -428,6 +431,8 @@ characteristics and lists the system constraints.  \plt{This text can likely be
 
 \subsection{System Context}
 
+The RwaveDetecion system receives sample frequency $f_s$ and discrete time domain ECG signal $u(n)$ from the ADC.  Based on this information, the index of each R-wave peak $R(n)$ can be calculated and returned to the user.  If the user provides annotated data $A(n)$, which is optional, the system will return the $RMSE$ between $A(n)$ and $R(n)$ additionally.
+
 \plt{Your system context will include a figure that shows the abstract view of
   the software.  Often in a scientific context, the program can be viewed
   abstractly following the design pattern of Inputs $\rightarrow$ Calculations
@@ -446,7 +451,7 @@ characteristics and lists the system constraints.  \plt{This text can likely be
 
 \begin{figure}[h!]
 \begin{center}
- \includegraphics[width=0.6\textwidth]{SystemContextFigure}
+ \includegraphics[width=0.8\textwidth]{SystemContextFigure}
 \caption{System Context}
 \label{Fig_SystemContext} 
 \end{center}
@@ -465,13 +470,17 @@ characteristics and lists the system constraints.  \plt{This text can likely be
 \begin{itemize}
 \item User Responsibilities:
 \begin{itemize}
-\item 
+\item Provide ADC sample frequency $f_s$
+\item Provide discrete time domain ECG signal $u(n)$ sampled from ADC
+\item (Optional) Provide correctly annotated data $A(n)$
 \end{itemize}
 \item \progname{} Responsibilities:
 \begin{itemize}
 \item Detect data type mismatch, such as a string of characters instead of a
   floating point number
-\item 
+\item Return the index of each R-wave peak $R(n)$ detected from $u(n)$
+\item Render a graph that shows $u(n)$ and $R(n)$ at the same time
+\item Return the $RMSE$ between $A(n)$ and $R(n)$ if required
 \end{itemize}
 \end{itemize}
 
