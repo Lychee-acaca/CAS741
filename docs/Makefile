@@ -34,7 +34,7 @@ Refl:
 UGde:
 	cd UserGuide && make && cd ../..
 
-clean:	cleanSRS cleanMG cleanMIS cleanSystDes cleanPS cleanVnVP cleanVnVR cleanDevP cleanUGde
+clean:	cleanSRS cleanMG cleanMIS cleanPS cleanVnVP cleanVnVR cleanDevP cleanUGde
 
 cleanPS:
 	cd ProblemStatementAndGoals && make clean && cd ..
@@ -48,8 +48,8 @@ cleanMG:
 cleanMIS:
 	cd Design/SoftDetailedDes && make clean && cd ..
 
-cleanSystDes:
-	cd Design/SystDesign && make clean && cd ..
+# cleanSystDes:
+# 	cd Design/SystDesign && make clean && cd ..
 
 cleanVnVP:
 	cd VnVPlan && make clean && cd ..
