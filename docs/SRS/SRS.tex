@@ -222,11 +222,11 @@ order.
 \noindent \begin{longtable*}{l l p{12cm}} \toprule \textbf{symbol} &
 \textbf{unit} & \textbf{description}\\
 \midrule 
-$A(n)$ & \si{\mV} & Index of the annotated n-th R wave \\
+$A$ & \si{\mV} & a sequence of index of the annotated R wave \\
 $f_c$ & \si{\hertz} & cutoff frequency of the filter \\
 $f_s$ & \si{\hertz} & sampling frequency of the ECG signal \\
-$R(n)$ & N/A & Index of the calculated n-th R wave \\
-$u(n)$ & \si{\mV} & Discrete-time ECG signal at sample n \\
+$R$ & N/A & a sequence of index of the calculated R wave \\
+$u$ & \si{\mV} & a sequence of discrete-time ECG signal \\
 \bottomrule
 \end{longtable*}
 \plt{Use your problems actual symbols.  The si package is a good idea to use for
@@ -434,10 +434,10 @@ borrowed verbatim.}
 \subsection{System Context}
 
 The RwaveDetecion system receives sample frequency $f_s$ and discrete time
-domain ECG signal $u(n)$ from the ADC.  Based on this information, the index of
-each R-wave peak $R(n)$ can be calculated and returned to the user.  If the user
-provides annotated data $A(n)$, which is optional, the system will return the
-$RMSE$ between $A(n)$ and $R(n)$ additionally.
+domain ECG signal $u$ from the ADC.  Based on this information, the index of
+each R-wave peak $R$ can be calculated and returned to the user.  If the user
+provides annotated data $A$, which is optional, the system will return the
+$RMSE$ between $A$ and $R$ additionally.
 
 \plt{Your system context will include a figure that shows the abstract view of
   the software.  Often in a scientific context, the program can be viewed
@@ -476,17 +476,18 @@ $RMSE$ between $A(n)$ and $R(n)$ additionally.
 \begin{itemize}
 \item User Responsibilities:
 \begin{itemize}
-\item Provide ADC sample frequency $f_s$
-\item Provide discrete time domain ECG signal $u(n)$ sampled from ADC
-\item (Optional) Provide correctly annotated data $A(n)$
+\item Provide integer ADC sample frequency $f_s$
+\item Provide discrete time domain ECG signal real sequence $u$ sampled from ADC
+\item (Optional) Provide correctly annotated data real sequence $A$
 \end{itemize}
 \item \progname{} Responsibilities:
 \begin{itemize}
 \item Detect data type mismatch, such as a string of characters instead of a
-  floating point number
-\item Return the index of each R-wave peak $R(n)$ detected from $u(n)$
-\item Render a graph that shows $u(n)$ and $R(n)$ at the same time
-\item Return the $RMSE$ between $A(n)$ and $R(n)$ if required
+  real number
+\item Return the integer sequence index of each R-wave peak $R$ detected from
+$u$
+\item Render a graph that shows $u$ and $R$ at the same time
+\item Return the $RMSE$ between $A$ and $R$ if required
 \end{itemize}
 \end{itemize}
 
