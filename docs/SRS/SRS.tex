@@ -611,8 +611,11 @@ elements:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] Given a single-channel unfiltered ECG signal, find the index of each R-wave peak.
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] Given correct annotated data, calculate the RMSE between each detected R-wave peak time and annotated time.
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] Given a
+single-channel unfiltered ECG signal, find the index of each R-wave peak.
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] Given
+correct annotated data, calculate the RMSE between each detected R-wave peak
+time and annotated time.
 
 \end{itemize}
 
@@ -695,7 +698,16 @@ change [LC], in which the respective assumption is used.
 
 \begin{itemize}
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_meaningfulLabel}:]
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Nq_frequency}:] The
+sampling frequency is not lower than the Nyquist frequency.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_naked_eye}:] The
+R-wave has peak characteristics that can be discerned by the naked eye.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_high_quality}:] The input ECG signal is of high quality.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_filtered_out}:] Noise in data can be filtered out, within expectations.
+
   \plt{Short description of each assumption.  Each assumption should have a
     meaningful label.  Use cross-references to identify the appropriate
     traceability to TM, GD, DD etc., using commands like dref, ddref etc.  Each
