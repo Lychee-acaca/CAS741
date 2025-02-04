@@ -222,11 +222,15 @@ order.
 \noindent \begin{longtable*}{l l p{12cm}} \toprule \textbf{symbol} &
 \textbf{unit} & \textbf{description}\\
 \midrule 
+$a$ & N/A & a sequence of digital filter weighting coefficients \\
 $A$ & \si{\mV} & a sequence of index of the annotated R wave \\
+$b$ & N/A & a sequence of digital filter feedback coefficients \\
 $f_c$ & \si{\hertz} & cutoff frequency of the filter \\
 $f_s$ & \si{\hertz} & sampling frequency of the ECG signal \\
+$H$ & N/A & transfer function of digital filter \\
 $R$ & N/A & a sequence of index of the calculated R wave \\
 $u$ & \si{\mV} & a sequence of discrete-time ECG signal \\
+$z$ & N/A & complex frequency variable in the Z-domain, $z=e^{j2\pi f}$ \\
 \bottomrule
 \end{longtable*}
 \plt{Use your problems actual symbols.  The si package is a good idea to use for
@@ -260,17 +264,8 @@ $u$ & \si{\mV} & a sequence of discrete-time ECG signal \\
 
 \subsection{Mathematical Notation}
 
-\plt{This section is optional, but should be included for projects that make use
-  of notation to convey mathematical information.  For instance, if typographic
-  conventions (like bold face font) are used to distinguish matrices, this
-  should be stated here.  If symbols are used to show mathematical operations,
-  these should be summarized here.  In some cases the easiest way to summarize
-  the notation is to point to a text or other source that explains the
-  notation.}
-
-\plt{This section was added to the template because some students use very
-  domain specific notation.  This notation will not be readily understandable to
-  people outside of your domain.  It should be explained.}
+In the fields of electronics and signal processing, $j$ represents the imaginary
+unit. In other word, we define $j^2 = -1$.
 
 \newpage
 
@@ -730,27 +725,28 @@ as appropriate.}
 \noindent
 \deftheory
 % #2 refname of theory
-{TM:COE}
+{TM:DFDE}
 % #3 label
-{Conservation of thermal energy}
+{Digital Filter Difference Equation}
 % #4 equation
-{ $-{\bf \nabla \cdot q} + g$ = $\rho C \frac{\partial T}{\partial t}$ }
+{$y[n] = -\sum_{k=1}^{M}a_ky[n-k] + \sum_{l=0}^{N}b_lx[n-l]$}
 % #5 description
-{ The above equation gives the conservation of energy for transient heat
-  transfer in a material of specific heat capacity $C$
-  (\si{\joule\per\kilogram\per\celsius}) and density $\rho$
-  (\si{\kilogram\per\cubic\metre}), where $\bf q$ is the thermal flux vector
-  (\si{\watt\per\square\metre}), $g$ is the volumetric heat generation
-  (\si{\watt\per\cubic\metre}), $T$ is the temperature (\si{\celsius}),  $t$ is
-  time (\si{\second}), and $\nabla$ is the gradient operator.  For this equation
-  to apply, other forms of energy, such as mechanical energy, are assumed to be
-  negligible in the system (\aref{A_OnlyThermalEnergy}).  In general, the
-  material properties ($\rho$ and $C$) depend on temperature.  }
+{ \leavevmode \\
+  $x[n]$ is the input signal at the $n$-th time sample.  \\
+  $y[n]$ is the output signal at the $n$-th time sample.  \\
+  $b_l$ is the coefficients for the input signal.  \\
+  $a_k$ is the coefficients for the output signal.  \\
+  $N$ is the maximum delay for the input signal.  \\
+  $M$ is the maximum delay for the output signal.  }
 % #6 Notes
-{ None.  }
+{This difference equation represents the operation of an digital filter.  The
+filter computes the current output based on weighted sums of past input values
+and past output values.  This equation is based on discrete-time signal
+processing theory and is widely used in signal filtering, noise suppression, and
+signal enhancement.  }
 % #7 Source
 {
-  \url{http://www.efunda.com/formulae/heat_transfer/conduction/overview_cond.cfm}
+  \url{https://en.wikipedia.org/wiki/Digital_filter}
 }
 % #8 Referenced by
 {
@@ -769,6 +765,97 @@ as appropriate.}
   in the other direction pointing to the current model, definition or
   assumption.  As an example, if TM1 is referenced by GD2, that means that GD2
   will explicitly include a reference to TM1.}
+
+~\newline
+
+\noindent
+\deftheory
+% #2 refname of theory
+{TM:BF}
+% #3 label
+{Butterworth Filter}
+% #4 equation
+{$H(z) = \frac{1}{1+(\frac{z}{2\pi f_c})^{2n}}$}
+% #5 description
+{ \leavevmode \\
+  $H$ is the transfer function of the Butterworth filter in Z-domain.  \\
+  $z$ is the complex frequency variable in the Z-domain.  \\
+  $f_c$ is the cutoff frequency (\si{\hertz}) at which the magnitude of the $H$.
+  decreases to approximately $-3\si{\decibel}$.  \\
+  $n$ is the order of the filter.  }
+% #6 Notes
+{The frequency response of the Butterworth filter is maximally flat (i.e., has
+no ripples) in the passband and rolls off towards zero in the stopband.  }
+% #7 Source
+{
+  \url{https://en.wikipedia.org/wiki/Butterworth_filter}
+}
+% #8 Referenced by
+{
+  \dref{ROCT}
+}
+% #9 Preconditions
+{ None }
+% #1 derivation - not applicable by default
+{}
+
+~\newline
+
+\noindent
+\deftheory
+% #2 refname of theory
+{TM:CF}
+% #3 label
+{Chebyshev Filter}
+% #4 equation
+{}
+% #5 description
+{ \leavevmode \\
+  }
+% #6 Notes
+{Chebyshev filters are analog or digital filters that have a steeper roll-off
+than Butterworth filters, and have either passband ripple (type I) or stopband
+ripple (type II).  }
+% #7 Source
+{
+  \url{https://en.wikipedia.org/wiki/Chebyshev_filter}
+}
+% #8 Referenced by
+{
+  \dref{ROCT}
+}
+% #9 Preconditions
+{ None }
+% #1 derivation - not applicable by default
+{}
+
+~\newline
+
+\noindent
+\deftheory
+% #2 refname of theory
+{TM:TD}
+% #3 label
+{Threshold Detect}
+% #4 equation
+{}
+% #5 description
+{ \leavevmode \\
+  }
+% #6 Notes
+{}
+% #7 Source
+{
+  \url{https://en.wikipedia.org/wiki/Chebyshev_filter}
+}
+% #8 Referenced by
+{
+  \dref{ROCT}
+}
+% #9 Preconditions
+{ None }
+% #1 derivation - not applicable by default
+{}
 
 ~\newline
 
