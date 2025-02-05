@@ -426,8 +426,8 @@ $RMSE$ between $A$ and $R$ additionally.
   properties, geometry, etc.).  Likewise, the outputs should be presented from
   an abstract point of view.  In some cases the diagram will show other external
   entities, besides the user.  For instance, when the software product is a
-  library, the user will be another software program, not an actual end user.
-  If there are system constraints that the software must work with external
+  library, the user will be another software program, not an actual end user. If
+  there are system constraints that the software must work with external
   libraries, these libraries can also be shown on the System Context diagram.
   They should only be named with a specific library name if this is required by
   the system constraint.}
@@ -446,8 +446,8 @@ $RMSE$ between $A$ and $R$ additionally.
   of responsibilities should be about the inputs and outputs only, and they
   should be abstract.  Details should not be presented here.  However, the
   information should not be so abstract as to just say ``inputs'' and
-  ``outputs''.  A summarizing phrase can be used to characterize the inputs.
-  For instance, saying ``material properties'' provides some information, but it
+  ``outputs''.  A summarizing phrase can be used to characterize the inputs. For
+  instance, saying ``material properties'' provides some information, but it
   stays away from the detail of listing every required properties.}
 
 \begin{itemize}
@@ -618,8 +618,8 @@ time and annotated time.
   models.  It starts with the abstract/general Theoretical Models (TMs) and
   refines them to the concrete/specific Instance Models (IMs).  If necessary
   there are intermediate refinements to General Definitions (GDs).  All of these
-  refinements can potentially use Assumptions (A) and Data Definitions (DD).
-  TMs are refined to create new models, that are called GMs or IMs. DDs are not
+  refinements can potentially use Assumptions (A) and Data Definitions (DD). TMs
+  are refined to create new models, that are called GMs or IMs. DDs are not
   refined; they are just used. GDs and IMs are derived, or refined, from other
   models. DDs are not derived; they are just given. TMs are also just given, but
   they are refined, not used.  If a potential DD includes a derivation, then
@@ -686,20 +686,14 @@ change [LC], in which the respective assumption is used.
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Nq_frequency}:] The
 sampling frequency is not lower than the Nyquist frequency.
 
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_filtered_out}:] Noise in
+data can be filtered out, within expectations.
+
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_naked_eye}:] The R-wave
 has peak characteristics that can be discerned by the naked eye.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_high_quality}:] The
 input ECG signal is of high quality.
-
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_filtered_out}:] Noise in
-data can be filtered out, within expectations.
-
-  \plt{Short description of each assumption.  Each assumption should have a
-    meaningful label.  Use cross-references to identify the appropriate
-    traceability to TM, GD, DD etc., using commands like dref, ddref etc.  Each
-    assumption should be atomic - that is, there should not be an explicit (or
-    implicit) ``and'' in the text of an assumption.}
 
 \end{itemize}
 
@@ -725,28 +719,28 @@ as appropriate.}
 \noindent
 \deftheory
 % #2 refname of theory
-{TM:DFDE}
+{TM:AFE}
 % #3 label
-{Digital Filter Difference Equation}
+{Analog Filter Equation}
 % #4 equation
-{$y[n] = -\sum_{k=1}^{M}a_ky[n-k] + \sum_{l=0}^{N}b_lx[n-l]$}
+{$H(s) = \frac{\sum_{i=0}^{m}{b_is^i}}{\sum_{i=0}^{n}{a_is^i}}$}
 % #5 description
 { \leavevmode \\
-  $x[n]$ is the input signal at the $n$-th time sample.  \\
-  $y[n]$ is the output signal at the $n$-th time sample.  \\
-  $b_l$ is the coefficients for the input signal.  \\
-  $a_k$ is the coefficients for the output signal.  \\
-  $N$ is the maximum delay for the input signal.  \\
-  $M$ is the maximum delay for the output signal.  }
+  $H$ is the transfer function of the filter.  \\
+  $s$ is the Laplace variable (complex frequency).  \\
+  $b_m$, $b_{m-1}$, $...$, $b_0$ are the numerator coefficients.  \\
+  $a_n$, $a_{n-1}$, $...$, $a_0$ are the denominator coefficients, where $a_n
+  \neq 0$ to ensure causality and stability.  \\
+  $n$ and $m$ represent the highest order of the denominator and numerator
+  polynomials, respectively.  Usually, $n \geq m$ to maintain realizability
+  (strictly causal system).  }
 % #6 Notes
-{This difference equation represents the operation of an digital filter.  The
-filter computes the current output based on weighted sums of past input values
-and past output values.  This equation is based on discrete-time signal
-processing theory and is widely used in signal filtering, noise suppression, and
-signal enhancement.  }
+{ Transfer functions are commonly used in the analysis of systems such as
+  single-input single-output filters in signal processing, communication theory,
+  and control theory.  }
 % #7 Source
 {
-  \url{https://en.wikipedia.org/wiki/Digital_filter}
+  \url{https://en.wikipedia.org/wiki/Transfer_function}
 }
 % #8 Referenced by
 {
@@ -757,15 +751,6 @@ signal enhancement.  }
 % #1 derivation - not applicable by default
 {}
 
-\plt{``Ref.\ By'' is used repeatedly with the different types of information.
-  This stands for Referenced By.  It means that the models, definitions and
-  assumptions listed reference the current model, definition or assumption.
-  This information is given for traceability.  Ref. By provides a pointer in the
-  opposite direction to what we commonly do.  You still need to have a reference
-  in the other direction pointing to the current model, definition or
-  assumption.  As an example, if TM1 is referenced by GD2, that means that GD2
-  will explicitly include a reference to TM1.}
-
 ~\newline
 
 \noindent
@@ -775,13 +760,14 @@ signal enhancement.  }
 % #3 label
 {Butterworth Filter}
 % #4 equation
-{$H(z) = \frac{1}{1+(\frac{z}{2\pi f_c})^{2n}}$}
+{$G_n(\omega) = \frac{G_0}{\sqrt{1+(\frac{\omega}{\omega_c})^{2n}}}$}
 % #5 description
 { \leavevmode \\
-  $H$ is the transfer function of the Butterworth filter in Z-domain.  \\
-  $z$ is the complex frequency variable in the Z-domain.  \\
-  $f_c$ is the cutoff frequency (\si{\hertz}) at which the magnitude of the $H$.
-  decreases to approximately $-3\si{\decibel}$.  \\
+  $G_n$ is the gain function of the $n$th-order Butterworth filter.  \\
+  $G_0$ is the DC gain (gain at zero frequency).  \\
+  $\omega$ is the angular frequency of the signal.  \\
+  $\omega_c$ is the angular cutoff frequency (\si{\hertz}) which defines the
+  $-3\si{\decibel}$ point.  \\
   $n$ is the order of the filter.  }
 % #6 Notes
 {The frequency response of the Butterworth filter is maximally flat (i.e., has
@@ -808,14 +794,19 @@ no ripples) in the passband and rolls off towards zero in the stopband.  }
 % #3 label
 {Chebyshev Filter}
 % #4 equation
-{}
+{$G_n(\omega) = \frac{1}{\sqrt{1+\epsilon^2T_n^2(\omega/\omega_c)}}$}
 % #5 description
 { \leavevmode \\
-  }
+$G_n$ is the gain function of the $n$th-order Butterworth filter.  \\
+$\epsilon$ is the ripple factor, $|\epsilon| < 1$ \\
+$\omega$ is the angular frequency of the signal.  \\
+$\omega_c$ is the angular cutoff frequency (\si{\hertz}) which defines the
+$-3\si{\decibel}$ point.  \\
+$T_n(\frac{\omega}{\omega0})$ is the $n$th order Chebyshev polynomials.  
+}
 % #6 Notes
-{Chebyshev filters are analog or digital filters that have a steeper roll-off
-than Butterworth filters, and have either passband ripple (type I) or stopband
-ripple (type II).  }
+{Chebyshev filters have a steeper roll-off than Butterworth filters, and have
+either passband ripple (type I) or stopband ripple (type II).  }
 % #7 Source
 {
   \url{https://en.wikipedia.org/wiki/Chebyshev_filter}
@@ -838,16 +829,22 @@ ripple (type II).  }
 % #3 label
 {Threshold Detect}
 % #4 equation
-{}
+{ $y(n) = 
+\begin{cases}
+1 & \text{if } x(n) \geq \theta \\
+0 & \text{if } x(n) < \theta \end{cases}$ }
 % #5 description
 { \leavevmode \\
-  }
-% #6 Notes
-{}
-% #7 Source
-{
-  \url{https://en.wikipedia.org/wiki/Chebyshev_filter}
+  $x$ is the input signal.  \\
+  $y$ is the output signal.  \\
+  $\theta$ is the threshold, which is not guaranteed to be a static number all
+  the time and may change as the state changes.  \\
 }
+% #6 Notes
+{threshold comparison detection is a simple signal processing technique where
+the input signal is compared to a threshold value.}
+% #7 Source
+{}
 % #8 Referenced by
 {
   \dref{ROCT}
@@ -860,12 +857,6 @@ ripple (type II).  }
 ~\newline
 
 \subsubsection{General Definitions}\label{sec_gendef}
-
-\plt{General Definitions (GDs) are a refinement of one or more TMs, and/or of
-  other GDs.  The GDs are less abstract than the TMs.  Generally the reduction
-  in abstraction is possible through invoking (using/referencing) Assumptions.
-  For instance, the TM could be Newton's Law of Cooling stated abstracting.  The
-  GD could take the general law and apply it to get a 1D equation.}
 
 This section collects the laws and equations that will be used in building the
 instance models.
@@ -1435,9 +1426,9 @@ maintenance.}
 \begin{itemize}
 \item Difference between physical and software constraints
 \item Properties of a correct solution means \emph{additional} properties, not a
-  restating of the requirements (may be ``not applicable'' for your problem).
-  If you have a table of output constraints, then these are properties of a
-  correct solution.
+  restating of the requirements (may be ``not applicable'' for your problem). If
+  you have a table of output constraints, then these are properties of a correct
+  solution.
 \item Assumptions have to be invoked somewhere
 \item ``Referenced by'' implies that there is an explicit reference
 \item Think of traceability matrix, list of assumption invocations and list of
