@@ -78,9 +78,9 @@
 \noindent \rule{\textwidth}{0.5mm}
 
 \paragraph{RefName: } \textbf{#2} \phantomsection 
-\label{#2}
 
 \paragraph{Label:} #3
+\label{#3}
 
 \noindent \rule{\textwidth}{0.5mm}
 
@@ -606,46 +606,46 @@ time and annotated time.
 
 \subsection{Solution Characteristics Specification}
 
-\plt{This section specifies the information in the solution domain of the system
-  to be developed. This section is intended to express what is required in such
-  a way that analysts and stakeholders get a clear picture, and the latter will
-  accept it. The purpose of this section is to reduce the problem into one
-  expressed in mathematical terms. Mathematical expertise is used to extract the
-  essentials from the underlying physical description of the problem, and to
-  collect and substantiate all physical data pertinent to the problem.}
+% \plt{This section specifies the information in the solution domain of the system
+%   to be developed. This section is intended to express what is required in such
+%   a way that analysts and stakeholders get a clear picture, and the latter will
+%   accept it. The purpose of this section is to reduce the problem into one
+%   expressed in mathematical terms. Mathematical expertise is used to extract the
+%   essentials from the underlying physical description of the problem, and to
+%   collect and substantiate all physical data pertinent to the problem.}
 
-\plt{This section presents the solution characteristics by successively refining
-  models.  It starts with the abstract/general Theoretical Models (TMs) and
-  refines them to the concrete/specific Instance Models (IMs).  If necessary
-  there are intermediate refinements to General Definitions (GDs).  All of these
-  refinements can potentially use Assumptions (A) and Data Definitions (DD). TMs
-  are refined to create new models, that are called GMs or IMs. DDs are not
-  refined; they are just used. GDs and IMs are derived, or refined, from other
-  models. DDs are not derived; they are just given. TMs are also just given, but
-  they are refined, not used.  If a potential DD includes a derivation, then
-  that means it is refining other models, which would make it a GD or an IM.}
+% \plt{This section presents the solution characteristics by successively refining
+%   models.  It starts with the abstract/general Theoretical Models (TMs) and
+%   refines them to the concrete/specific Instance Models (IMs).  If necessary
+%   there are intermediate refinements to General Definitions (GDs).  All of these
+%   refinements can potentially use Assumptions (A) and Data Definitions (DD). TMs
+%   are refined to create new models, that are called GMs or IMs. DDs are not
+%   refined; they are just used. GDs and IMs are derived, or refined, from other
+%   models. DDs are not derived; they are just given. TMs are also just given, but
+%   they are refined, not used.  If a potential DD includes a derivation, then
+%   that means it is refining other models, which would make it a GD or an IM.}
 
-\plt{The above makes a distinction between ``refined'' and ``used.'' A model is
-  refined to another model if it is changed by the refinement. When we change a
-  general 3D equation to a 2D equation, we are making a refinement, by applying
-  the assumption that the third dimension does not matter. If we use a
-  definition, like the definition of density, we aren't refining, or changing
-  that definition, we are just using it.}
+% \plt{The above makes a distinction between ``refined'' and ``used.'' A model is
+%   refined to another model if it is changed by the refinement. When we change a
+%   general 3D equation to a 2D equation, we are making a refinement, by applying
+%   the assumption that the third dimension does not matter. If we use a
+%   definition, like the definition of density, we aren't refining, or changing
+%   that definition, we are just using it.}
 
-\plt{The same information can be a TM in one problem and a DD in another.  It is
-  about how the information is used.  In one problem the definition of
-  acceleration can be a TM, in another it would be a DD.}
+% \plt{The same information can be a TM in one problem and a DD in another.  It is
+%   about how the information is used.  In one problem the definition of
+%   acceleration can be a TM, in another it would be a DD.}
 
-\plt{There is repetition between the information given in the different chunks
-  (TM, GDs etc) with other information in the document.  For instance, the
-  meaning of the symbols, the units etc are repeated.  This is so that the
-  chunks can stand on their own when being read by a reviewer/user.  It also
-  facilitates reuse of the models in a different context.}
+% \plt{There is repetition between the information given in the different chunks
+%   (TM, GDs etc) with other information in the document.  For instance, the
+%   meaning of the symbols, the units etc are repeated.  This is so that the
+%   chunks can stand on their own when being read by a reviewer/user.  It also
+%   facilitates reuse of the models in a different context.}
 
-\noindent \plt{The relationships between the parts of the document are show in
-  the following figure.  In this diagram ``may ref'' has the same role as
-  ``uses'' above.  The figure adds ``Likely Changes,'' which are able to
-  reference (use) Assumptions.}
+% \noindent \plt{The relationships between the parts of the document are show in
+%   the following figure.  In this diagram ``may ref'' has the same role as
+%   ``uses'' above.  The figure adds ``Likely Changes,'' which are able to
+%   reference (use) Assumptions.}
 
 \begin{figure}[H]
   \includegraphics[scale=0.9]{RelationsBetweenTM_GD_IM_DD_A.pdf}
@@ -656,10 +656,10 @@ Subsection~\ref{sec_instance}.  The information to understand the meaning of the
 instance models and their derivation is also presented, so that the instance
 models can be verified.
 
-\subsubsection{Types}
+% \subsubsection{Types}
 
-\plt{This section is optional. Defining types can make the document easier to
-understand.}
+% \plt{This section is optional. Defining types can make the document easier to
+% understand.}
 
 \subsubsection{Assumptions} \label{sec_assumpt}
 
@@ -699,27 +699,12 @@ input ECG signal is of high quality.
 
 \subsubsection{Theoretical Models}\label{sec_theoretical}
 
-\plt{Theoretical models are sets of abstract mathematical equations or axioms
-  for solving the problem described in Section ``Physical System Description''
-  (Section~\ref{sec_phySystDescrip}). Examples of theoretical models are
-  physical laws, constitutive equations, relevant conversion factors, etc.}
-
-\plt{Optionally the theory section could be divided into subsections to provide
-more structure and improve understandability and reusability.  Potential
-subsections include the following: Context theories, background theories, helper
-theories, generic theories, problem specific theories, final theories and
-rationale theories.}
-
-This section focuses on the general equations and laws that \progname{} is based
-on.  \plt{Modify the examples below for your problem, and add additional models
-as appropriate.}
-
 ~\newline
-
+\refstepcounter{theorynum}
 \noindent
 \deftheory
 % #2 refname of theory
-{TM:AFE}
+{TM\thetheorynum}
 % #3 label
 {Analog Filter Equation}
 % #4 equation
@@ -752,11 +737,11 @@ as appropriate.}
 {}
 
 ~\newline
-
+\refstepcounter{theorynum}
 \noindent
 \deftheory
 % #2 refname of theory
-{TM:BF}
+{TM\thetheorynum}
 % #3 label
 {Butterworth Filter}
 % #4 equation
@@ -786,11 +771,11 @@ no ripples) in the passband and rolls off towards zero in the stopband.  }
 {}
 
 ~\newline
-
+\refstepcounter{theorynum}
 \noindent
 \deftheory
 % #2 refname of theory
-{TM:CF}
+{TM\thetheorynum}
 % #3 label
 {Chebyshev Filter}
 % #4 equation
@@ -821,11 +806,11 @@ either passband ripple (type I) or stopband ripple (type II).  }
 {}
 
 ~\newline
-
+\refstepcounter{theorynum}
 \noindent
 \deftheory
 % #2 refname of theory
-{TM:TD}
+{TM\thetheorynum}
 % #3 label
 {Threshold Detect}
 % #4 equation
@@ -854,16 +839,12 @@ the input signal is compared to a threshold value.}
 % #1 derivation - not applicable by default
 {}
 
-~\newline
+~\newpage
 
 \subsubsection{General Definitions}\label{sec_gendef}
 
 This section collects the laws and equations that will be used in building the
 instance models.
-
-\plt{Some projects may not have any content for this section, but the section
-  heading should be kept.}  \plt{Modify the examples below for your problem, and
-  add additional definitions as appropriate.}
 
 ~\newline
 
@@ -873,38 +854,78 @@ instance models.
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 \hline
 \rowcolor[gray]{0.9}
-Number& GD\refstepcounter{defnum}\thedefnum \label{NL}\\
+Number& GD\refstepcounter{defnum}\thedefnum \label{B-trans}\\
 \hline
-Label &\bf Newton's law of cooling \\
+Label &\bf Bilinear transform \\
 \hline
 % Units&$MLt^{-3}T^0$\\
+% \hline SI Units&\si{\watt\per\square\metre}\\
 % \hline
-SI Units&\si{\watt\per\square\metre}\\
+Equation&$s \approx \frac{2}{T} \cdot \frac{z-1}{z+1}$  \\
 \hline
-Equation&$ q(t) = h \Delta T(t)$  \\
+Description & The bilinear transform is used in digital signal processing and
+discrete-time control theory to transform continuous-time system representations
+to discrete-time.  \\
+& $s$ is the Laplace variable (complex frequency).  \\
+& $z$ is the complex frequency variable in the Z-domain.  \\
+& $T$ is the sampling period.  \\
+& When \aref{A_Nq_frequency} is satisfied, this equation represents replacing
+all $s$ terms in $H(s)$ S-domain transfer function directly with $\frac{2}{T}
+\cdot \frac{z-1}{z+1}$, after doing this we can get Z-domain transfer function
+H(z).  \\
+& Analog filters in \tref{Butterworth Filter} and \tref{Chebyshev Filter} can be
+transformed into digital filter in this way. \\
 \hline
-Description & Newton's law of cooling describes convective cooling from a
-surface.  The law is stated as: the rate of heat loss from a body is
-proportional to the difference in temperatures between the body and its
-surroundings.  \\
-& $q(t)$ is the thermal flux (\si{\watt\per\square\metre}).\\
-& $h$ is the heat transfer coefficient, assumed independent of $T$
-	(\aref{A_hcoeff}) (\si{\watt\per\square\metre\per\celsius}).\\
-&$\Delta T(t)$= $T(t) - T_{\text{env}}(t)$ is the time-dependent thermal
-gradient between the environment and the object (\si{\celsius}).  \\
-\hline
-  Source & Citation here \\
+  Source & \url{https://en.wikipedia.org/wiki/Bilinear_transform} \\
   \hline
   Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
   \hline
 \end{tabular}
 \end{minipage}\\
 
-\subsubsection*{Detailed derivation of simplified rate of change of temperature}
+~\newline
 
-\plt{This may be necessary when the necessary information does not fit in the
-  description field.} \plt{Derivations are important for justifying a given GD.
-  You want it to be clear where the equation came from.}
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& GD\refstepcounter{defnum}\thedefnum \label{FDE}\\
+\hline
+Label &\bf Filter Difference Equation \\
+\hline
+% Units&$MLt^{-3}T^0$\\
+% \hline SI Units&\si{\watt\per\square\metre}\\
+% \hline
+Equation&$H(z)=\frac{\sum_{l=0}^{N}b_lz^{-l}}{1 + \sum_{k=1}^{M}a_kz^{-k}}
+\leftrightarrow y[n] = -\sum_{k=1}^{M}a_ky[n-k] + \sum_{l=0}^{N}b_lx[n-l]$  \\
+\hline
+Description & $x[n]$ is the input signal at the $n$-th time sample.  \\
+& $y[n]$ is the output signal at the $n$-th time sample.  \\
+& $b_l$ is the coefficients for the input signal.  \\
+& $a_k$ is the coefficients for the output signal.  \\
+& $N$ is the maximum delay for the input signal.  \\
+& $M$ is the maximum delay for the output signal.  \\
+& $z$ is the complex frequency variable in the Z-domain.  \\
+& This equation reflects the conversion relationship between the difference
+equation and the Z-domain transfer function $H(z)$ comes from \dref{B-trans}. \\
+
+\hline
+  Source & \url{https://en.wikipedia.org/wiki/Digital_filter} \\
+  \hline
+  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+
+% \subsubsection*{Detailed derivation of simplified rate of change of
+% temperature}
+
+% \plt{This may be necessary when the necessary information does not fit in the
+%   description field.} \plt{Derivations are important for justifying a given
+%   GD.  You want it to be clear where the equation came from.}
 
 \subsubsection{Data Definitions}\label{sec_datadef}
 
@@ -960,43 +981,35 @@ Symbol &$q_C$\\
 \end{tabular}
 \end{minipage}\\
 
-\subsubsection{Data Types}\label{sec_datatypes}
+% \subsubsection{Data Types}\label{sec_datatypes}
 
-\plt{This section is optional.  In many scientific computing programs it isn't
-  necessary, since the inputs and outpus are straightforward types, like reals,
-  integers, and sequences of reals and integers.  However, for some problems it
-  is very helpful to capture the type information.}
+% \plt{This section is optional.  In many scientific computing programs it isn't
+%   necessary, since the inputs and outpus are straightforward types, like
+%   reals, integers, and sequences of reals and integers.  However, for some
+%   problems it is very helpful to capture the type information.}
 
-\plt{The data types are not derived; they are simply stated and used by other
-  models.}
+% \plt{The data types are not derived; they are simply stated and used by other
+%   models.}
 
-\plt{All data types must be used by at least one of the models.}
+% \plt{All data types must be used by at least one of the models.}
 
-\plt{For the mathematical notation for expressing types, the recommendation is
-  to use the notation of~\cite{HoffmanAndStrooper1995}.}
+% \plt{For the mathematical notation for expressing types, the recommendation is
+%   to use the notation of~\cite{HoffmanAndStrooper1995}.}
 
-This section collects and defines all the data types needed to document the
-models. \plt{Modify the examples below for your problem, and add additional
-definitions as appropriate.}
+% This section collects and defines all the data types needed to document the
+% models. \plt{Modify the examples below for your problem, and add additional
+% definitions as appropriate.}
 
-~\newline
+% ~\newline
 
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Type Name & Name for Type\\
-  \hline
-  Type Def & mathematical definition of the type\\
-  \hline
-  Description & description here \\
-  \hline
-  Sources & Citation here, if the type is borrowed from another source\\
-  \hline
-\end{tabular}
-\end{minipage}\\
+% \noindent \begin{minipage}{\textwidth} \renewcommand*{\arraystretch}{1.5}
+% \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|} \hline \rowcolor[gray]{0.9}
+% Type Name & Name for Type\\
+%   \hline Type Def & mathematical definition of the type\\
+%   \hline Description & description here \\
+%   \hline Sources & Citation here, if the type is borrowed from another
+%   source\\
+%   \hline \end{tabular} \end{minipage}\\
 
 \subsubsection{Instance Models} \label{sec_instance}    
 
