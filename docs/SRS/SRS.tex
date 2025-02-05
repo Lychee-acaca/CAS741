@@ -267,6 +267,10 @@ $z$ & N/A & complex frequency variable in the Z-domain, $z=e^{j2\pi f}$ \\
 In the fields of electronics and signal processing, $j$ represents the imaginary
 unit. In other word, we define $j^2 = -1$.
 
+In discrete signal processing, square brackets are used to represent discrete
+signals and round brackets are used to represent continuous signals.  For
+instance, $u(t)$ is continuous signal and $u[n]$ is discrete signal.
+
 \newpage
 
 \pagenumbering{arabic}
@@ -606,34 +610,36 @@ time and annotated time.
 
 \subsection{Solution Characteristics Specification}
 
-% \plt{This section specifies the information in the solution domain of the system
-%   to be developed. This section is intended to express what is required in such
-%   a way that analysts and stakeholders get a clear picture, and the latter will
-%   accept it. The purpose of this section is to reduce the problem into one
-%   expressed in mathematical terms. Mathematical expertise is used to extract the
-%   essentials from the underlying physical description of the problem, and to
-%   collect and substantiate all physical data pertinent to the problem.}
+% \plt{This section specifies the information in the solution domain of the
+%   system to be developed. This section is intended to express what is required
+%   in such a way that analysts and stakeholders get a clear picture, and the
+%   latter will accept it. The purpose of this section is to reduce the problem
+%   into one expressed in mathematical terms. Mathematical expertise is used to
+%   extract the essentials from the underlying physical description of the
+%   problem, and to collect and substantiate all physical data pertinent to the
+%   problem.}
 
-% \plt{This section presents the solution characteristics by successively refining
-%   models.  It starts with the abstract/general Theoretical Models (TMs) and
-%   refines them to the concrete/specific Instance Models (IMs).  If necessary
-%   there are intermediate refinements to General Definitions (GDs).  All of these
-%   refinements can potentially use Assumptions (A) and Data Definitions (DD). TMs
-%   are refined to create new models, that are called GMs or IMs. DDs are not
-%   refined; they are just used. GDs and IMs are derived, or refined, from other
-%   models. DDs are not derived; they are just given. TMs are also just given, but
-%   they are refined, not used.  If a potential DD includes a derivation, then
-%   that means it is refining other models, which would make it a GD or an IM.}
+% \plt{This section presents the solution characteristics by successively
+%   refining models.  It starts with the abstract/general Theoretical Models
+%   (TMs) and refines them to the concrete/specific Instance Models (IMs).  If
+%   necessary there are intermediate refinements to General Definitions (GDs).
+%   All of these refinements can potentially use Assumptions (A) and Data
+%   Definitions (DD). TMs are refined to create new models, that are called GMs
+%   or IMs. DDs are not refined; they are just used. GDs and IMs are derived, or
+%   refined, from other models. DDs are not derived; they are just given. TMs
+%   are also just given, but they are refined, not used.  If a potential DD
+%   includes a derivation, then that means it is refining other models, which
+%   would make it a GD or an IM.}
 
-% \plt{The above makes a distinction between ``refined'' and ``used.'' A model is
-%   refined to another model if it is changed by the refinement. When we change a
-%   general 3D equation to a 2D equation, we are making a refinement, by applying
-%   the assumption that the third dimension does not matter. If we use a
-%   definition, like the definition of density, we aren't refining, or changing
-%   that definition, we are just using it.}
+% \plt{The above makes a distinction between ``refined'' and ``used.'' A model
+%   is refined to another model if it is changed by the refinement. When we
+%   change a general 3D equation to a 2D equation, we are making a refinement,
+%   by applying the assumption that the third dimension does not matter. If we
+%   use a definition, like the definition of density, we aren't refining, or
+%   changing that definition, we are just using it.}
 
-% \plt{The same information can be a TM in one problem and a DD in another.  It is
-%   about how the information is used.  In one problem the definition of
+% \plt{The same information can be a TM in one problem and a DD in another.  It
+%   is about how the information is used.  In one problem the definition of
 %   acceleration can be a TM, in another it would be a DD.}
 
 % \plt{There is repetition between the information given in the different chunks
@@ -814,14 +820,14 @@ either passband ripple (type I) or stopband ripple (type II).  }
 % #3 label
 {Threshold Detect}
 % #4 equation
-{ $y(n) = 
+{ $T[n] = 
 \begin{cases}
-1 & \text{if } x(n) \geq \theta \\
-0 & \text{if } x(n) < \theta \end{cases}$ }
+x[n] & \text{if } x[n] \geq \theta \\
+0 & \text{if } x[n] < \theta \end{cases}$ }
 % #5 description
 { \leavevmode \\
   $x$ is the input signal.  \\
-  $y$ is the output signal.  \\
+  $T$ is the output signal.  \\
   $\theta$ is the threshold, which is not guaranteed to be a static number all
   the time and may change as the state changes.  \\
 }
@@ -911,6 +917,38 @@ Description & $x[n]$ is the input signal at the $n$-th time sample.  \\
 & This equation reflects the conversion relationship between the difference
 equation and the Z-domain transfer function $H(z)$ comes from \dref{B-trans}. \\
 
+\hline
+  Source & \url{https://en.wikipedia.org/wiki/Digital_filter} \\
+  \hline
+  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& GD\refstepcounter{defnum}\thedefnum \label{Differential filter}\\
+\hline
+Label &\bf Differential filter \\
+\hline
+% Units&$MLt^{-3}T^0$\\
+% \hline SI Units&\si{\watt\per\square\metre}\\
+% \hline
+Equation&$y[n]=\frac{1}{8}(2x[n]+x[n-1]-x[n-3]-2x[n-4])$  \\
+\hline
+Description & $x[n]$ is the input signal at the $n$-th time sample.  \\
+& $y[n]$ is the output signal at the $n$-th time sample.  \\
+& The five-point differentiation formula is a numerical method used to
+approximate the derivative of a discrete signal.  This filter is actually a
+special digital filter using difference equations in \dref{FDE}.  \\
+& In this program, differential filter can be used to enhance the slope of the
+QRS complex.  \\
 \hline
   Source & \url{https://en.wikipedia.org/wiki/Digital_filter} \\
   \hline
@@ -1024,10 +1062,8 @@ which is expressed in mathematical terms. It uses concrete symbols defined in
 Section~\ref{sec_datadef} to replace the abstract symbols in the models
 identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
 
-The goals \plt{reference your goals} are solved by \plt{reference your instance
-  models}.  \plt{other details, with cross-references where appropriate.}
-  \plt{Modify the examples below for your problem, and add additional models as
-  appropriate.}
+The goal \gsref{G_find_index} is solved by \iref{I_find_index} and
+\gsref{G_calculate_RMSE} is solved by \iref{I_RMSE}.
 
 ~\newline
 
@@ -1039,30 +1075,69 @@ The goals \plt{reference your goals} are solved by \plt{reference your instance
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{ewat}\\
+  Number& IM\refstepcounter{instnum}\theinstnum \label{I_find_index}\\
   \hline
-  Label& \bf Energy balance on water to find $T_W$\\
+  Label& \bf Algorithm to detect R-wave peak index\\
   \hline
-  Input&$m_W$, $C_W$, $h_C$, $A_C$, $h_P$, $A_P$, $t_\text{final}$, $T_C$,
-  $T_\text{init}$, $T_P(t)$ from \iref{epcm}\\
-  & The input is constrained so that $T_\text{init} \leq T_C$
-  (\aref{A_charge})\\
+  Input& $u$, $f_s$, $N$ \\
   \hline
-  Output&$T_W(t)$, $0\leq t \leq t_\text{final}$, such that\\
-  &$\frac{dT_W}{dt} = \frac{1}{\tau_W}[(T_C - T_W(t)) + {\eta}(T_P(t) -
-  T_W(t))]$,\\
-  &$T_W(0) = T_P(0) = T_\text{init}$ (\aref{A_InitTemp}) and $T_P(t)$ from
-  \iref{epcm} \\
+  Output&
+  \begin{equation}
+    u_f[n] = -\sum_{k=1}^{M}a_ku_f[n-k] + \sum_{l=0}^{N}b_lu[n-l] \nonumber
+  \end{equation}\\
+  &\begin{equation} u_w[n] = \frac{1}{W}\sum_{k=0}^{W-1}u_f[n-k]^2 \nonumber
+  \end{equation}\\
+  &\begin{equation} u_{th}[n] = 
+      \begin{cases}
+        u_w[n] & \text{if } u_w[n] \geq \theta \\
+        0 & \text{if } u_w[n] < \theta \end{cases} \nonumber \end{equation}\\
+  &\begin{equation} R[i] = \arg\max_{n}{u_{th}[n]}\nonumber \end{equation}\\
   \hline
-  Description&$T_W$ is the water temperature (\si{\celsius}).\\
-  &$T_P$ is the PCM temperature (\si{\celsius}).\\
-  &$T_C$ is the coil temperature (\si{\celsius}).\\
-  &$\tau_W = \frac{m_W C_W}{h_C A_C}$ is a constant (\si{\second}).\\
-  &$\eta = \frac{h_P A_P}{h_C A_C}$ is a constant (dimensionless).\\
-  & The above equation applies as long as the water is in liquid form,
-  $0<T_W<100^o\text{C}$, where $0^o\text{C}$ and $100^o\text{C}$ are the melting
-  and boiling points of water, respectively (\aref{A_OpRange},
-  \aref{A_Pressure}).  \\
+  Description& When calculating $u_f$, The filter parameters $a$ and $b$ here
+  are linear combinations of a series of filter parameters from \dref{B-trans}.
+  The sequence of filters including low-pass and high-pass filter from
+  \tref{Butterworth Filter} and \tref{Chebyshev Filter} and differential filter
+  from \dref{Differential filter}.  \\
+  & We use the square function and sliding window integral to calculate $u_w$,
+  in this way the R-wave can be amplified and the signal can be smoothed.  \\
+  & \tref{Threshold Detect} is used when calculating $u_{th}$, so we can focus
+  on extracting the R-wave and ignore the influence of other signals. \\
+  & In the last equation, the variable $n$ has a range limitation, we only take
+  a continuous period of $n$ where $u_{th}[n]$ is non-zero. \\
+  \hline
+  Sources& \url{https://en.wikipedia.org/wiki/Pan%E2%80%93Tompkins_algorithm} \\
+  \hline
+  Ref.\ By & \iref{epcm}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+%Instance Model 2
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{I_RMSE}\\
+  \hline
+  Label& \bf calculate $RMSE$ between $A$ and $R$ \\
+  \hline
+  Input& $A$, $R$, $L$\\
+  \hline
+  Output&
+  \begin{equation}
+    RMSE = \sqrt{\sum_{i=1}^{n}\frac{(A[i]-R[i])^2}{n}} \nonumber
+  \end{equation} \\
+  \hline
+  Description& $A$ is the sequence of integers containing annotated index. \\
+  & $R$ is the sequence of integers containing calculated index from
+  \iref{I_find_index}. \\
+  & $L$ is the length of $A$ and $R$.  Normally they are equal since we assumed
+  \aref{A_high_quality}.  \\
   \hline
   Sources& Citation here \\
   \hline
@@ -1152,6 +1227,8 @@ A correct solution must exhibit \plt{fill in the details}.  \plt{These
 \plt{This section is not for test cases or techniques for verification and
   validation.  Those topics will be addressed in the Verification and Validation
   plan.}
+
+\newpage
 
 \section{Requirements}
 
