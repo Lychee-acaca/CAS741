@@ -545,7 +545,11 @@ input ECG signal is of high quality.
 }
 % #8 Referenced by
 {
-  \dref{ROCT}
+  \tref{Butterworth Filter}
+  \tref{Chebyshev Filter}
+  \dref{B-trans}
+  \dref{FDE}
+  \iref{I_find_index}
 }
 % #9 Preconditions
 { None }
@@ -579,7 +583,9 @@ no ripples) in the passband and rolls off towards zero in the stopband.  }
 }
 % #8 Referenced by
 {
-  \dref{ROCT}
+  \dref{B-trans}
+  \dref{FDE}
+  \iref{I_find_index}
 }
 % #9 Preconditions
 { None }
@@ -614,7 +620,9 @@ either passband ripple (type I) or stopband ripple (type II).  }
 }
 % #8 Referenced by
 {
-  \dref{ROCT}
+  \dref{B-trans}
+  \dref{FDE}
+  \iref{I_find_index}
 }
 % #9 Preconditions
 { None }
@@ -648,7 +656,8 @@ the input signal is compared to a threshold value.}
 {}
 % #8 Referenced by
 {
-  \dref{ROCT}
+  \iref{I_find_index}
+  \iref{I_RMSE}
 }
 % #9 Preconditions
 { None }
@@ -692,7 +701,9 @@ transformed into digital filter in this way. \\
 \hline
   Source & \url{https://en.wikipedia.org/wiki/Bilinear_transform} \\
   \hline
-  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
+  Ref.\ By & \tref{Analog Filter Equation}, \tref{Butterworth Filter},
+  \tref{Chebyshev Filter}, \dref{FDE}, \dref{Differential filter},
+  \iref{I_find_index}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -728,7 +739,9 @@ equation and the Z-domain transfer function $H(z)$ comes from \dref{B-trans}. \\
 \hline
   Source & \url{https://en.wikipedia.org/wiki/Digital_filter} \\
   \hline
-  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
+  Ref.\ By & \tref{Analog Filter Equation}, \tref{Butterworth Filter},
+  \tref{Chebyshev Filter}, \dref{B-trans}, \dref{Differential filter},
+  \iref{I_find_index}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -760,7 +773,7 @@ QRS complex.  \\
 \hline
   Source & \url{https://en.wikipedia.org/wiki/Digital_filter} \\
   \hline
-  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
+  Ref.\ By & \tref{Analog Filter Equation}, \iref{I_find_index}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -805,7 +818,7 @@ Symbol &$T_s$\\
   \url{https://en.wikipedia.org/wiki/Sampling_(signal_processing)#Sampling_rate}
   \\
   \hline
-  Ref.\ By & \iref{ewat}\\
+  Ref.\ By & \dref{B-trans}, \iref{I_find_index}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -890,7 +903,9 @@ The goal \gsref{G_find_index} is solved by \iref{I_find_index} and
   \hline
   Sources& \url{https://en.wikipedia.org/wiki/Pan%E2%80%93Tompkins_algorithm} \\
   \hline
-  Ref.\ By & \iref{epcm}\\
+  Ref.\ By & \tref{Analog Filter Equation}, \tref{Butterworth Filter},
+  \tref{Chebyshev Filter}, \tref{Threshold Detect}, \dref{B-trans}, \dref{FDE},
+  \dref{Differential filter}, \ddref{d_pos}, \iref{I_RMSE}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -941,7 +956,7 @@ continuous period of $n$ where $u_{th}[n]$ is non-zero.
   \hline
   Sources& Citation here \\
   \hline
-  Ref.\ By & \iref{epcm}\\
+  Ref.\ By & \tref{Threshold Detect}, \iref{I_find_index}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1060,9 +1075,6 @@ data and detected R-wave index to calculate RMSE
 
 \end{itemize}
 
-\plt{Every IM should map to at least one requirement, but not every requirement
-  has to map to a corresponding IM.}
-
 \subsection{Nonfunctional Requirements}
 
 \noindent \begin{itemize}
@@ -1084,11 +1096,11 @@ data and detected R-wave index to calculate RMSE
 
 \end{itemize}
 
-\subsection{Rationale}
+% \subsection{Rationale}
 
-\plt{Provide a rationale for the decisions made in the documentation.  Rationale
-should be provided for scope decisions, modelling decisions, assumptions and
-typical values.}
+% \plt{Provide a rationale for the decisions made in the documentation.
+% Rationale should be provided for scope decisions, modelling decisions,
+% assumptions and typical values.}
 
 \section{Likely Changes}    
 
@@ -1122,15 +1134,6 @@ dependencies of instance models, requirements, and data constraints on each
 other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
 general definitions, data definitions, instance models, and likely changes on
 the assumptions.
-
-\plt{You will have to modify these tables for your problem.}
-
-\plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
-  means that GD1's derivation or presentation requires invocation of A1.  A1
-  does not use GD1.  A1 is ``used by'' GD1.}
-
-\plt{The traceability matrix is challenging to maintain manually.  Please do
-  your best.  In the future tools (like Drasil) will make this much easier.}
 
 \begin{table}[htbp!]
 \centering
@@ -1170,7 +1173,7 @@ the assumptions.
 \tref{Chebyshev Filter}        & X& & & & X& X& & & X&  \\ \hline
 \tref{Threshold Detect}        & & & & & & & & & X& X \\ \hline
 \dref{B-trans}                 & X& X& X& & & X& & X& X&  \\ \hline
-\dref{FDE}                     & X& X& X& & X& X& & & X&  \\ \hline
+\dref{FDE}                     & X& X& X& & X& & & & X&  \\ \hline
 \dref{Differential filter}     & & & & & X& X& & & X&  \\ \hline
 \ddref{d_pos}                  & & & & & & & & & X&  \\ \hline
 \iref{I_find_index}            & X& X& X& X& X& X& X& X& & X \\ \hline
@@ -1206,10 +1209,10 @@ what has to be additionally modified if a certain component is changed.  The
 arrows in the graphs represent dependencies. The component at the tail of an
 arrow is depended on by the component at the head of that arrow. Therefore, if a
 component is changed, the components that it points to should also be changed.
-Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models, general
-definitions, data definitions, instance models, likely changes, and assumptions
-on each other. Figure~\ref{Fig_RTrace} shows the dependencies of instance
-models, requirements, and data constraints on each other.
+% Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models, general
+% definitions, data definitions, instance models, likely changes, and
+% assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
+% instance models, requirements, and data constraints on each other.
 
 % \begin{figure}[h!] \begin{center} %\rotatebox{-90}
 %     {
