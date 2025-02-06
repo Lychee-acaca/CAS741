@@ -1102,9 +1102,16 @@ data and detected R-wave index to calculate RMSE
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the likely changes, with a reference to the related assumption (aref), as
-    appropriate.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_filters}:] The types of digital
+filters such as \tref{Butterworth Filter} and \tref{Chebyshev Filter} may be
+increased according to actual needs
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_parameters}:] Some specific
+parameters in \iref{I_find_index} may be changed, such as the default filter
+order number, cutoff frequency, window size etc.
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_database}:] Some ECG data other
+than MITBIH may be used.
 
 \end{itemize}
 
@@ -1112,9 +1119,9 @@ data and detected R-wave index to calculate RMSE
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the unlikely changes.  The design can assume that the changes listed will
-    not occur.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_convert}:] The method of
+converting continuous-time systems to discrete-time systems will be bilinear
+transform in \dref{B-trans} and does not change.
 
 \end{itemize}
 
@@ -1148,7 +1155,10 @@ the assumptions.
 \ddref{d_pos}                 & & & &  \\ \hline
 \iref{I_find_index}           & X& X& X& X \\ \hline
 \iref{I_RMSE}                 & & X& X& X \\ \hline
-\lcref{LC_htank}              & & & &  \\
+\lcref{LC_filters}            & X& & &  \\ \hline
+\lcref{LC_parameters}         & X& & X&  \\ \hline
+\lcref{LC_database}           & X& X& X& X \\ \hline
+\lcref{LC_convert}            & X& & &  \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
