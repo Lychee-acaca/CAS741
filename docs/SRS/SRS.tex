@@ -867,14 +867,14 @@ Label &\bf Bilinear transform \\
 % Units&$MLt^{-3}T^0$\\
 % \hline SI Units&\si{\watt\per\square\metre}\\
 % \hline
-Equation&$s \approx \frac{2}{T} \cdot \frac{z-1}{z+1}$  \\
+Equation&$s \approx \frac{2}{T_s} \cdot \frac{z-1}{z+1}$  \\
 \hline
 Description & The bilinear transform is used in digital signal processing and
 discrete-time control theory to transform continuous-time system representations
 to discrete-time.  \\
 & $s$ is the Laplace variable (complex frequency).  \\
 & $z$ is the complex frequency variable in the Z-domain.  \\
-& $T$ is the sampling period.  \\
+& $T_s$ is the sampling period.  \\
 & When \aref{A_Nq_frequency} is satisfied, this equation represents replacing
 all $s$ terms in $H(s)$ S-domain transfer function directly with $\frac{2}{T}
 \cdot \frac{z-1}{z+1}$, after doing this we can get Z-domain transfer function
@@ -988,31 +988,24 @@ below for your problem, and add additional definitions as appropriate.}
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 \hline
 \rowcolor[gray]{0.9}
-Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{FluxCoil}\\
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{d_pos}\\
 \hline
-Label& \bf Heat flux out of coil\\
+Label& \bf Period of sampling\\
 \hline
-Symbol &$q_C$\\
+Symbol &$T_s$\\
 \hline
 % Units& $Mt^{-3}$\\
 % \hline
-  SI Units & \si{\watt\per\square\metre}\\
+  SI Units & \si{\second}\\
   \hline
-  Equation&$q_C(t) = h_C (T_C - T_W(t))$, over area $A_C$\\
+  Equation&$T_s = \frac{1}{f_s}$\\
   \hline
-  Description & $T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is
-                the temperature of the water (\si{\celsius}).  
-                The heat flux out of the coil, $q_C$
-                (\si{\watt\per\square\metre}), is found by assuming that
-                Newton's Law of Cooling applies (\aref{A_Newt_coil}).  This law
-                (\dref{NL}) is used on the surface of the coil, which has area
-                $A_C$ (\si{\square\metre}) and heat transfer coefficient $h_C$
-                (\si{\watt\per\square\metre\per\celsius}).  This equation
-                assumes that the temperature of the coil is constant over time
-                (\aref{A_tcoil}) and that it does not vary along the length of
-                the coil (\aref{A_tlcoil}).  \\
+  Description & $T_s$ is the period of sampling (\si{\second}).  \\
+  & $f_s$ is the frequency of sampling (\si{\hertz}).  \\
   \hline
-  Sources& Citation here \\
+  Sources&
+  \url{https://en.wikipedia.org/wiki/Sampling_(signal_processing)#Sampling_rate}
+  \\
   \hline
   Ref.\ By & \iref{ewat}\\
   \hline
@@ -1093,17 +1086,15 @@ The goal \gsref{G_find_index} is solved by \iref{I_find_index} and
         0 & \text{if } u_w[n] < \theta \end{cases} \nonumber \end{equation}\\
   &\begin{equation} R[i] = \arg\max_{n}{u_{th}[n]}\nonumber \end{equation}\\
   \hline
-  Description& When calculating $u_f$, The filter parameters $a$ and $b$ here
-  are linear combinations of a series of filter parameters from \dref{B-trans}.
-  The sequence of filters including low-pass and high-pass filter from
-  \tref{Butterworth Filter} and \tref{Chebyshev Filter} and differential filter
-  from \dref{Differential filter}.  \\
-  & We use the square function and sliding window integral to calculate $u_w$,
-  in this way the R-wave can be amplified and the signal can be smoothed.  \\
-  & \tref{Threshold Detect} is used when calculating $u_{th}$, so we can focus
-  on extracting the R-wave and ignore the influence of other signals. \\
-  & In the last equation, the variable $n$ has a range limitation, we only take
-  a continuous period of $n$ where $u_{th}[n]$ is non-zero. \\
+  Description& $u$ is the sequence of original ECG signal input data.  \\
+  & $a$ and $b$ are sequence of digital filter parameters.  \\
+  & $M$ and $N$ are the length of filter parameters.  \\
+  & $W$ is the window size of sliding window integral. This size needs to be
+  adjusted manually.  \\
+  & $\theta$ is the R-wave detecting threshold, which is designed to be
+  automatically adjusted by the program.   \\
+  & $R$ is the final output of the program, which is a sequence of R-wave index
+  we hope to detect in \gsref{G_find_index}.  \\
   \hline
   Sources& \url{https://en.wikipedia.org/wiki/Pan%E2%80%93Tompkins_algorithm} \\
   \hline
@@ -1111,6 +1102,23 @@ The goal \gsref{G_find_index} is solved by \iref{I_find_index} and
   \hline
 \end{tabular}
 \end{minipage}\\
+
+\subsubsection*{Derivation of \iref{I_find_index}}
+
+When calculating $u_f$, The filter parameters $a$ and $b$ are linear
+combinations of a series of filter parameters from \dref{B-trans}.  The sequence
+of filters including low-pass and high-pass filter from \tref{Butterworth
+Filter} and \tref{Chebyshev Filter} and differential filter from
+\dref{Differential filter}.  
+
+We use the square function and sliding window integral to calculate $u_w$, in
+this way the R-wave can be amplified and the signal can be smoothed.  
+
+\tref{Threshold Detect} is used when calculating $u_{th}$, so we can focus on
+extracting the R-wave and ignore the influence of other signals.  
+
+In the last equation, the variable $n$ has a range limitation, we only take a
+continuous period of $n$ where $u_{th}[n]$ is non-zero.  
 
 ~\newline
 
@@ -1147,12 +1155,6 @@ The goal \gsref{G_find_index} is solved by \iref{I_find_index} and
 \end{minipage}\\
 
 %~\newline
-
-\subsubsection*{Derivation of ...}
-
-\plt{The derivation shows how the IM is derived from the TMs/GDs.  In cases
-  where the derivation cannot be described under the Description field, it will
-  be necessary to include this subsection.}
 
 \subsubsection{Input Data Constraints} \label{sec_DataConstraints}    
 
