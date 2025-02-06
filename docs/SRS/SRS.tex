@@ -319,7 +319,7 @@ The RwaveDetecion system receives sample frequency $f_s$ and discrete time
 domain ECG signal $u$ from the ADC.  Based on this information, the index of
 each R-wave peak $R$ can be calculated and returned to the user.  If the user
 provides annotated data $A$, which is optional, the system will return the
-$RMSE$ between $A$ and $R$ additionally.
+$\text{RMSE}$ between $A$ and $R$ additionally.
 
 \begin{figure}[h!]
 \begin{center}
@@ -343,7 +343,7 @@ $RMSE$ between $A$ and $R$ additionally.
 \item Return the integer sequence index of each R-wave peak $R$ detected from
 $u$
 \item Render a graph that shows $u$ and $R$ at the same time
-\item Return the $RMSE$ between $A$ and $R$ if required
+\item Return the $\text{RMSE}$ between $A$ and $R$ if required
 \end{itemize}
 \end{itemize}
 
@@ -910,7 +910,7 @@ The goal \gsref{G_find_index} is solved by \iref{I_find_index} and
 \end{tabular}
 \end{minipage}\\
 
-\subsubsection*{Derivation of \iref{I_find_index}}
+\subsubsection*{Details of \iref{I_find_index}}
 
 When calculating $u_f$, The filter parameters $a$ and $b$ are linear
 combinations of a series of filter parameters from \dref{B-trans}.  The sequence
@@ -939,13 +939,13 @@ continuous period of $n$ where $u_{th}[n]$ is non-zero.
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{I_RMSE}\\
   \hline
-  Label& \bf calculate $RMSE$ between $A$ and $R$ \\
+  Label& \bf calculate $\text{RMSE}$ between $A$ and $R$ \\
   \hline
   Input& $A$, $R$, $L$\\
   \hline
   Output&
   \begin{equation}
-    RMSE = \sqrt{\sum_{i=1}^{n}\frac{(A[i]-R[i])^2}{n}} \nonumber
+    \text{RMSE} = \sqrt{\sum_{i=1}^{n}\frac{(A[i]-R[i])^2}{n}} \nonumber
   \end{equation} \\
   \hline
   Description& $A$ is the sequence of integers containing annotated index. \\
@@ -954,7 +954,7 @@ continuous period of $n$ where $u_{th}[n]$ is non-zero.
   & $L$ is the length of $A$ and $R$.  Normally they are equal since we assumed
   \aref{A_high_quality}.  \\
   \hline
-  Sources& Citation here \\
+  Sources& None \\
   \hline
   Ref.\ By & \tref{Threshold Detect}, \iref{I_find_index}\\
   \hline
@@ -986,18 +986,16 @@ Table~\ref{TblSpecParams}.
 \noindent \begin{longtable*}{l l l l c} 
   \toprule
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} &
-                             \textbf{Typical Value} & \textbf{Uncertainty}\\
+                             \textbf{Typical Value}\\
   \midrule 
-  $L$ & $L > 0$ & $L_{\text{min}} \leq L \leq L_{\text{max}}$ & 1.5
-  \si[per-mode=symbol] {\metre} & 10\% \\
+  $f_s$ & $f_s > 0$ & $f_{s\text{ min}} \leq f_s \leq f_{s\text{ max}}$ & 360
+  \si[per-mode=symbol] {\hertz} \\
+  $u$ & $u[n] \geq 0$ & $0 \leq u[n] \leq u_{\text{max}}$ & 0.5\si{\mV} \\
+  $N$ & $N > 0$ & $0 < N \leq N_{\text{max}}$ & 36000 \\
+  $A$ & $A[n] \geq 0$ & $0 \leq A[n] \leq A_{\text{max}}$ & 15000 \\
   \bottomrule
 \end{longtable*}
 \end{table}
-
-\noindent 
-\begin{description}
-\item[(*)] \plt{you might need to add some notes or clarifications}
-\end{description}
 
 \begin{table}[!h]
 \caption{Specification Parameter Values} \label{TblSpecParams}
@@ -1006,36 +1004,34 @@ Table~\ref{TblSpecParams}.
   \toprule
   \textbf{Var} & \textbf{Value} \\
   \midrule 
-  $L_\text{min}$ & 0.1 \si{\metre}\\
+  $f_{s\text{ min}}$ & 100 \si{\hertz}\\
+  $f_{s\text{ max}}$ & 5000 \si{\hertz}\\
+  $u_{\text{max}}$ & 10 \si{\mV}\\
+  $N_{\text{max}}$ & 1,000,000 \\
+  $A_{\text{max}}$ & 100,000 \\
   \bottomrule
 \end{longtable*}
 \end{table}
 
-\subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
+% \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
-\noindent
-A correct solution must exhibit \plt{fill in the details}.  \plt{These
-  properties are in addition to the stated requirements.  There is no need to
-  repeat the requirements here.  These additional properties may not exist for
-  every problem.  Examples include conservation laws (like conservation of
-  energy or mass) and known constraints on outputs, which are usually summarized
-  in tabular form.  A sample table is shown in Table~\ref{TblOutputVar}}
+% \noindent A correct solution must exhibit \plt{fill in the details}.
+% \plt{These properties are in addition to the stated requirements.  There is no
+% need to repeat the requirements here.  These additional properties may not
+% exist for every problem.  Examples include conservation laws (like
+% conservation of energy or mass) and known constraints on outputs, which are
+% usually summarized in tabular form.  A sample table is shown in
+% Table~\ref{TblOutputVar}}
 
-\begin{table}[!h]
-\caption{Output Variables} \label{TblOutputVar}
-\renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l} 
-  \toprule
-  \textbf{Var} & \textbf{Physical Constraints} \\
-  \midrule 
-  $T_W$ & $T_\text{init} \leq T_W \leq T_C$ (by~\aref{A_charge}) \\
-  \bottomrule
-\end{longtable*}
-\end{table}
+% \begin{table}[!h] \caption{Output Variables} \label{TblOutputVar}
+% \renewcommand{\arraystretch}{1.2} \noindent \begin{longtable*}{l l} \toprule
+% \textbf{Var} & \textbf{Physical Constraints} \\
+%   \midrule $T_W$ & $T_\text{init} \leq T_W \leq T_C$ (by~\aref{A_charge}) \\
+%   \bottomrule \end{longtable*} \end{table}
 
-\plt{This section is not for test cases or techniques for verification and
-  validation.  Those topics will be addressed in the Verification and Validation
-  plan.}
+% \plt{This section is not for test cases or techniques for verification and
+%   validation.  Those topics will be addressed in the Verification and
+%   Validation plan.}
 
 \newpage
 
@@ -1239,15 +1235,15 @@ component is changed, the components that it points to should also be changed.
 %   organized as a prioritized list of requirements, or it could should the
 %   requirements that will be implemented for ``phase 1'', ``phase 2'', etc.}
 
-\section{Values of Auxiliary Constants}
+% \section{Values of Auxiliary Constants}
 
-\plt{Show the values of the symbolic parameters introduced in the report.}
+% \plt{Show the values of the symbolic parameters introduced in the report.}
 
-\plt{The definition of the requirements will likely call for
-SYMBOLIC\_CONSTANTS.  Their values are defined in this section for easy
-maintenance.}
+% \plt{The definition of the requirements will likely call for
+% SYMBOLIC\_CONSTANTS.  Their values are defined in this section for easy
+% maintenance.}
 
-\plt{The value of FRACTION, for the Maintainability NFR would be given here.}
+% \plt{The value of FRACTION, for the Maintainability NFR would be given here.}
 
 \newpage
 
