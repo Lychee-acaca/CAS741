@@ -79,58 +79,44 @@ system before deployment.
 
 \section{General Information}
 
+This section will provide the project summary and objectives for this document.
+
 \subsection{Summary}
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+This project focuses on reimplementing the Pan-Tompkins algorithm for R-wave
+detection in ECG signal processing.  This implementation will automatically
+derive all filter parameters based on requirements without relying on external
+libraries.
 
 \subsection{Objectives}
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
+The objectives of this VnV plan include:
 
-\wss{You should also list the objectives that are out of scope.  You don't have
-the resources to do everything, so what will you be leaving out.  For instance,
-if you are not going to verify the quality of usability, state this.  It is also
-worthwhile to justify why the objectives are left out.}
+\begin{itemize}
+  \item Build confidence in the software correctness.
+  \item Test robustness against noisy ECG signals.
+\end{itemize}
 
-\wss{The objectives are important because they highlight that you are aware of
-limitations in your resources for verification and validation.  You can't do
-everything, so what are you going to prioritize?  As an example, if your system
-depends on an external library, you can explicitly state that you will assume
-that external library has already been verified by its implementation team.}
+\noindent The objectives of this VnV plan do not include:
+
+\begin{itemize}
+  \item User experience testing for a graphical interface or integration into
+  medical workflow systems.
+  \item Clinical trials.
+\end{itemize}
 
 \subsection{Challenge Level and Extras}
 
-\wss{State the challenge level (advanced, general, basic) for your project.
-Your challenge level should exactly match what is included in your problem
-statement.  This should be the challenge level agreed on between you and the
-course instructor.  You can use a pull request to update your challenge level
-(in TeamComposition.csv or Repos.csv) if your plan changes as a result of the
-VnV planning exercise.}
-
-\wss{Summarize the extras (if any) that were tackled by this project.  Extras
-can include usability testing, code walkthroughs, user documentation, formal
-proof, GenderMag personas, Design Thinking, etc.  Extras should have already
-been approved by the course instructor as included in your problem statement.
-You can use a pull request to update your extras (in TeamComposition.csv or
-Repos.csv) if your plan changes as a result of the VnV planning exercise.}
+This is a problem with a general-level challenge. Doxygen will be widely used to
+generate the API documentation.
 
 \subsection{Relevant Documentation}
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (design documents, like MG, MIS, etc).  You
-  can include these even before they are written, since by the time the project
-  is done, they will be written.  You can create BibTeX entries for your
-  documents and within those entries include a hyperlink to the documents.}
-
-\citet{SRS}
-
-\wss{Don't just list the other documents.  You should explain why they are
-relevant and how they relate to your VnV efforts.}
+In the Verification and Validation Plan, we reference the Software Requirements
+Specification (SRS) \citep{SRS} as the primary document. The SRS outlines the
+system’s requirements, forming the foundation for all verification activities.
+It ensures that the VnV process is aligned with the specified functional and
+nonfunctional requirements.
 
 \section{Plan}
 
