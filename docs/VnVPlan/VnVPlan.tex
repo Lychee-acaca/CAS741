@@ -3,13 +3,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=blue,
-    filecolor=black,
-    linkcolor=red,
-    urlcolor=blue
-}
+\hypersetup{ colorlinks, citecolor=blue, filecolor=black, linkcolor=red,
+    urlcolor=blue }
 \usepackage[round]{natbib}
 
 \input{../Comments}
@@ -27,11 +22,10 @@
 
 \section*{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X} \toprule {\bf Date} & {\bf Version}
+& {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Feb 21, 2025 & 1.0 & Creation\\
 \bottomrule
 \end{tabularx}
 
@@ -100,16 +94,16 @@ This document ... \wss{provide an introductory blurb and roadmap of the
   ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
   just those that are most important.}
 
-\wss{You should also list the objectives that are out of scope.  You don't have 
-the resources to do everything, so what will you be leaving out.  For instance, 
-if you are not going to verify the quality of usability, state this.  It is also 
+\wss{You should also list the objectives that are out of scope.  You don't have
+the resources to do everything, so what will you be leaving out.  For instance,
+if you are not going to verify the quality of usability, state this.  It is also
 worthwhile to justify why the objectives are left out.}
 
-\wss{The objectives are important because they highlight that you are aware of 
-limitations in your resources for verification and validation.  You can't do everything, 
-so what are you going to prioritize?  As an example, if your system depends on an 
-external library, you can explicitly state that you will assume that external library 
-has already been verified by its implementation team.}
+\wss{The objectives are important because they highlight that you are aware of
+limitations in your resources for verification and validation.  You can't do
+everything, so what are you going to prioritize?  As an example, if your system
+depends on an external library, you can explicitly state that you will assume
+that external library has already been verified by its implementation team.}
 
 \subsection{Challenge Level and Extras}
 
@@ -137,8 +131,8 @@ Repos.csv) if your plan changes as a result of the VnV planning exercise.}
 
 \citet{SRS}
 
-\wss{Don't just list the other documents.  You should explain why they are relevant and 
-how they relate to your VnV efforts.}
+\wss{Don't just list the other documents.  You should explain why they are
+relevant and how they relate to your VnV efforts.}
 
 \section{Plan}
 
@@ -147,9 +141,9 @@ how they relate to your VnV efforts.}
 
 \subsection{Verification and Validation Team}
 
-\wss{Your teammates.  Maybe your supervisor.
-  You should do more than list names.  You should say what each person's role is
-  for the project's verification.  A table is a good way to summarize this information.}
+\wss{Your teammates.  Maybe your supervisor.  You should do more than list
+  names.  You should say what each person's role is for the project's
+  verification.  A table is a good way to summarize this information.}
 
 \subsection{SRS Verification Plan}
 
@@ -222,13 +216,15 @@ that document.}
 the requirements document captures the right requirements.  Maybe task based
 inspection?}
 
-\wss{For those capstone teams with an external supervisor, the Rev 0 demo should 
-be used as an opportunity to validate the requirements.  You should plan on 
-demonstrating your project to your supervisor shortly after the scheduled Rev 0 demo.  
-The feedback from your supervisor will be very useful for improving your project.}
+\wss{For those capstone teams with an external supervisor, the Rev 0 demo should
+be used as an opportunity to validate the requirements.  You should plan on
+demonstrating your project to your supervisor shortly after the scheduled Rev 0
+demo.  
+The feedback from your supervisor will be very useful for improving your
+project.}
 
-\wss{For teams without an external supervisor, user testing can serve the same purpose 
-as a Rev 0 demo for the supervisor.}
+\wss{For teams without an external supervisor, user testing can serve the same
+purpose as a Rev 0 demo for the supervisor.}
 
 \wss{This section might reference back to the SRS verification section.}
 
@@ -243,15 +239,15 @@ the contents of the subsections.}
   different areas.  If there are no identifiable subsets for the tests, this
   level of document structure can be removed.}
 
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.}
+\wss{Include a blurb here to explain why the subsections below cover the
+  requirements.  References to the SRS would be good here.}
 
 \subsubsection{Area of Testing1}
 
 \wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
+  cover the requirements.  References to the SRS would be good here.  If a
+  section covers tests for input constraints, you should reference the data
+  constraints table in the SRS.}
 		
 \paragraph{Title for Test}
 
@@ -365,13 +361,15 @@ How test will be performed:
 \wss{Reference your MIS (detailed design document) and explain your overall
 philosophy for test case selection.}  
 
-\wss{To save space and time, it may be an option to provide less detail in this section.  
-For the unit tests you can potentially layout your testing strategy here.  That is, you 
-can explain how tests will be selected for each module.  For instance, your test building 
-approach could be test cases for each access program, including one test for normal behaviour 
-and as many tests as needed for edge cases.  Rather than create the details of the input 
-and output here, you could point to the unit testing code.  For this to work, you code 
-needs to be well-documented, with meaningful names for all of the tests.}
+\wss{To save space and time, it may be an option to provide less detail in this
+section.  
+For the unit tests you can potentially layout your testing strategy here.  That
+is, you can explain how tests will be selected for each module.  For instance,
+your test building approach could be test cases for each access program,
+including one test for normal behaviour and as many tests as needed for edge
+cases.  Rather than create the details of the input and output here, you could
+point to the unit testing code.  For this to work, you code needs to be
+well-documented, with meaningful names for all of the tests.}
 
 \subsection{Unit Testing Scope}
 
@@ -384,8 +382,8 @@ needs to be well-documented, with meaningful names for all of the tests.}
 \subsection{Tests for Functional Requirements}
 
 \wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
+  appropriate specific modules can be verified by a non-testing based technique.
+  That can also be documented in this section.}
 
 \subsubsection{Module 1}
 
@@ -398,8 +396,8 @@ needs to be well-documented, with meaningful names for all of the tests.}
 
 \item{test-id1\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will be
+  automatic}
 					
 Initial State: 
 					
@@ -413,8 +411,8 @@ How test will be performed:
 					
 \item{test-id2\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will be
+  automatic}
 					
 Initial State: 
 					
@@ -449,8 +447,8 @@ How test will be performed:
 
 \item{test-id1\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will be
+  automatic}
 					
 Initial State: 
 					
@@ -494,8 +492,8 @@ This is where you can place additional information.
 
 \subsection{Symbolic Parameters}
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+The definition of the test cases will call for SYMBOLIC\_CONSTANTS.  Their
+values are defined in this section for easy maintenance.
 
 \subsection{Usability Survey Questions?}
 
@@ -513,13 +511,13 @@ graduate attribute of Lifelong Learning.
 
 \begin{enumerate}
   \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how
-    did you resolve them?
+  \item What pain points did you experience during this deliverable, and how did
+    you resolve them?
   \item What knowledge and skills will the team collectively need to acquire to
   successfully complete the verification and validation of your project?
   Examples of possible knowledge and skills include dynamic testing knowledge,
-  static testing knowledge, specific tool usage, Valgrind etc.  You should look to
-  identify at least one item for each team member.
+  static testing knowledge, specific tool usage, Valgrind etc.  You should look
+  to identify at least one item for each team member.
   \item For each of the knowledge areas and skills identified in the previous
   question, what are at least two approaches to acquiring the knowledge or
   mastering the skill?  Of the identified approaches, which will each team
