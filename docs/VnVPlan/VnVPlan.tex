@@ -10,6 +10,10 @@
 \input{../Comments}
 \input{../Common}
 
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
 \begin{document}
 
 \title{System Verification and Validation Plan for \progname{}} 
@@ -123,42 +127,50 @@ nonfunctional requirements.
 \wss{Introduce this section.  You can provide a roadmap of the sections to
   come.}
 
-\subsection{Verification and Validation Team}
+% \subsection{Verification and Validation Team}
 
-\wss{Your teammates.  Maybe your supervisor.  You should do more than list
-  names.  You should say what each person's role is for the project's
-  verification.  A table is a good way to summarize this information.}
+% \wss{Your teammates.  Maybe your supervisor.  You should do more than list
+%   names.  You should say what each person's role is for the project's
+%   verification.  A table is a good way to summarize this information.}
 
 \subsection{SRS Verification Plan}
 
-\wss{List any approaches you intend to use for SRS verification.  This may
-  include ad hoc feedback from reviewers, like your classmates (like your
-  primary reviewer), or you may plan for something more rigorous/systematic.}
+The SRS document \citep{SRS} will be reviewed by a domain expert.  The content
+of the review is based on the following checklist:
 
-\wss{If you have a supervisor for the project, you shouldn't just say they will
-read over the SRS.  You should explain your structured approach to the review.
-Will you have a meeting?  What will you present?  What questions will you ask?
-Will you give them instructions for a task-based inspection?  Will you use your
-issue tracker?}
-
-\wss{Maybe create an SRS checklist?}
+\begin{todolist}
+  \item Completeness: Included GS, A, GD, DD, TM, IM, etc.
+  \item Formatting: The document has a clear, logical structure, and properly
+  organized.
+  \item Verifiability: Each requirement is testable with a clear pass/fail
+  standard.
+  \item Traceability: Each requirement is linked to an IM
+\end{todolist}
 
 \subsection{Design Verification Plan}
 
-\wss{Plans for design verification}
+The Design Verification Plan will be reviewed by a domain expert.  The content
+of the review is based on the following checklist:
 
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
+\begin{todolist}
+  \item Low module coupling: modules can be reused anywhere and do not affect
+  others.
+  \item Good Hierarchy: make sure the hierarchy is clear and easy to maintain.
+\end{todolist}
 
 \subsection{Verification and Validation Plan Verification Plan}
 
-\wss{The verification and validation plan is an artifact that should also be
-verified.  Techniques for this include review and mutation testing.}
+The Verification and Validation Plan (This document itself) will be reviewed by
+a domain expert.  The content of the review is based on the following checklist:
 
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
+\begin{todolist}
+  \item Completeness : VnV plan includes all necessary sections.
+  \item Formatting: The document has a clear, logical structure, and properly
+  organized.
+  \item Appropriateness: Confirm that the methods and tools proposed in the VnV
+  plan are appropriate for the project.
+  \item Coverage: Make sure the VnV plan covers all the requirements.
+\end{todolist}
 
 \subsection{Implementation Verification Plan}
 
@@ -175,20 +187,18 @@ CAS741) for a partial usability survey.}
 
 \subsection{Automated Testing and Verification Tools}
 
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
-
-\wss{If you have already done this in the development plan, you can point to
-that document.}
-
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
+\begin{itemize}
+  \item Static code checker: cpplint - A tool that enforces Google's C++ style
+  guide by checking for common coding style violations.
+  \item Unit test: gTest - A C++ testing framework that provides a rich set of
+  assertions and test case management.
+  \item Local code quality control: git pre-commit - A framework that runs
+  checks before committing code, helping to enforce coding standards and catch
+  issues early.
+  \item Continuous integration: GitHub Actions - An automation tool that enables
+  CI/CD workflows, allowing code to be built, tested, and deployed
+  automatically.
+\end{itemize}
 
 \subsection{Software Validation Plan}
 
