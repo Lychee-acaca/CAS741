@@ -225,25 +225,11 @@ a domain expert.  The content of the review is based on the following checklist:
 
 \subsection{Software Validation Plan}
 
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
-
-\wss{You might want to use review sessions with the stakeholder to check that
-the requirements document captures the right requirements.  Maybe task based
-inspection?}
-
-\wss{For those capstone teams with an external supervisor, the Rev 0 demo should
-be used as an opportunity to validate the requirements.  You should plan on
-demonstrating your project to your supervisor shortly after the scheduled Rev 0
-demo.  
-The feedback from your supervisor will be very useful for improving your
-project.}
-
-\wss{For teams without an external supervisor, user testing can serve the same
-purpose as a Rev 0 demo for the supervisor.}
-
-\wss{This section might reference back to the SRS verification section.}
+The software will be validated using the
+\href{https://www.physionet.org/content/mitdb/1.0.0/}{MIT-BIH} dataset, where
+the system's performance will be assessed by calculating the Root Mean Square
+Error (RMSE) between the predicted and actual results. This will provide a
+quantitative measure of the system's accuracy.
 
 \section{System Tests}
 
@@ -720,6 +706,8 @@ How test will be performed:
     modularity.
   \end{enumerate}
 \end{enumerate}
+
+\newpage
 
 \subsection{Traceability Between Test Cases and Requirements}
 
