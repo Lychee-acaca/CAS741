@@ -579,62 +579,108 @@ How test will be performed:
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy.}
-
-\wss{For some nonfunctional tests, you won't be setting a target threshold for
-passing the test, but rather describing the experiment you will do to measure
-the quality for different inputs.  For instance, you could measure speed versus
-the problem size.  The output of the test isn't pass/fail, but rather a summary
-table or graph.}
-
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
-
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
-
-\wss{If you introduce static tests in your plan, you need to provide details.
-How will they be done?  In cases like code (or document) walkthroughs, who will
-be involved? Be specific.}
-
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\refstepcounter{testcasenum} \label{TC_USABILITY}
+\subsubsection{TC\thetestcasenum : Usability}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+  \item{Verify Doxygen generates a structured and readable API documentation \\}
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+  Type: Non-Functional, Dynamic, Manual
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+  Initial State: The software documentation is written in a format supported by
+  Doxygen.
 
+  Input/Condition: Run Doxygen on the project’s documentation source files.
+
+  Output/Result: A structured and readable API documentation is generated in the
+  expected format (e.g., HTML, PDF).
+
+  How test will be performed:
+  \begin{enumerate}
+    \item Execute Doxygen with the configured settings.
+    \item Inspect the generated documentation for completeness and readability.
+    \item Verify that all sections (e.g., class descriptions, function
+    documentation) are properly formatted.
+    \item Conduct a peer review to assess usability.
+  \end{enumerate}
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\refstepcounter{testcasenum} \label{TC_MAINTAINABILITY}
+\subsubsection{TC\thetestcasenum : Maintainability}
 
-...
+\begin{enumerate}
+
+  \item{Ensure high test coverage \\}
+
+  Type: Non-Functional, Dynamic, Automatic
+
+  Initial State: The software project contains multiple modules.
+
+  Input/Condition: Run a test coverage analysis tool.
+
+  Output/Result: A report showing the percentage of code covered by tests.
+
+  How test will be performed:
+  \begin{enumerate}
+    \item Execute the test suite with coverage tracking enabled.
+    \item Generate a test coverage report.
+    \item Verify that all modules have test coverage above a predefined
+    threshold.
+    \item If any module lacks coverage, update tests accordingly.
+  \end{enumerate}
+\end{enumerate}
+
+\refstepcounter{testcasenum} \label{TC_PORTABILITY}
+\subsubsection{TC\thetestcasenum : Portability}
+
+\begin{enumerate}
+
+  \item{Confirm the software builds and runs correctly on multi-platform \\}
+
+  Type: Non-Functional, Dynamic, Manual
+
+  Initial State: The source code is available and ready for compilation.
+
+  Input/Condition: Attempt to build and run the software on both Linux and
+  Windows environments.
+
+  Output/Result: The software compiles successfully and functions correctly on
+  both platforms.
+
+  How test will be performed:
+  \begin{enumerate}
+    \item Set up test environments for Linux and Windows.
+    \item Compile the software on both platforms.
+    \item Run key functionalities and verify expected behavior.
+    \item Identify and document any platform-specific issues.
+  \end{enumerate}
+\end{enumerate}
+
+\refstepcounter{testcasenum} \label{TC_REUSABILITY}
+\subsubsection{TC\thetestcasenum : Reusability}
+
+\begin{enumerate}
+
+  \item{Check if the code is modular and reusable in different contexts \\}
+
+  Type: Non-Functional, Static, Manual
+
+  Initial State: The software project contains multiple modules.
+
+  Input/Condition: Review code structure and check module usage.
+
+  Output/Result: A checklist ensures that modules are used in different
+  contexts.
+
+  How test will be performed:
+  \begin{enumerate}
+    \item Inspect code structure for clear separation of concerns.
+    \item Identify modules that are used in different parts of the software.
+    \item Complete a module reuse checklist, and suggest improvements for better
+    modularity.
+  \end{enumerate}
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
