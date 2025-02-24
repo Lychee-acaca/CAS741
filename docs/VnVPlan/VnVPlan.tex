@@ -37,30 +37,31 @@ Feb 21, 2025 & 1.0 & Creation\\
 \bottomrule
 \end{tabularx}
 
-~\\
-\wss{The intention of the VnV plan is to increase confidence in the software.
-However, this does not mean listing every verification and validation technique
-that has ever been devised.  The VnV plan should also be a \textbf{feasible}
-plan. Execution of the plan should be possible with the time and team available.
-If the full plan cannot be completed during the time available, it can either be
-modified to ``fake it'', or a better solution is to add a section describing
-what work has been completed and what work is still planned for the future.}
+% ~\\
+% \wss{The intention of the VnV plan is to increase confidence in the software.
+% However, this does not mean listing every verification and validation
+% technique that has ever been devised.  The VnV plan should also be a
+% \textbf{feasible} plan. Execution of the plan should be possible with the time
+% and team available.  If the full plan cannot be completed during the time
+% available, it can either be modified to ``fake it'', or a better solution is
+% to add a section describing what work has been completed and what work is
+% still planned for the future.}
 
-\wss{The VnV plan is typically started after the requirements stage, but before
-the design stage.  This means that the sections related to unit testing cannot
-initially be completed.  The sections will be filled in after the design stage
-is complete.  the final version of the VnV plan should have all sections filled
-in.}
+% \wss{The VnV plan is typically started after the requirements stage, but
+% before the design stage.  This means that the sections related to unit testing
+% cannot initially be completed.  The sections will be filled in after the
+% design stage is complete.  the final version of the VnV plan should have all
+% sections filled in.}
 
 \newpage
 
 \tableofcontents
 
 \listoftables
-\wss{Remove this section if it isn't needed}
+% \wss{Remove this section if it isn't needed}
 
 \listoffigures
-\wss{Remove this section if it isn't needed}
+% \wss{Remove this section if it isn't needed}
 
 \newpage
 
@@ -128,8 +129,11 @@ nonfunctional requirements.
 
 \section{Plan}
 
-\wss{Introduce this section.  You can provide a roadmap of the sections to
-  come.}
+This section provides plans to verify SRS, Design, VnV, and Implementation. In
+addition, some automated tools for testing are listed.
+
+% \wss{Introduce this section.  You can provide a roadmap of the sections to
+%   come.}
 
 % \subsection{Verification and Validation Team}
 
@@ -178,16 +182,29 @@ a domain expert.  The content of the review is based on the following checklist:
 
 \subsection{Implementation Verification Plan}
 
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
+\begin{todolist}
+  \item Static code check: Tools (cpplint) will be used to automatically detect
+  common issues such as memory leaks, uninitialized variables, and other code
+  quality concerns.
+  \item Test coverage: Tools (gcov) will be used to check test coverage and
+  ensure that most of the code is covered by tests, increasing confidence in the
+  correctness of the code.
+  \item Unit test: Comprehensive unit tests will be executed in testing
+  framework (gTest) to ensure that every units perform correctly.
+  \item Code review: The developer will conduct his own code reviews, and the
+  domain expert will also participate in code reviews if possible.
+\end{todolist}
 
-\wss{In this section you would also give any details of any plans for static
-  verification of the implementation.  Potential techniques include code
-  walkthroughs, code inspection, static analyzers, etc.}
+% \wss{You should at least point to the tests listed in this document and the
+%   unit testing plan.}
 
-\wss{The final class presentation in CAS 741 could be used as a code
-walkthrough.  There is also a possibility of using the final presentation (in
-CAS741) for a partial usability survey.}
+% \wss{In this section you would also give any details of any plans for static
+%   verification of the implementation.  Potential techniques include code
+%   walkthroughs, code inspection, static analyzers, etc.}
+
+% \wss{The final class presentation in CAS 741 could be used as a code
+% walkthrough.  There is also a possibility of using the final presentation (in
+% CAS741) for a partial usability survey.}
 
 \subsection{Automated Testing and Verification Tools}
 
@@ -230,25 +247,23 @@ purpose as a Rev 0 demo for the supervisor.}
 
 \section{System Tests}
 
-\wss{There should be text between all headings, even if it is just a roadmap of
-the contents of the subsections.}
+% \wss{There should be text between all headings, even if it is just a roadmap
+% of the contents of the subsections.}
+
+This section will provide the system tests designed to verify requirements of
+the system, including functional and non-functional requirements.
 
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
+% \wss{Subsets of the tests may be in related, so this section is divided into
+%   different areas.  If there are no identifiable subsets for the tests, this
+%   level of document structure can be removed.}
 
-\wss{Include a blurb here to explain why the subsections below cover the
-  requirements.  References to the SRS would be good here.}
+% \wss{Include a blurb here to explain why the subsections below cover the
+%   requirements.  References to the SRS would be good here.}
 
 \refstepcounter{testcasenum} \label{TC_IIR_FIR}
 \subsubsection{TC\thetestcasenum : Basic IIR and FIR Filters}
-
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a
-  section covers tests for input constraints, you should reference the data
-  constraints table in the SRS.}
 		
 %\paragraph{Title for Test}
 
@@ -848,17 +863,7 @@ Not filled.
 
 \newpage
 
-\section{Appendix}
-
-This is where you can place additional information.
-
-\subsection{Symbolic Parameters}
-
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.  Their
-values are defined in this section for easy maintenance.
-
-\subsection{Usability Survey Questions} \label{Survey}
-
+\section{Usability Survey Questions} \label{Survey}
 
 \begin{enumerate}
   \item On a scale of 1-5, how easy is it to use the software?
@@ -899,31 +904,6 @@ values are defined in this section for easy maintenance.
   
   \item Any additional comments or suggestions?\\
   \underline{\hspace{12cm}}
-\end{enumerate}
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-\wss{This section is not required for CAS 741}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.
-
-\input{../Reflection.tex}
-
-\begin{enumerate}
-  \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how did
-    you resolve them?
-  \item What knowledge and skills will the team collectively need to acquire to
-  successfully complete the verification and validation of your project?
-  Examples of possible knowledge and skills include dynamic testing knowledge,
-  static testing knowledge, specific tool usage, Valgrind etc.  You should look
-  to identify at least one item for each team member.
-  \item For each of the knowledge areas and skills identified in the previous
-  question, what are at least two approaches to acquiring the knowledge or
-  mastering the skill?  Of the identified approaches, which will each team
-  member pursue, and why did they make this choice?
 \end{enumerate}
 
 \end{document}
