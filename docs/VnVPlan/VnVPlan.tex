@@ -723,8 +723,30 @@ How test will be performed:
 
 \subsection{Traceability Between Test Cases and Requirements}
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
+% \wss{Provide a table that shows which test cases are supporting which
+%   requirements.}
+
+\begin{table}[htbp!]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+    & FR1& FR2& FR3& FR4& FR5& FR6& FR7& FR8& NFR1& NFR2& NFR3& NFR4 \\
+  \hline
+  \tcref{TC_IIR_FIR}            & X& & & & & & & & & & & \\ \hline
+  \tcref{TC_BUT_CHEB}           & & X& X& & & & & & & & & \\ \hline
+  \tcref{TC_SQUARING}           & & & & X& & & & & & & & \\ \hline
+  \tcref{TC_THRESHOLDING}       & & & & & X& & & & & & & \\ \hline
+  \tcref{TC_RMSE}               & & & & & & X& & & & & & \\ \hline
+  \tcref{TC_ALG}                & & & & & & & X& X& & & & \\ \hline
+  \tcref{TC_USABILITY}          & & & & & & & & & X& & & \\ \hline
+  \tcref{TC_MAINTAINABILITY}    & & & & & & & & & & X& & \\ \hline
+  \tcref{TC_PORTABILITY}        & & & & & & & & & & & X& \\ \hline
+  \tcref{TC_REUSABILITY}        & & & & & & & & & & & & X\\
+  \hline
+  \end{tabular}
+  \caption{Traceability Matrix Showing the Connections Between Requirements and System Test Cases}
+  \label{Table:tc_trace}
+\end{table}
 
 \section{Unit Test Description}
 
