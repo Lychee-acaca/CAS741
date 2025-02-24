@@ -6,6 +6,7 @@
 \hypersetup{ colorlinks, citecolor=blue, filecolor=black, linkcolor=red,
     urlcolor=blue }
 \usepackage[round]{natbib}
+\usepackage{graphicx}
 
 \input{../Comments}
 \input{../Common}
@@ -518,6 +519,60 @@ How test will be performed:
     \item The output will be compared against the expected result.
     \item There is a global floating point comparison threshold $\epsilon$ to
     determine whether floating point numbers are equal.
+  \end{enumerate}
+
+\end{enumerate}
+
+\refstepcounter{testcasenum} \label{TC_ALG}
+\subsubsection{TC\thetestcasenum : R-wave position calculating}
+
+\begin{enumerate}
+
+  \item{MIT-BIH Database test\\}
+  
+  Control: Automatic
+            
+  Initial State: No prior state is required.
+            
+  Input:
+  \begin{itemize}
+    \item sampling frequency $f_s=360$ Hz
+    \item MIT-BIH data from
+    \url{https://www.physionet.org/content/mitdb/1.0.0/}, as shown in figure
+    \ref{Fig_wave}. This is a curve consisting of discrete sample points and
+    contains the annotated points from cardiologists.  The blue vertical lines
+    in the figure \ref{Fig_wave} are annotated points.
+  \end{itemize}
+
+  \begin{figure}[h!]
+    \begin{center}
+      \includegraphics[width=1.1\textwidth]{wave}
+      \caption{input wave}
+      \label{Fig_wave} 
+    \end{center}
+  \end{figure}
+  
+  Output:
+  \begin{itemize}
+    \item The index of annotated points from cardiologists as shown in figure
+    \ref{Fig_wave}.
+    \item The RMSE between calculated and annotated R-wave index.
+  \end{itemize}
+  
+  Test Case Derivation: The test will evaluate the accuracy of the R-wave
+  detection function by comparing the detected R-wave index to the annotated
+  index, with the RMSE between the two sets of index expected to be below $3.0$.
+            
+  How test will be performed: 
+  \begin{enumerate}
+    \item The input $f_s$ and wave data will be provided to the calculating
+    function.
+    \item The annotated data will be provided to the calculating function.
+    \item The function will process the original wave data and calculate the
+    R-wave index.
+    \item The function will return the RMSE.
+    \item The correctness of this function is evaluated by the output RMSE,
+    assert that the RMSE is below $3.0$.
   \end{enumerate}
 
 \end{enumerate}
