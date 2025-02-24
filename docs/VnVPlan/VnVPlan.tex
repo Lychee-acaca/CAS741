@@ -14,6 +14,9 @@
 \newlist{todolist}{itemize}{2}
 \setlist[todolist]{label=$\square$}
 
+\newcommand{\tcref}[1]{TC\ref{#1}} \newcounter{testcasenum}
+\newcommand{\tthetestcasenum}{TM\thetestcasenum}
+
 \begin{document}
 
 \title{System Verification and Validation Plan for \progname{}} 
@@ -236,46 +239,82 @@ the contents of the subsections.}
 \wss{Include a blurb here to explain why the subsections below cover the
   requirements.  References to the SRS would be good here.}
 
-\subsubsection{Area of Testing1}
+\refstepcounter{testcasenum} \label{TC_IIR_FIR}
+\subsubsection{TC\thetestcasenum : Basic IIR and FIR Filters}
 
 \wss{It would be nice to have a blurb here to explain why the subsections below
   cover the requirements.  References to the SRS would be good here.  If a
   section covers tests for input constraints, you should reference the data
   constraints table in the SRS.}
 		
-\paragraph{Title for Test}
+%\paragraph{Title for Test}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{FIR Filter with Random Coefficients\\}
 
-Control: Manual versus Automatic
+Control: Automatic
 					
-Initial State: 
+Initial State: No prior state is required; the test starts with randomly
+generated filter coefficients.
 					
-Input: 
-					
-Output: \wss{The expected result for the given inputs.  Output is not how you
-are going to return the results of the test.  The output is the expected
-result.}
+Input:
+\begin{itemize}
+  \item FIR filter coefficients generated using scipy.signal.firwin(10, 0.3).
+  \item A sinusoidal wave with added Gaussian noise, generated using np.sin(2 *
+  np.pi * 0.05 * np.arange(1000)) + np.random.normal(0, 1, 1000).
+\end{itemize}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Output:
+\begin{itemize}
+  \item The filtered signal produced by the implemented FIR filter should
+  closely match the filtered signal from scipy.signal.lfilter.
+  \item The RMSE between the two outputs should be below $1e-5$.
+\end{itemize}
+
+Test Case Derivation: The test ensures that a basic FIR filter implementation
+behaves consistently with pseudo-oracle scipy.signal.
 					
 How test will be performed: 
+\begin{enumerate}
+  \item Generate FIR filter coefficients.
+  \item Generate an input signal as a sinusoidal wave with Gaussian noise.
+  \item Apply the FIR filter implementation.
+  \item Apply scipy.signal.lfilter with the same coefficients.
+  \item Compute the RMSE between outputs.
+  \item Assert that the RMSE is below $1e-5$.
+\end{enumerate}
 					
-\item{test-id2\\}
+\item{IIR Filter with Random Coefficients\\}
 
-Control: Manual versus Automatic
+Control: Automatic
 					
-Initial State: 
+Initial State: No prior state is required; the test starts with randomly
+generated filter coefficients.
 					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
+Input:
+\begin{itemize}
+  \item IIR filter coefficients generated using scipy.signal.butter(3, 0.3, btype='low', output='ba').
+  \item A sinusoidal wave with added Gaussian noise, generated using np.sin(2 * np.pi * 0.05 * np.arange(1000)) + np.random.normal(0, 1, 1000).
+\end{itemize}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Output:
+\begin{itemize}
+  \item The filtered signal produced by the implemented IIR filter should closely match the filtered signal from scipy.signal.lfilter.
+  \item The RMSE between the two outputs should be below $1e-5$.
+\end{itemize}
+
+The test ensures that a basic IIR filter implementation behaves consistently with scipy.signal.
 
 How test will be performed: 
+\begin{enumerate}
+  \item Generate IIR filter coefficients.
+  \item Generate an input signal as a sinusoidal wave with Gaussian noise.
+  \item Apply the IIR filter implementation.
+  \item Apply scipy.signal.lfilter with the same coefficients.
+  \item Compute the RMSE between outputs.
+  \item Assert that the RMSE is below $1e-5$.
+\end{enumerate}
 
 \end{enumerate}
 
