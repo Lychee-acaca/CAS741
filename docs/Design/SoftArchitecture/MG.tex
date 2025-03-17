@@ -151,13 +151,14 @@ adapted here is called design for change.
 \begin{description}
 \item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
 hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acFilter}:] The types of digital
-filters.
+\item[\refstepcounter{acnum} \actheacnum \label{acSIIR}:] The types of specified
+IIR filters.
+\item[\refstepcounter{acnum} \actheacnum \label{acIO}:] The input and output
+format.
+\item[\refstepcounter{acnum} \actheacnum \label{acMath}:] Specific
+implementation methods of various mathematical functions.
+\item[\refstepcounter{acnum} \actheacnum \label{acLog}:] The log format.
 \end{description}
-
-\wss{Anticipated changes relate to changes that would be made in requirements,
-design or implementation choices.  They are not related to changes that are made
-at run-time, like the values of parameters.}
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
@@ -169,9 +170,7 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucAlg}:] The specific algorithm to implement R-wave detection task.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
