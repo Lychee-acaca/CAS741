@@ -64,11 +64,11 @@ This section records information for easy reference.
   MG & Module Guide \\
   OS & Operating System \\
   R & Requirement\\
+  RMSE & Root Mean Square Error \\
+  \progname & Explanation of program name\\
   SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  \progname & Explanation of program name\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -170,7 +170,8 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucAlg}:] The specific algorithm to implement R-wave detection task.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucAlg}:] The specific algorithm
+to implement R-wave detection task.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -277,49 +278,56 @@ to be implemented.
 \subsubsection{General Digital Filter Module (\mref{mGDF})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
+\item[Secrets:]The data structure and algorithm for implementing filter
+difference equations.
+\item[Services:]Input the original signal and digital filter parameters, perform
+digital filtering, and return the filtered result.
 \item[Implemented By:] \progname
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets
-  tree.]
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Specified IIR Filter Module (\mref{mSIIR})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]Specific implementation details for different types of IIR
+filters such as Butterworth filter and Chebyshev filter.
+\item[Services:]Input the desired filter type, order, cutoff frequency, and
+other parameters to output a set of usable filter parameters.
 \item[Implemented By:] \progname
-\item[Type of Module:]
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Math Module (\mref{mMath})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]The specific implementation methods and algorithms for various
+mathematical functions.
+\item[Services:]Provide interfaces for mathematical functions such as square,
+thresholding, and RMSE calculation.
 \item[Implemented By:] \progname
-\item[Type of Module:]
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Pan Tompkins Algorithm Module (\mref{mAlg})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]The specific implementation of the Pan-Tompkins Algorithm and
+some finely tuned parameters within the algorithm.
+\item[Services:]Input a sequence of raw ECG data, process it through the
+algorithm, and output the index sequence of the predicted R-wave peaks.
 \item[Implemented By:] \progname
-\item[Type of Module:]
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Annotated Data RMSE Module (\mref{mRMSE})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]Point-to-point matching algorithm between predicted data and
+annotated data.
+\item[Services:]Input a sequence of predicted R-wave indices and a sequence of
+annotated indices, and output the RMSE between two sequences.
 \item[Implemented By:] \progname
-\item[Type of Module:]
+\item[Type of Module:] Library
 \end{description}
 
 
@@ -391,8 +399,10 @@ R3 & \mref{mSIIR}, \mref{mError}, \mref{mLogger}\\
 R4 & \mref{mMath}, \mref{mError}, \mref{mLogger}\\
 R5 & \mref{mMath}, \mref{mError}, \mref{mLogger}\\
 R6 & \mref{mMath}, \mref{mError}, \mref{mLogger}\\
-R7 & \mref{mHH}, \mref{mAlg}, \mref{mRwave}, \mref{mIO}, \mref{mError}, \mref{mLogger}\\
-R8 & \mref{mHH}, \mref{mRMSE}, \mref{mRwave}, \mref{mIO}, \mref{mError}, \mref{mLogger}\\
+R7 & \mref{mHH}, \mref{mAlg}, \mref{mRwave}, \mref{mIO}, \mref{mError},
+\mref{mLogger}\\
+R8 & \mref{mHH}, \mref{mRMSE}, \mref{mRwave}, \mref{mIO}, \mref{mError},
+\mref{mLogger}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
