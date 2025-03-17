@@ -149,7 +149,8 @@ require changing the one module that hides the associated decision. The approach
 adapted here is called design for change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific hardware on which the software is running.
+\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
+hardware on which the software is running.
 \item[\refstepcounter{acnum} \actheacnum \label{acFilter}:] The types of digital
 filters.
 \end{description}
@@ -196,19 +197,19 @@ actually be implemented.
 {Hardware-Hiding Module} & ~ \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{5}{0.3\textwidth}{Behaviour-Hiding Module}
+& General Digital Filter Module \\
+& Specified IIR Filter Module \\
+& Math Module \\
+& Pan Tompkins Algorithm Module \\
+& Annotated Data RMSE Module \\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{4}{0.3\textwidth}{Software Decision Module}
+& Rwave Detect Module \\
+& Input Output Processing Module \\
+& Error Handler Module \\
+& Logger Module \\
 \bottomrule
 
 \end{tabular}
@@ -363,24 +364,20 @@ In this section, the uses hierarchy between modules is provided.
 execution of B may be necessary for A to complete the task described in its
 specification. That is, A {\em uses} B if there exist situations in which the
 correct functioning of A depends upon the availability of a correct
-implementation of B.  Figure \ref{FigUH} illustrates the use relation between
-the modules. It can be seen that the graph is a directed acyclic graph (DAG).
-Each level of the hierarchy offers a testable and usable subset of the system,
-and modules in the higher level of the hierarchy are essentially simpler because
-they use modules from the lower levels.
+implementation of B.
 
-\wss{The uses relation is not a data flow diagram.  In the code there will often
-be an import statement in module A when it directly uses module B.  Module B
-provides the services that module A needs.  The code for module A needs to be
-able to see these services (hence the import statement).  Since the uses
-relation is transitive, there is a use relation without an import, but the
-arrows in the diagram typically correspond to the presence of import statement.}
+Figure \ref{FigUH} illustrates the use relation between the modules. It can be
+seen that the graph is a directed acyclic graph (DAG).  The Error Handler module
+and Logger module with dotted arrows in the Figure \ref{FigUH} indicate that
+they are referenced by all other modules except themselves.  Each level of the
+hierarchy offers a testable and usable subset of the system, and modules in the
+higher level of the hierarchy are essentially simpler because they use modules
+from the lower levels.
 
-\wss{If module A uses module B, the arrow is directed from A to B.}
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\includegraphics[width=1.1\textwidth]{UsesHierarchy.pdf}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
