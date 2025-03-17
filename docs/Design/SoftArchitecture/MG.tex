@@ -183,7 +183,20 @@ actually be implemented.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mGDF}:] General Digital Filter
+Module
+\item [\refstepcounter{mnum} \mthemnum \label{mSIIR}:] Specified IIR Filter
+Module
+\item [\refstepcounter{mnum} \mthemnum \label{mMath}:] Math Module
+\item [\refstepcounter{mnum} \mthemnum \label{mAlg}:] Pan Tompkins Algorithm
+Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRMSE}:] Annotated Data RMSE
+Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRwave}:] Rwave Detect Module
+\item [\refstepcounter{mnum} \mthemnum \label{mIO}:] Input Output Processing
+Module
+\item [\refstepcounter{mnum} \mthemnum \label{mError}:] Error Handler Module
+\item [\refstepcounter{mnum} \mthemnum \label{mLogger}:] Logger Module
 \end{description}
 
 
@@ -269,19 +282,53 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{General Digital Filter Module (\mref{mGDF})}
 
 \begin{description}
 \item[Secrets:]The format and structure of the input data.
 \item[Services:]Converts the input data into the data structure used by the
   input parameters module.
-\item[Implemented By:] [Your Program Name Here]
+\item[Implemented By:] \progname
 \item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
   [Information to include for leaf modules in the decomposition by secrets
   tree.]
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Specified IIR Filter Module (\mref{mSIIR})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Math Module (\mref{mMath})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Pan Tompkins Algorithm Module (\mref{mAlg})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Annotated Data RMSE Module (\mref{mRMSE})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
 
 
 \subsection{Software Decision Module}
@@ -297,7 +344,41 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Rwave Detect Module (\mref{mRwave})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Input Output Processing Module (\mref{mIO})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Error Handler Module (\mref{mError})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Logger Module (\mref{mLogger})}
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] \progname
+\item[Type of Module:]
+\end{description}
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -384,20 +465,10 @@ are essentially simpler because they use modules from the lower levels.
 
 %\section*{References}
 
-\section{User Interfaces}
+% \section{User Interfaces}
 
-\wss{Design of user interface for software and hardware.  Attach an appendix if
-needed. Drawings, Sketches, Figma}
-
-\section{Design of Communication Protocols}
-
-\wss{If appropriate}
-
-\section{Timeline}
-
-\wss{Schedule of tasks and who is responsible}
-
-\wss{You can point to GitHub if this information is included there}
+% \wss{Design of user interface for software and hardware.  Attach an appendix
+% if needed. Drawings, Sketches, Figma}
 
 \bibliographystyle {plainnat}
 \bibliography{../../../refs/References}
