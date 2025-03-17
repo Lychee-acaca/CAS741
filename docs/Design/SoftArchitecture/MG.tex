@@ -347,37 +347,44 @@ annotated indices, and output the RMSE between two sequences.
 \subsubsection{Rwave Detect Module (\mref{mRwave})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]The method and order for initializing and calling various
+internal required modules.
+\item[Services:]Provides an entry point to the entire program.
 \item[Implemented By:] \progname
-\item[Type of Module:]
 \end{description}
 
 \subsubsection{Input Output Processing Module (\mref{mIO})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]The specific process of user input and output, the process of
+converting input into a program-readable format, and the supported input and
+output formats.
+\item[Services:]Obtain input readable by other modules, and provide an interface
+for output to other modules.
 \item[Implemented By:] \progname
-\item[Type of Module:]
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Error Handler Module (\mref{mError})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]The detailed error handling process, error report format and
+path.
+\item[Services:]Provide an interface for unified redirection after an error
+occurs.  When an error is encountered, it will automatically generate a series
+of reports and terminate the program, facilitating issue reproduction.
 \item[Implemented By:] \progname
-\item[Type of Module:]
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Logger Module (\mref{mLogger})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
+\item[Secrets:]Definition of log levels and required print format.
+\item[Services:]Input a string, print it as a log with a timestamp, log level,
+and other relevant information.  It can be saved in real-time.
 \item[Implemented By:] \progname
-\item[Type of Module:]
+\item[Type of Module:] Library
 \end{description}
 
 \section{Traceability Matrix} \label{SecTM}
