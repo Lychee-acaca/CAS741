@@ -369,10 +369,10 @@ implementation of B.
 Figure \ref{FigUH} illustrates the use relation between the modules. It can be
 seen that the graph is a directed acyclic graph (DAG).  The Error Handler module
 and Logger module with dotted arrows in the Figure \ref{FigUH} indicate that
-they are referenced by all other modules except themselves.  Each level of the
-hierarchy offers a testable and usable subset of the system, and modules in the
-higher level of the hierarchy are essentially simpler because they use modules
-from the lower levels.
+they are referenced by all other modules except themselves and the
+Hardware-Hiding Module.  Each level of the hierarchy offers a testable and
+usable subset of the system, and modules in the higher level of the hierarchy
+are essentially simpler because they use modules from the lower levels.
 
 
 \begin{figure}[H]
