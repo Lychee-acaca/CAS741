@@ -163,8 +163,7 @@ project.
 \newpage
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
+\section{MIS of Hardware-Hiding Module} \label{MIS_HH}
 
 \wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
 
@@ -172,7 +171,7 @@ project.
 
 \subsection{Module}
 
-\wss{Short name for the module}
+Hardware-Hiding
 
 \subsection{Uses}
 
@@ -233,6 +232,52 @@ project.
   They are not necessarily something that is going to be implemented explicitly.
   Even if they are implemented, they are not exported; they only have local
   scope.}
+
+\newpage
+
+\section{MIS of General Digital Filter Module} \label{MIS_GDF}
+
+\subsection{Module}
+
+General Digital Filter
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\wss{accessProg} & - & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \wss{accessProg}():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\subsubsection{Local Functions}
 
 \newpage
 
