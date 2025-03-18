@@ -20,10 +20,10 @@
 \usepackage{caption}
 \usepackage{fullpage}
 
-\hypersetup{
-bookmarks=true,     % show bookmarks bar?
+\hypersetup{ bookmarks=true,     % show bookmarks bar?
 colorlinks=true,       % false: boxed links; true: colored links
-linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+linkcolor=red,          % color of internal links (change box color with
+                        % linkbordercolor)
 citecolor=blue,      % color of links to bibliography
 filecolor=magenta,  % color of file links
 urlcolor=cyan          % color of external links
@@ -50,11 +50,10 @@ urlcolor=cyan          % color of external links
 
 \section{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X} \toprule {\bf Date} & {\bf Version}
+& {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Mar 17, 2025 & 1.0 & Creation\\
 \bottomrule
 \end{tabularx}
 
@@ -79,14 +78,14 @@ See SRS Documentation at \wss{give url}
 The following document details the Module Interface Specifications for
 \wss{Fill in your project name and description}
 
-Complementary documents include the System Requirement Specifications
-and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+Complementary documents include the System Requirement Specifications and Module
+Guide.  The full documentation and implementation can be found at \url{...}.
+\wss{provide the url for your repo}
 
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
+\wss{You should describe your notation.  You can use what is below as a starting
+  point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
@@ -105,24 +104,27 @@ The following table summarizes the primitive data types used by \progname.
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
 character & char & a single symbol or digit\\
-integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
-natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
+integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$,
+$\infty$) \\
+natural number & $\mathbb{N}$ & a number without a fractional component in [1,
+$\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
 \bottomrule
 \end{tabular} 
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences, strings, and
-tuples. Sequences are lists filled with elements of the same data type. Strings
-are sequences of characters. Tuples contain a list of values, potentially of
-different types. In addition, \progname \ uses functions, which
+The specification of \progname \ uses some derived data types: sequences,
+strings, and tuples. Sequences are lists filled with elements of the same data
+type. Strings are sequences of characters. Tuples contain a list of values,
+potentially of different types. In addition, \progname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
 
 \section{Module Decomposition}
 
-The following table is taken directly from the Module Guide document for this project.
+The following table is taken directly from the Module Guide document for this
+project.
 
 \begin{table}[h!]
 \centering
@@ -223,9 +225,9 @@ The following table is taken directly from the Module Guide document for this pr
 \subsubsection{Local Functions}
 
 \wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+  They are not necessarily something that is going to be implemented explicitly.
+  Even if they are implemented, they are not exported; they only have local
+  scope.}
 
 \newpage
 
@@ -237,34 +239,5 @@ The following table is taken directly from the Module Guide document for this pr
 \section{Appendix} \label{Appendix}
 
 \wss{Extra information if required}
-
-\newpage{}
-
-\section*{Appendix --- Reflection}
-
-\wss{Not required for CAS 741 projects}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Problem Analysis and Design.
-
-\input{../../Reflection.tex}
-
-\begin{enumerate}
-  \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how
-    did you resolve them?
-  \item Which of your design decisions stemmed from speaking to your client(s)
-  or a proxy (e.g. your peers, stakeholders, potential users)? For those that
-  were not, why, and where did they come from?
-  \item While creating the design doc, what parts of your other documents (e.g.
-  requirements, hazard analysis, etc), it any, needed to be changed, and why?
-  \item What are the limitations of your solution?  Put another way, given
-  unlimited resources, what could you do to make the project better? (LO\_ProbSolutions)
-  \item Give a brief overview of other design solutions you considered.  What
-  are the benefits and tradeoffs of those other designs compared with the chosen
-  design?  From all the potential options, why did you select the documented design?
-  (LO\_Explores)
-\end{enumerate}
-
 
 \end{document}
