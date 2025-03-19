@@ -193,7 +193,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-open & $\text{char}^n$, $\mathbb{N}$, $\mathbb{N}$ & $\mathbb{Z}$ & - \\
+open & $\text{string}$, $\mathbb{N}$, $\mathbb{N}$ & $\mathbb{Z}$ & - \\
 write & $\mathbb{Z}$, $\mathbb{N}^n$, $\mathbb{N}$ & $\mathbb{N}$ & - \\
 read & $\mathbb{Z}$, $\mathbb{N}^n$, $\mathbb{N}$ & $\mathbb{N}$ & - \\
 \hline
@@ -344,9 +344,12 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-butter & - & - & - \\
-cheby1 & - & - & - \\
-cheby2 & - & - & - \\
+butter & $\mathbb{N}$, $\mathbb{R}$, $\text{string}$ & $\mathbb{R}^{n}$,
+$\mathbb{R}^{m}$ & - \\
+cheby1 & $\mathbb{N}$, $\mathbb{R}$, $\mathbb{R}$, $\text{string}$ &
+$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ \\
+cheby2 & $\mathbb{N}$, $\mathbb{R}$, $\mathbb{R}$, $\text{string}$ &
+$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -367,7 +370,8 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item The system performing the calculations can handle floating-point precision properly.
+\item The system performing the calculations can handle floating-point precision
+properly.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
@@ -433,7 +437,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+calSquare & $\mathbb{R}^n$ & $\mathbb{R}^n$ & - \\
+calThreshold & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}^n$ & - \\
+calRMSE & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}$ & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -454,15 +460,36 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item All input sequences are non-empty.
+\item In calThreshold, the input sequences $x$ and $\text{thres}$ have the same
+length.
+\item In calRMSE, the sequences $x$ and $y$ are of equal length and contain
+numerical values.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent calSquare(x):
 \begin{itemize}
-\item transition: 
-\item output: 
+\item transition: Input a sequence $x$, compute a new sequence where each
+element is the square of the corresponding element in $x$.
+\item output: The sequence after squaring.
+\item exception: 
+\end{itemize}
+
+\noindent calThreshold(x, thres):
+\begin{itemize}
+\item transition: Input a sequence $x$ and a threshold sequence $\text{thres}$,
+then compute the result of applying this threshold to $x$.
+\item output: The result of applying the threshold to the sequence $x$.
+\item exception: 
+\end{itemize}
+
+\noindent calRMSE(x, y):
+\begin{itemize}
+\item transition: Input two sequences $x$ and $y$ of the same length, then
+compute the RMSE.
+\item output: The RMSE of sequence $x$ and sequence $y$.
 \item exception: 
 \end{itemize}
 
@@ -504,7 +531,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+findPeak & $\mathbb{R}^n$, $\mathbb{N}$ & $\mathbb{Z}^m$ & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -525,15 +552,18 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item The input sequence rawSignal is a non-empty array of real numbers.
+\item The input sequence rawSignal is filterable.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent findPeak(rawSignal, fs):
 \begin{itemize}
-\item transition: 
-\item output: 
+\item transition: Input the raw signal $\text{rawSignal}$ and the sampling
+frequency $\text{fs}$, and use the Pan-Tompkins algorithm to compute the R-wave
+peak indices.
+\item output: An integer sequence representing the R-wave peak indices.
 \item exception: 
 \end{itemize}
 
@@ -573,7 +603,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+signalRMSE & $\mathbb{Z}^n$, $\mathbb{Z}^m$ & $\mathbb{R}$ & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -599,10 +629,12 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent signalRMSE(rawIndices, annIndices):
 \begin{itemize}
-\item transition: 
-\item output: 
+\item transition: Input two index sequences rawIndices and annIndices (possibly
+of unequal lengths), match the nearby peak points, and compute the RMSE for the
+matched points.
+\item output: A real number representing the RMSE.
 \item exception: 
 \end{itemize}
 
@@ -630,8 +662,8 @@ Rwave Detect
 
 \subsection{Syntax}
 
-This section describes the syntax used in the Specified IIR Filter Module,
-including the constants, programs, and routines that can be accessed.
+This section describes the syntax used in the Rwave Detect Module, including the
+constants, programs, and routines that can be accessed.
 
 \subsubsection{Exported Constants}
 
@@ -644,7 +676,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+mainEntry & - & - & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -665,16 +697,16 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item The program will first initialize and enter this module during execution.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent mainEntry:
 \begin{itemize}
-\item transition: 
-\item output: 
-\item exception: 
+\item transition: As the entry point of the program, it will initialize other
+modules and make the corresponding function calls, coordinating the various
+modules.
 \end{itemize}
 
 \subsubsection{Local Functions}
