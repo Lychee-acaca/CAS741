@@ -107,12 +107,13 @@ The following table summarizes the primitive data types used by \progname.
 \toprule 
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
-character & char & a single symbol or digit\\
+character & $\text{char}$ & a single symbol or digit\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$,
 $\infty$) \\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1,
 $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+string & $\text{string}$ & -\\
 \bottomrule
 \end{tabular} 
 \end{center}
@@ -165,9 +166,8 @@ project.
 
 \section{MIS of Hardware-Hiding Module} \label{MIS_HH}
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+This section outlines the formal specification of the Hardware-Hiding Module,
+which provides an abstraction layer for interacting with hardware devices.
 
 \subsection{Module}
 
@@ -175,10 +175,16 @@ Hardware-Hiding
 
 \subsection{Uses}
 
+None
 
 \subsection{Syntax}
 
+This section describes the syntax used in the Hardware-Hiding Module, including
+the constants, programs, and routines that can be accessed.
+
 \subsubsection{Exported Constants}
+
+None
 
 \subsubsection{Exported Access Programs}
 
@@ -187,51 +193,54 @@ Hardware-Hiding
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+open & $\text{char}^n$, $\mathbb{N}$, $\mathbb{N}$ & $\mathbb{Z}$ & - \\
+write & $\mathbb{Z}$, $\mathbb{N}^n$, $\mathbb{N}$ & $\mathbb{N}$ & - \\
+read & $\mathbb{Z}$, $\mathbb{N}^n$, $\mathbb{N}$ & $\mathbb{N}$ & - \\
 \hline
 \end{tabular}
 \end{center}
 
 \subsection{Semantics}
 
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+This module does not maintain state variables.
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+This module interacts with hardware devices, such as file systems or external
+I/O devices.
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+\item The input parameters to open must be valid and correspond to existing
+hardware components.
+\item The write operation assumes that the hardware device is available and
+writable.
+\item The read operation assumes that the hardware device is readable.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
+\noindent open(pathname, flags, mode):
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
+See \url{https://en.wikipedia.org/wiki/Open_(system_call)}.
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent write(fd, buf, count):
+
+See \url{https://en.wikipedia.org/wiki/Write_(system_call)}.
+
+\noindent read(fd, buf, count):
+
+See \url{https://en.wikipedia.org/wiki/Read_(system_call)}.
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented explicitly.
-  Even if they are implemented, they are not exported; they only have local
-  scope.}
+None
 
 \newpage
 
@@ -243,10 +252,16 @@ General Digital Filter
 
 \subsection{Uses}
 
+None
 
 \subsection{Syntax}
 
+This section describes the syntax used in the General Digital Filter Module,
+including the constants, programs, and routines that can be accessed.
+
 \subsubsection{Exported Constants}
+
+None
 
 \subsubsection{Exported Access Programs}
 
@@ -255,29 +270,42 @@ General Digital Filter
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+lfilter & $\mathbb{R}^n$, $\mathbb{R}^m$, $\mathbb{R}^t$ & $\mathbb{R}^t$ & - \\
 \hline
 \end{tabular}
 \end{center}
 
 \subsection{Semantics}
 
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
 \subsubsection{State Variables}
+
+None
 
 \subsubsection{Environment Variables}
 
+None
+
 \subsubsection{Assumptions}
+
+\begin{itemize}
+\item a1
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent lfilter(b, a, x):
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item Calculate the filtered result of the sequence $x$ based on the given
+filter parameters $b$ and $a$.
+\item output: The result of the sequence $x$ after being filtered.
 \end{itemize}
 
 \subsubsection{Local Functions}
+
+None
 
 \newpage
 
