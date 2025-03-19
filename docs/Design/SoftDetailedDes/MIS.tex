@@ -64,7 +64,7 @@ Mar 17, 2025 & 1.0 & Creation\\
 See SRS Documentation at
 \url{https://github.com/Lychee-acaca/CAS741/blob/main/docs/SRS/SRS.pdf}.
 
-\wss{Also add any additional symbols, abbreviations or acronyms}
+%\wss{Also add any additional symbols, abbreviations or acronyms}
 
 \newpage
 
@@ -340,16 +340,16 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 butter & $\mathbb{N}$, $\mathbb{R}$, $\text{string}$ & $\mathbb{R}^{n}$,
-$\mathbb{R}^{m}$ & - \\
+$\mathbb{R}^{m}$ & ResultExceededExpectation \\
 cheby1 & $\mathbb{N}$, $\mathbb{R}$, $\mathbb{R}$, $\text{string}$ &
-$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ \\
+$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ & ResultExceededExpectation \\
 cheby2 & $\mathbb{N}$, $\mathbb{R}$, $\mathbb{R}$, $\text{string}$ &
-$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ \\
+$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ & ResultExceededExpectation \\
 \hline
 \end{tabular}
 \end{center}
@@ -381,7 +381,8 @@ properly.
 \item transition: Given the order $N$, cutoff angular frequency $W_n$, and type
 of the Butterworth filter (high/low), calculate the parameters.
 \item output: The parameter sequences $b$ and $a$ of the filter.
-\item exception: 
+\item exception: When the output result clearly does not meet expectations,
+throw the ResultExceededExpectationError.
 \end{itemize}
 
 \noindent cheby1(N, rp, Wn, btype):
@@ -390,7 +391,8 @@ of the Butterworth filter (high/low), calculate the parameters.
 angular frequency $W_n$, and type of the Chebyshev I filter (high/low),
 calculate the parameters.
 \item output: The parameter sequences $b$ and $a$ of the filter.
-\item exception: 
+\item exception: When the output result clearly does not meet expectations,
+throw the ResultExceededExpectationError.
 \end{itemize}
 
 \noindent cheby2(N, rs, Wn, btype):
@@ -399,7 +401,8 @@ calculate the parameters.
 angular frequency $W_n$, and type of the Chebyshev II filter (high/low),
 calculate the parameters.
 \item output: The parameter sequences $b$ and $a$ of the filter.
-\item exception: 
+\item exception: When the output result clearly does not meet expectations,
+throw the ResultExceededExpectationError.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -438,8 +441,8 @@ None
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 calSquare & $\mathbb{R}^n$ & $\mathbb{R}^n$ & - \\
-calThreshold & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}^n$ & - \\
-calRMSE & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}$ & - \\
+calThreshold & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}^n$ & InvalidInput \\
+calRMSE & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}$ & InvalidInput \\
 \hline
 \end{tabular}
 \end{center}
@@ -461,10 +464,6 @@ None
 
 \begin{itemize}
 \item All input sequences are non-empty.
-\item In calThreshold, the input sequences $x$ and $\text{thres}$ have the same
-length.
-\item In calRMSE, the sequences $x$ and $y$ are of equal length and contain
-numerical values.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
@@ -474,7 +473,6 @@ numerical values.
 \item transition: Input a sequence $x$, compute a new sequence where each
 element is the square of the corresponding element in $x$.
 \item output: The sequence after squaring.
-\item exception: 
 \end{itemize}
 
 \noindent calThreshold(x, thres):
@@ -482,7 +480,8 @@ element is the square of the corresponding element in $x$.
 \item transition: Input a sequence $x$ and a threshold sequence $\text{thres}$,
 then compute the result of applying this threshold to $x$.
 \item output: The result of applying the threshold to the sequence $x$.
-\item exception: 
+\item exception: When the lengths of $x$ and $\text{thres}$ are not equal, throw
+an InvalidInput exception.
 \end{itemize}
 
 \noindent calRMSE(x, y):
@@ -490,7 +489,8 @@ then compute the result of applying this threshold to $x$.
 \item transition: Input two sequences $x$ and $y$ of the same length, then
 compute the RMSE.
 \item output: The RMSE of sequence $x$ and sequence $y$.
-\item exception: 
+\item exception: When the lengths of $x$ and $y$ are not equal, throw an
+InvalidInput exception.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -531,7 +531,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-findPeak & $\mathbb{R}^n$, $\mathbb{N}$ & $\mathbb{Z}^m$ & - \\
+findPeak & $\mathbb{R}^n$, $\mathbb{N}$ & $\mathbb{Z}^m$ & InvalidInput \\
 \hline
 \end{tabular}
 \end{center}
@@ -564,7 +564,8 @@ None
 frequency $\text{fs}$, and use the Pan-Tompkins algorithm to compute the R-wave
 peak indices.
 \item output: An integer sequence representing the R-wave peak indices.
-\item exception: 
+\item exception: When the input signal is shorter than the specified minimum
+length, throw an InvalidInput exception.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -599,11 +600,11 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-signalRMSE & $\mathbb{Z}^n$, $\mathbb{Z}^m$ & $\mathbb{R}$ & - \\
+signalRMSE & $\mathbb{Z}^n$, $\mathbb{Z}^m$ & $\mathbb{R}$ & NoMatchingPoint \\
 \hline
 \end{tabular}
 \end{center}
@@ -624,7 +625,7 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item The implementation of the Pan-Tompkins algorithm is correct.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
@@ -635,7 +636,8 @@ None
 of unequal lengths), match the nearby peak points, and compute the RMSE for the
 matched points.
 \item output: A real number representing the RMSE.
-\item exception: 
+\item exception: When no pairs of points match or the number of matching points
+is too few, throw a NoMatchingPoint exception.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -688,7 +690,9 @@ functions.
 
 \subsubsection{State Variables}
 
-None
+runningState: Record the stages of the program's execution, such as
+initialization, running, or unexpected termination.  runningTime: The runtime of
+the program.
 
 \subsubsection{Environment Variables}
 
@@ -741,11 +745,12 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+readFromFile & string & - & FileError \\
+writeToFile & string, x & - & FileError \\
 \hline
 \end{tabular}
 \end{center}
@@ -766,16 +771,24 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item The operating system can perform file read and write operations correctly.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent readFromFile(filename):
 \begin{itemize}
-\item transition: 
-\item output: 
-\item exception: 
+\item transition: Read the ECG signal from a file at the specified path and
+convert it into a format that can be used by other modules.
+\item output: The ECG signal after format conversion.
+\item exception: When the operating system cannot find the corresponding file or
+the file's internal format is incorrect, throw a FileError.
+\end{itemize}
+
+\noindent writeToFile(filename, index):
+\begin{itemize}
+\item transition: Save the index sequence of the R-wave peaks to a file.
+\item exception: If the file is not writable, throw a FileError.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -808,11 +821,11 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+throwException & string & - & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -833,16 +846,15 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item The exception can be correctly logged and saved.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent throwException(ex):
 \begin{itemize}
-\item transition: 
-\item output: 
-\item exception: 
+\item transition: Throw an exception named ex, terminate the program execution,
+and output the relevant logs.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -879,7 +891,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+log & string, $\mathbb{N}$ & - & - \\
+setLogLevel & $\mathbb{N}$ & - & - \\
+setLogPath & string & - & FileError \\
 \hline
 \end{tabular}
 \end{center}
@@ -895,21 +909,32 @@ None
 
 \subsubsection{Environment Variables}
 
-None
+The default log level in the configuration file.
 
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item Logs can be correctly output and stored.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent log(msg, level):
 \begin{itemize}
-\item transition: 
-\item output: 
-\item exception: 
+\item transition: If the level meets the output condition, log the message with
+the specified format and timestamp.
+\end{itemize}
+
+\noindent setLogLevel(level):
+\begin{itemize}
+\item transition: Suppress all log outputs below the specified level, and retain
+log outputs with a level greater than or equal to the specified level.
+\end{itemize}
+
+\noindent setLogPath(filename):
+\begin{itemize}
+\item transition: Set the log file save path.
+\item exception: If the file is not writable, throw a FileError.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -921,10 +946,10 @@ None
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
 
-\newpage
+% \newpage
 
-\section{Appendix} \label{Appendix}
+% \section{Appendix} \label{Appendix}
 
-\wss{Extra information if required}
+% \wss{Extra information if required}
 
 \end{document}
