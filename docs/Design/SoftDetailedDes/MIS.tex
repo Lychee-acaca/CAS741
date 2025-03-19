@@ -294,7 +294,9 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item The filter coefficients $b$ and $a$ are valid real-valued sequences.
+\item The input sequence $x$ is a real-valued time series of appropriate length.
+\item The first coefficient of $a$ is nonzero to ensure system stability.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
@@ -342,7 +344,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-- & - & - & - \\
+butter & - & - & - \\
+cheby1 & - & - & - \\
+cheby2 & - & - & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -363,15 +367,34 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item a1
+\item The system performing the calculations can handle floating-point precision properly.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent a:
+\noindent butter(N, Wn, btype):
 \begin{itemize}
-\item transition: 
-\item output: 
+\item transition: Given the order $N$, cutoff angular frequency $W_n$, and type
+of the Butterworth filter (high/low), calculate the parameters.
+\item output: The parameter sequences $b$ and $a$ of the filter.
+\item exception: 
+\end{itemize}
+
+\noindent cheby1(N, rp, Wn, btype):
+\begin{itemize}
+\item transition: Given the order $N$, the maximum ripple $rp$, the cutoff
+angular frequency $W_n$, and type of the Chebyshev I filter (high/low),
+calculate the parameters.
+\item output: The parameter sequences $b$ and $a$ of the filter.
+\item exception: 
+\end{itemize}
+
+\noindent cheby2(N, rs, Wn, btype):
+\begin{itemize}
+\item transition: Given the order $N$, the minimum attenuation $rs$, the cutoff
+angular frequency $W_n$, and type of the Chebyshev II filter (high/low),
+calculate the parameters.
+\item output: The parameter sequences $b$ and $a$ of the filter.
 \item exception: 
 \end{itemize}
 
