@@ -20,10 +20,10 @@
 \usepackage{caption}
 \usepackage{fullpage}
 
-\hypersetup{
-bookmarks=true,     % show bookmarks bar?
+\hypersetup{ bookmarks=true,     % show bookmarks bar?
 colorlinks=true,       % false: boxed links; true: colored links
-linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+linkcolor=red,          % color of internal links (change box color with
+                        % linkbordercolor)
 citecolor=blue,      % color of links to bibliography
 filecolor=magenta,  % color of file links
 urlcolor=cyan          % color of external links
@@ -50,11 +50,10 @@ urlcolor=cyan          % color of external links
 
 \section{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X} \toprule {\bf Date} & {\bf Version}
+& {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Mar 17, 2025 & 1.0 & Creation\\
 \bottomrule
 \end{tabularx}
 
@@ -62,9 +61,10 @@ Date 2 & 1.1 & Notes\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \wss{give url}
+See SRS Documentation at
+\url{https://github.com/Lychee-acaca/CAS741/blob/main/docs/SRS/SRS.pdf}.
 
-\wss{Also add any additional symbols, abbreviations or acronyms}
+%\wss{Also add any additional symbols, abbreviations or acronyms}
 
 \newpage
 
@@ -77,16 +77,16 @@ See SRS Documentation at \wss{give url}
 \section{Introduction}
 
 The following document details the Module Interface Specifications for
-\wss{Fill in your project name and description}
+\progname.
 
-Complementary documents include the System Requirement Specifications
-and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+This project focuses on reimplementing the Pan-Tompkins algorithm for R-wave
+detection in ECG signal processing.
+
+Complementary documents include the System Requirement Specifications and Module
+Guide.  The full documentation and implementation can be found at
+\url{https://github.com/Lychee-acaca/CAS741}.
 
 \section{Notation}
-
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
@@ -104,25 +104,29 @@ The following table summarizes the primitive data types used by \progname.
 \toprule 
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
-character & char & a single symbol or digit\\
-integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
-natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
+character & $\text{char}$ & a single symbol or digit\\
+integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$,
+$\infty$) \\
+natural number & $\mathbb{N}$ & a number without a fractional component in [1,
+$\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
 \bottomrule
-\end{tabular} 
+\end{tabular}
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences, strings, and
-tuples. Sequences are lists filled with elements of the same data type. Strings
-are sequences of characters. Tuples contain a list of values, potentially of
-different types. In addition, \progname \ uses functions, which
-are defined by the data types of their inputs and outputs. Local functions are
-described by giving their type signature followed by their specification.
+The specification of \progname \ uses some derived data types: sequences and
+strings. Sequences are lists filled with elements of the same data type, they
+are represented using a type with a superscript, for example, $\mathbb{R}^n$
+represents a real number sequence of length n. Strings are sequences of
+characters. In addition, \progname \ uses functions, which are defined by the
+data types of their inputs and outputs. Local functions are described by giving
+their type signature followed by their specification.
 
 \section{Module Decomposition}
 
-The following table is taken directly from the Module Guide document for this project.
+The following table is taken directly from the Module Guide document for this
+project.
 
 \begin{table}[h!]
 \centering
@@ -131,21 +135,22 @@ The following table is taken directly from the Module Guide document for this pr
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding} & ~ \\
+{Hardware-Hiding Module} & ~ \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
+\multirow{5}{0.3\textwidth}{Behaviour-Hiding Module}
+& General Digital Filter Module \\
+& Specified IIR Filter Module \\
+& Math Module \\
+& Pan Tompkins Algorithm Module \\
+& Annotated Data RMSE Module \\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
+\multirow{4}{0.3\textwidth}{Software Decision Module}
+& Rwave Detect Module \\
+& Input Output Processing Module \\
+& Error Handler Module \\
+& Logger Module \\
 \bottomrule
 
 \end{tabular}
@@ -156,23 +161,27 @@ The following table is taken directly from the Module Guide document for this pr
 \newpage
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
+\section{MIS of Hardware-Hiding Module} \label{MIS_HH}
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+This section outlines the formal specification of the Hardware-Hiding Module,
+which provides an abstraction layer for interacting with hardware devices.
 
 \subsection{Module}
 
-\wss{Short name for the module}
+Hardware-Hiding
 
 \subsection{Uses}
 
+None
 
 \subsection{Syntax}
 
+This section describes the syntax used in the Hardware-Hiding Module, including
+the constants, programs, and routines that can be accessed.
+
 \subsubsection{Exported Constants}
+
+None
 
 \subsubsection{Exported Access Programs}
 
@@ -181,90 +190,801 @@ The following table is taken directly from the Module Guide document for this pr
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+open & $\text{string}$, $\mathbb{N}$, $\mathbb{N}$ & $\mathbb{Z}$ & - \\
+write & $\mathbb{Z}$, $\mathbb{N}^n$, $\mathbb{N}$ & $\mathbb{N}$ & - \\
+read & $\mathbb{Z}$, $\mathbb{N}^n$, $\mathbb{N}$ & $\mathbb{N}$ & - \\
 \hline
 \end{tabular}
 \end{center}
 
 \subsection{Semantics}
 
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+None
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+None
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+\item The input parameters to open must be valid and correspond to existing
+hardware components.
+\item The write operation assumes that the hardware device is available and
+writable.
+\item The read operation assumes that the hardware device is readable.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
+\noindent open(pathname, flags, mode):
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
+See \url{https://en.wikipedia.org/wiki/Open_(system_call)}.
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent write(fd, buf, count):
+
+See \url{https://en.wikipedia.org/wiki/Write_(system_call)}.
+
+\noindent read(fd, buf, count):
+
+See \url{https://en.wikipedia.org/wiki/Read_(system_call)}.
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+None
+
+\newpage
+
+\section{MIS of General Digital Filter Module} \label{MIS_GDF}
+
+This section outlines the formal specification of the General Digital Filter
+Module, which provides linear filter functions for filtering in the form of
+difference equations.
+
+\subsection{Module}
+
+General Digital Filter
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Error Handler Module
+\item Logger Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the General Digital Filter Module,
+including the constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+lfilter & $\mathbb{R}^n$, $\mathbb{R}^m$, $\mathbb{R}^t$ & $\mathbb{R}^t$ & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The filter coefficients $b$ and $a$ are valid real-valued sequences.
+\item The input sequence $x$ is a real-valued time series of appropriate length.
+\item The first coefficient of $a$ is nonzero to ensure system stability.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent lfilter(b, a, x):
+\begin{itemize}
+\item transition: Calculate the filtered result of the sequence $x$ based on the
+given filter parameters $b$ and $a$.
+\item output: The result of the sequence $x$ after being filtered.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Specified IIR Filter Module} \label{MIS_SIIR}
+
+This section outlines the formal specification of the Specified IIR Filter
+Module, which provides parameter derivation functions for Butterworth and
+Chebyshev filters.
+
+\subsection{Module}
+
+Specified IIR Filter
+
+\subsection{Uses}
+
+\begin{itemize}
+\item General Digital Filter Module
+\item Error Handler Module
+\item Logger Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Specified IIR Filter Module,
+including the constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{5cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+butter & $\mathbb{N}$, $\mathbb{R}$, $\text{string}$ & $\mathbb{R}^{n}$,
+$\mathbb{R}^{m}$ & ResultExceededExpectation \\
+cheby1 & $\mathbb{N}$, $\mathbb{R}$, $\mathbb{R}$, $\text{string}$ &
+$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ & ResultExceededExpectation \\
+cheby2 & $\mathbb{N}$, $\mathbb{R}$, $\mathbb{R}$, $\text{string}$ &
+$\mathbb{R}^{n}$, $\mathbb{R}^{m}$ & ResultExceededExpectation \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The system performing the calculations can handle floating-point precision
+properly.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent butter(N, Wn, btype):
+\begin{itemize}
+\item transition: Given the order $N$, cutoff angular frequency $W_n$, and type
+of the Butterworth filter (high/low), calculate the parameters.
+\item output: The parameter sequences $b$ and $a$ of the filter.
+\item exception: When the output result clearly does not meet expectations,
+throw the ResultExceededExpectationError.
+\end{itemize}
+
+\noindent cheby1(N, rp, Wn, btype):
+\begin{itemize}
+\item transition: Given the order $N$, the maximum ripple $rp$, the cutoff
+angular frequency $W_n$, and type of the Chebyshev I filter (high/low),
+calculate the parameters.
+\item output: The parameter sequences $b$ and $a$ of the filter.
+\item exception: When the output result clearly does not meet expectations,
+throw the ResultExceededExpectationError.
+\end{itemize}
+
+\noindent cheby2(N, rs, Wn, btype):
+\begin{itemize}
+\item transition: Given the order $N$, the minimum attenuation $rs$, the cutoff
+angular frequency $W_n$, and type of the Chebyshev II filter (high/low),
+calculate the parameters.
+\item output: The parameter sequences $b$ and $a$ of the filter.
+\item exception: When the output result clearly does not meet expectations,
+throw the ResultExceededExpectationError.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Math Module} \label{MIS_Math}
+
+This section outlines the formal specification of the Math Module, which
+provides three mathematical functions: squaring, thresholding, and RMSE
+calculation.
+
+\subsection{Module}
+
+Math
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Error Handler Module
+\item Logger Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Math Module, including the
+constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+calSquare & $\mathbb{R}^n$ & $\mathbb{R}^n$ & - \\
+calThreshold & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}^n$ & InvalidInput \\
+calRMSE & $\mathbb{R}^n$, $\mathbb{R}^n$ & $\mathbb{R}$ & InvalidInput \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item All input sequences are non-empty.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent calSquare(x):
+\begin{itemize}
+\item transition: Input a sequence $x$, compute a new sequence where each
+element is the square of the corresponding element in $x$.
+\item output: The sequence after squaring.
+\end{itemize}
+
+\noindent calThreshold(x, thres):
+\begin{itemize}
+\item transition: Input a sequence $x$ and a threshold sequence $\text{thres}$,
+then compute the result of applying this threshold to $x$.
+\item output: The result of applying the threshold to the sequence $x$.
+\item exception: When the lengths of $x$ and $\text{thres}$ are not equal, throw
+an InvalidInput exception.
+\end{itemize}
+
+\noindent calRMSE(x, y):
+\begin{itemize}
+\item transition: Input two sequences $x$ and $y$ of the same length, then
+compute the RMSE.
+\item output: The RMSE of sequence $x$ and sequence $y$.
+\item exception: When the lengths of $x$ and $y$ are not equal, throw an
+InvalidInput exception.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Pan Tompkins Algorithm Module} \label{MIS_Alg}
+
+This section outlines the formal specification of the Pan Tompkins Algorithm
+Module, which provides the implementation of the Pan-Tompkins algorithm.
+
+\subsection{Module}
+
+Pan Tompkins Algorithm
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Specified IIR Filter Module
+\item General Digital Filter Module
+\item Math Module
+\item Error Handler Module
+\item Logger Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Pan Tompkins Algorithm Module,
+including the constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+findPeak & $\mathbb{R}^n$, $\mathbb{N}$ & $\mathbb{Z}^m$ & InvalidInput \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The input sequence rawSignal is a non-empty array of real numbers.
+\item The input sequence rawSignal is filterable.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent findPeak(rawSignal, fs):
+\begin{itemize}
+\item transition: Input the raw signal $\text{rawSignal}$ and the sampling
+frequency $\text{fs}$, and use the Pan-Tompkins algorithm to compute the R-wave
+peak indices.
+\item output: An integer sequence representing the R-wave peak indices.
+\item exception: When the input signal is shorter than the specified minimum
+length, throw an InvalidInput exception.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Annotated Data RMSE Module} \label{MIS_RMSE}
+
+This section outlines the formal specification of the Annotated Data RMSE
+Module, which provides functionality to compare algorithm results with annotated
+data to determine the magnitude of algorithmic errors.
+
+\subsection{Module}
+
+Annotated Data RMSE
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Math Module
+\item Error Handler Module
+\item Logger Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Annotated Data RMSE Module,
+including the constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{5cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+signalRMSE & $\mathbb{Z}^n$, $\mathbb{Z}^m$ & $\mathbb{R}$ & NoMatchingPoint \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The implementation of the Pan-Tompkins algorithm is correct.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent signalRMSE(rawIndices, annIndices):
+\begin{itemize}
+\item transition: Input two index sequences rawIndices and annIndices (possibly
+of unequal lengths), match the nearby peak points, and compute the RMSE for the
+matched points.
+\item output: A real number representing the RMSE.
+\item exception: When no pairs of points match or the number of matching points
+is too few, throw a NoMatchingPoint exception.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Rwave Detect Module} \label{MIS_Rwave}
+
+This section outlines the formal specification of the Rwave Detect Module, which
+provides initialization and invocation functionalities for other modules,
+serving as the entry point for the entire program.
+
+\subsection{Module}
+
+Rwave Detect
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Input Output Processing Module
+\item Pan Tompkins Algorithm Module
+\item Annotated Data RMSE Module
+\item Error Handler Module
+\item Logger Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Rwave Detect Module, including the
+constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+mainEntry & - & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+\begin{itemize}
+\item runningState: Record the stages of the program's execution, such as
+initialization, running, or unexpected termination.
+\end{itemize}
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The program will first initialize and enter this module during execution.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent mainEntry:
+\begin{itemize}
+\item transition: As the entry point of the program, it will initialize other
+modules and make the corresponding function calls, coordinating the various
+modules.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Input Output Processing Module} \label{MIS_IO}
+
+This section outlines the formal specification of the Input Output Processing
+Module, which provides basic data input and output functionality by calling the
+Hardware-Hiding Module.
+
+\subsection{Module}
+
+Input Output Processing
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Hardware-Hiding Module
+\item Error Handler Module
+\item Logger Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Input Output Processing Module,
+including the constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+readFromFile & string & - & FileError \\
+writeToFile & string, x & - & FileError \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The operating system can perform file read and write operations correctly.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent readFromFile(filename):
+\begin{itemize}
+\item transition: Read the ECG signal from a file at the specified path and
+convert it into a format that can be used by other modules.
+\item output: The ECG signal after format conversion.
+\item exception: When the operating system cannot find the corresponding file or
+the file's internal format is incorrect, throw a FileError.
+\end{itemize}
+
+\noindent writeToFile(filename, index):
+\begin{itemize}
+\item transition: Save the index sequence of the R-wave peaks to a file.
+\item exception: If the file is not writable, throw a FileError.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Error Handler Module} \label{MIS_ERROR}
+
+This section outlines the formal specification of the Error Handler Module,
+which provides handling functionality for exceptions that occur during the
+execution of the program.
+
+\subsection{Module}
+
+Error Handler
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Hardware-Hiding Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Error Handler Module, including
+the constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+throwException & string & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The exception can be correctly logged and saved.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent throwException(ex):
+\begin{itemize}
+\item transition: Throw an exception named ex, terminate the program execution,
+and output the relevant logs.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS of Logger Module} \label{MIS_Logger}
+
+This section outlines the formal specification of the Logger Module, which
+provides functionality for logging output.
+
+\subsection{Module}
+
+Logger
+
+\subsection{Uses}
+
+\begin{itemize}
+\item Hardware-Hiding Module
+\end{itemize}
+
+\subsection{Syntax}
+
+This section describes the syntax used in the Logger Module, including the
+constants, programs, and routines that can be accessed.
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+log & string, $\mathbb{N}$ & - & - \\
+setLogLevel & $\mathbb{N}$ & - & - \\
+setLogPath & string & - & FileError \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+This section provides the detailed functionality and behavior of the module’s
+functions.
+
+\subsubsection{State Variables}
+
+\begin{itemize}
+\item runningTime: The runtime of the program.
+\end{itemize}
+
+\subsubsection{Environment Variables}
+
+\begin{itemize}
+\item The default log level in the configuration file.
+\end{itemize}
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item Logs can be correctly output and stored.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent log(msg, level):
+\begin{itemize}
+\item transition: If the level meets the output condition, log the message with
+the specified format and timestamp.
+\end{itemize}
+
+\noindent setLogLevel(level):
+\begin{itemize}
+\item transition: Suppress all log outputs below the specified level, and retain
+log outputs with a level greater than or equal to the specified level.
+\end{itemize}
+
+\noindent setLogPath(filename):
+\begin{itemize}
+\item transition: Set the log file save path.
+\item exception: If the file is not writable, throw a FileError.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
 
 \newpage
 
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
 
-\newpage
+% \newpage
 
-\section{Appendix} \label{Appendix}
+% \section{Appendix} \label{Appendix}
 
-\wss{Extra information if required}
-
-\newpage{}
-
-\section*{Appendix --- Reflection}
-
-\wss{Not required for CAS 741 projects}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Problem Analysis and Design.
-
-\input{../../Reflection.tex}
-
-\begin{enumerate}
-  \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how
-    did you resolve them?
-  \item Which of your design decisions stemmed from speaking to your client(s)
-  or a proxy (e.g. your peers, stakeholders, potential users)? For those that
-  were not, why, and where did they come from?
-  \item While creating the design doc, what parts of your other documents (e.g.
-  requirements, hazard analysis, etc), it any, needed to be changed, and why?
-  \item What are the limitations of your solution?  Put another way, given
-  unlimited resources, what could you do to make the project better? (LO\_ProbSolutions)
-  \item Give a brief overview of other design solutions you considered.  What
-  are the benefits and tradeoffs of those other designs compared with the chosen
-  design?  From all the potential options, why did you select the documented design?
-  (LO\_Explores)
-\end{enumerate}
-
+% \wss{Extra information if required}
 
 \end{document}
