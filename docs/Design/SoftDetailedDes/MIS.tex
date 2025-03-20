@@ -88,9 +88,6 @@ Guide.  The full documentation and implementation can be found at
 
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as a starting
-  point.}
-
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
 \cite{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
@@ -113,18 +110,18 @@ $\infty$) \\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1,
 $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
-string & $\text{string}$ & -\\
 \bottomrule
-\end{tabular} 
+\end{tabular}
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences,
-strings, and tuples. Sequences are lists filled with elements of the same data
-type. Strings are sequences of characters. Tuples contain a list of values,
-potentially of different types. In addition, \progname \ uses functions, which
-are defined by the data types of their inputs and outputs. Local functions are
-described by giving their type signature followed by their specification.
+The specification of \progname \ uses some derived data types: sequences and
+strings. Sequences are lists filled with elements of the same data type, they
+are represented using a type with a superscript, for example, $\mathbb{R}^n$
+represents a real number sequence of length n. Strings are sequences of
+characters. In addition, \progname \ uses functions, which are defined by the
+data types of their inputs and outputs. Local functions are described by giving
+their type signature followed by their specification.
 
 \section{Module Decomposition}
 
@@ -207,12 +204,11 @@ functions.
 
 \subsubsection{State Variables}
 
-This module does not maintain state variables.
+None
 
 \subsubsection{Environment Variables}
 
-This module interacts with hardware devices, such as file systems or external
-I/O devices.
+None
 
 \subsubsection{Assumptions}
 
@@ -713,9 +709,10 @@ functions.
 
 \subsubsection{State Variables}
 
-runningState: Record the stages of the program's execution, such as
-initialization, running, or unexpected termination.  runningTime: The runtime of
-the program.
+\begin{itemize}
+\item runningState: Record the stages of the program's execution, such as
+initialization, running, or unexpected termination.
+\end{itemize}
 
 \subsubsection{Environment Variables}
 
@@ -939,11 +936,15 @@ functions.
 
 \subsubsection{State Variables}
 
-None
+\begin{itemize}
+\item runningTime: The runtime of the program.
+\end{itemize}
 
 \subsubsection{Environment Variables}
 
-The default log level in the configuration file.
+\begin{itemize}
+\item The default log level in the configuration file.
+\end{itemize}
 
 \subsubsection{Assumptions}
 
