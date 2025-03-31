@@ -7,7 +7,16 @@ RUN apt-get update && apt-get install -y \
     cmake \
     ninja-build \
     git \
+    python3 \
+    python3-venv \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m venv /workspace/venv
+
+RUN /workspace/venv/bin/pip install cpplint
+
+RUN echo "export PATH=/workspace/venv/bin:$PATH" >> ~/.bashrc
 
 WORKDIR /workspace/rwave
 

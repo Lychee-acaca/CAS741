@@ -15,7 +15,7 @@ endif()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
 
 # Add include directories
-include_directories(${PROJECT_SOURCE_DIR}/src)
+include_directories(${PROJECT_SOURCE_DIR})
 
 # Search source files automatically
 aux_source_directory(${PROJECT_SOURCE_DIR}/src SRC_LIST)
