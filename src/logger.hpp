@@ -14,11 +14,15 @@
 class Logger {
  public:
   enum LogLevel { LOW, MEDIUM, HIGH };
-  explicit Logger(LogLevel ll = LogLevel::MEDIUM) : logLevel(ll) {}
+  static Logger *getInstance(void) {
+    static Logger instance;
+    return &instance;
+  }
   void log(std::string, LogLevel);
   void setLogLevel(LogLevel ll) { logLevel = ll; }
   void setLogPath(std::string);
 
  private:
+  Logger(void) : logLevel(LogLevel::MEDIUM) {}
   LogLevel logLevel;
 };
