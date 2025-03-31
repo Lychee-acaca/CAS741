@@ -68,7 +68,7 @@ class DoublyLL {
     using difference_type = std::ptrdiff_t;
     using pointer = float *;
     using reference = float &;
-    using iterator_category = std::forward_iterator_tag;
+    using iterator_category = std::bidirectional_iterator_tag;
 
     explicit Iterator(DoublyLL_Node *node) : current(node) {}
 
@@ -82,6 +82,17 @@ class DoublyLL {
     Iterator operator++(int) {
       Iterator temp = *this;
       ++(*this);
+      return temp;
+    }
+
+    Iterator &operator--() {
+      if (current) current = current->getPre();
+      return *this;
+    }
+
+    Iterator operator--(int) {
+      Iterator temp = *this;
+      --(*this);
       return temp;
     }
 

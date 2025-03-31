@@ -30,7 +30,7 @@ class GeneralDigitalFilter {
   DoublyLL *get_b(void) { return b; }
   DoublyLL *get_a(void) { return a; }
 
-  void lfilter(Signal *x, bool);
+  Signal *lfilter(Signal *x);
 
  private:
   DoublyLL *b, *a;

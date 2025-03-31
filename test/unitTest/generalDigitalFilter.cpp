@@ -69,3 +69,37 @@ TEST(GDF_Test, RegularizeTest2) {
   delete b;
   delete a;
 }
+
+TEST(GDF_Test, LfilterTest1) {
+  float ib[3] = {0.4f, 0.3f, 0.2f};
+  float ia[4] = {0.5f, 0.6f, 0.7f, 0.8f};
+  float ix[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+  float iy[9] = {0.8f,      1.24f,      1.392f,      1.1136f,    2.33088f,
+                 2.816704f, 2.7749632f, 1.99725056f, 4.01162445f};
+
+  Signal *x = new Signal(200);
+  DoublyLL *b = new DoublyLL();
+  DoublyLL *a = new DoublyLL();
+
+  for (int i = 0; i < 3; ++i) {
+    b->push_back(ib[i]);
+  }
+  for (int i = 0; i < 4; ++i) {
+    a->push_back(ia[i]);
+  }
+  for (int i = 0; i < 9; ++i) {
+    x->signal->push_back(ix[i]);
+  }
+  GeneralDigitalFilter *gdf = new GeneralDigitalFilter(b, a);
+  auto y = gdf->lfilter(x);
+
+  for (int i = 0; i < 9; ++i) {
+    EXPECT_NEAR(y->signal->getIndex(i)->getData(), iy[i], FLOAT_TOLERANCE);
+  }
+
+  delete gdf;
+  delete b;
+  delete a;
+  delete x;
+  delete y;
+}
