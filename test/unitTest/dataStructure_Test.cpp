@@ -7,11 +7,13 @@
  *     https://opensource.org/licenses/MIT
  */
 
-#include <gtest/gtest.h>
-
 #include "src/dataStructure.hpp"
 
-TEST(DoublyLL_Test, BasicAssertions) {
+#include <gtest/gtest.h>
+
+#include "general.hpp"
+
+TEST(DoublyLL_Test, BasicOperations) {
   DoublyLL *d1 = new DoublyLL();
   d1->push_back(1.23f);
   d1->push_back(2.23f);
@@ -29,9 +31,16 @@ TEST(DoublyLL_Test, BasicAssertions) {
   d1->pop_head();
   d1->remove(3);
 
-  // Expect two strings not to be equal.
-  EXPECT_STRNE("hello", "world");
-  // Expect equality.
-  EXPECT_EQ(7 * 6, 42);
+  EXPECT_NEAR(d1->getIndex(0)->getData(), 115.0f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(1)->getData(), 1.23f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(2)->getData(), 2.23f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(3)->getData(), 4.23f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(4)->getData(), 5.23f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(5)->getData(), 6.23f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(6)->getData(), 7.23f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(7)->getData(), 8.23f, FLOAT_TOLERANCE);
+  EXPECT_NEAR(d1->getIndex(8)->getData(), 9.23f, FLOAT_TOLERANCE);
+
+  EXPECT_EQ(d1->getIndex(8)->getNext(), nullptr);
   delete d1;
 }
