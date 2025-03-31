@@ -16,10 +16,8 @@ Signal *MathFunc::calSquare(Signal *sig, bool inplace) {
   } else {
     res = new Signal(*sig);
   }
-  DoublyLL_Node *now = res->signal->getIndex(0);
-  while (now != nullptr) {
-    now->setData(now->getData() * now->getData());
-    now = now->getNext();
+  for (auto it = res->signal->begin(); it != res->signal->end(); ++it) {
+    (*it) = (*it) * (*it);
   }
   return res;
 }

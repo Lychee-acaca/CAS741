@@ -45,6 +45,7 @@ add_executable(
   ${TEST_LIST}
   ${PROJECT_SOURCE_DIR}/src/dataStructure.cpp
   ${PROJECT_SOURCE_DIR}/src/mmath.cpp
+  ${PROJECT_SOURCE_DIR}/src/generalDigitalFilter.cpp
 )
 
 target_link_libraries(

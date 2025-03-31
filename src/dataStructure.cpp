@@ -40,6 +40,9 @@ void DoublyLL::remove(int index) {
   if (target == nullptr) {
     return;
   }
+  if (index == len - 1) {
+    tail = tail->getPre();
+  }
   target->getPre()->setNext(target->getNext());
   if (target->getNext() != nullptr) {
     target->getNext()->setPre(target->getPre());
@@ -55,6 +58,9 @@ void DoublyLL::insert(int index, float data) {
     pre->getNext()->setPre(newNode);
   }
   pre->setNext(newNode);
+  if (index == len) {
+    tail = tail->getNext();
+  }
   ++len;
 }
 
@@ -64,7 +70,10 @@ float DoublyLL::pop_head(void) {
   return res;
 }
 
-void DoublyLL::push_back(float data) {
-  insert(len, data);
-  tail = tail->getNext();
+float DoublyLL::pop_back(void) {
+  float res = getIndex(len - 1)->getData();
+  remove(len - 1);
+  return res;
 }
+
+void DoublyLL::push_back(float data) { insert(len, data); }

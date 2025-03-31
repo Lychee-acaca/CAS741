@@ -9,6 +9,9 @@
 
 #pragma once
 
+#include <cstddef>
+#include <iterator>
+
 class DoublyLL_Node {
  public:
   DoublyLL_Node(float data, DoublyLL_Node *pre = nullptr,
@@ -23,6 +26,7 @@ class DoublyLL_Node {
   float getData(void) { return data; }
 
  private:
+  friend class DoublyLL;
   float data;
   DoublyLL_Node *pre, *next;
 };
@@ -34,8 +38,7 @@ class DoublyLL {
   }
   ~DoublyLL(void) {
     while (head != tail) {
-      tail = tail->getPre();
-      remove(0);
+      pop_back();
     }
     delete head;
   }
@@ -48,10 +51,50 @@ class DoublyLL {
     }
   }
   DoublyLL_Node *getIndex(int);
+
+  int getLen(void) { return len; }
   void remove(int);
   void insert(int, float);
   float pop_head(void);
+  float pop_back(void);
   void push_back(float);
+
+  class Iterator {
+   private:
+    DoublyLL_Node *current;
+
+   public:
+    using value_type = float;
+    using difference_type = std::ptrdiff_t;
+    using pointer = float *;
+    using reference = float &;
+    using iterator_category = std::forward_iterator_tag;
+
+    explicit Iterator(DoublyLL_Node *node) : current(node) {}
+
+    float &operator*() { return current->data; }
+
+    Iterator &operator++() {
+      if (current) current = current->getNext();
+      return *this;
+    }
+
+    Iterator operator++(int) {
+      Iterator temp = *this;
+      ++(*this);
+      return temp;
+    }
+
+    bool operator==(const Iterator &other) const {
+      return current == other.current;
+    }
+    bool operator!=(const Iterator &other) const {
+      return current != other.current;
+    }
+  };
+
+  Iterator begin() { return Iterator(head->getNext()); }
+  Iterator end() { return Iterator(nullptr); }
 
  private:
   DoublyLL_Node *head, *tail;

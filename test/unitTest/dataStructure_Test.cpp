@@ -42,5 +42,6 @@ TEST(DoublyLL_Test, BasicOperations) {
   EXPECT_NEAR(d1->getIndex(8)->getData(), 9.23f, FLOAT_TOLERANCE);
 
   EXPECT_EQ(d1->getIndex(8)->getNext(), nullptr);
+  EXPECT_EQ(d1->getLen(), 9);
   delete d1;
 }
