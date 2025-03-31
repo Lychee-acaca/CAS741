@@ -15,7 +15,10 @@
 
 class Signal {
  public:
-  DoublyLL signal;
+  explicit Signal(int fs = 0) : signal(new DoublyLL()), fs(fs) {}
+  explicit Signal(const Signal &s)
+      : signal(new DoublyLL(*(s.signal))), fs(s.fs) {}
+  DoublyLL *signal;
   int fs;
 };
 

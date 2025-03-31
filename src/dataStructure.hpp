@@ -39,6 +39,14 @@ class DoublyLL {
     }
     delete head;
   }
+  DoublyLL(const DoublyLL &d) : len(0) {
+    tail = head = new DoublyLL_Node(0, nullptr, nullptr);
+    DoublyLL_Node *d_ptr = d.head->getNext();
+    while (d_ptr != nullptr) {
+      this->push_back(d_ptr->getData());
+      d_ptr = d_ptr->getNext();
+    }
+  }
   DoublyLL_Node *getIndex(int);
   void remove(int);
   void insert(int, float);

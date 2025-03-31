@@ -31,7 +31,7 @@ Signal *IO_Processing::readFromFile(std::string filename) {
 
   while (std::getline(file, line)) {
     float f_num = std::stof(line);
-    sig->signal.push_back(f_num);
+    sig->signal->push_back(f_num);
   }
 
   file.close();
