@@ -13,14 +13,26 @@ DoublyLL_Node *DoublyLL::getIndex(int index) {
   if (index == -1) {
     return head;
   }
-  DoublyLL_Node *now = head->getNext();
-  for (int i = 0; i < index; ++i) {
-    if (now == nullptr) {
-      return nullptr;
+
+  if (index <= len / 2) {
+    DoublyLL_Node *now = head->getNext();
+    for (int i = 0; i < index; ++i) {
+      if (now == nullptr) {
+        return nullptr;
+      }
+      now = now->getNext();
     }
-    now = now->getNext();
+    return now;
+  } else {
+    DoublyLL_Node *now = tail;
+    for (int i = 0; i < len - index - 1; ++i) {
+      if (now == head) {
+        return nullptr;
+      }
+      now = now->getPre();
+    }
+    return now;
   }
-  return now;
 }
 
 void DoublyLL::remove(int index) {

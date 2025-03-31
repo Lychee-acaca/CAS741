@@ -11,8 +11,16 @@
 
 #include <string>
 
+#include "src/dataStructure.hpp"
+
+class Signal {
+ public:
+  DoublyLL signal;
+  int fs;
+};
+
 class IO_Processing {
  public:
-  IO_Processing(void);
-  void readFromFile(std::string);
+  IO_Processing(void) {}
+  Signal *readFromFile(std::string);
 };
