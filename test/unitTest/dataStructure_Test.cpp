@@ -11,7 +11,7 @@
 
 #include <gtest/gtest.h>
 
-#include "general.hpp"
+#include "test/unitTest/general.hpp"
 
 TEST(DoublyLL_Test, BasicOperations) {
   DoublyLL *d1 = new DoublyLL();

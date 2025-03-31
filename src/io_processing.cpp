@@ -11,6 +11,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <string>
 
 Signal *IO_Processing::readFromFile(std::string filename) {
   std::ifstream file(filename);
