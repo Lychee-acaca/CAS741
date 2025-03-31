@@ -1,7 +1,9 @@
 #include <iostream>
+#include "logger.hpp"
 
 int main()
 {
-    std::cout << "hello";
+    Logger logger;
+    logger.log("Hello", Logger::LogLevel::HIGH);
     return 0;
 }
