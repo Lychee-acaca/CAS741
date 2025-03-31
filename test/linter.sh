@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PROJECT_DIR=$(dirname "$(realpath "$0")")/..
-SOURCE_DIR=${PROJECT_DIR}/src
+PROJECT_DIR=$(dirname "$(realpath "$0")")
+SOURCE_DIR=$(realpath "${PROJECT_DIR}/../src")
 
 if [ ! -d "$SOURCE_DIR" ]; then
     echo "Error: Source directory $SOURCE_DIR does not exist."

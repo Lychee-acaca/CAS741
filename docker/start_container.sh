@@ -8,7 +8,8 @@ TAG="latest"
 CONTAINER_NAME="rwave-container"
 
 # Get the parent directory of this script (project directory)
-PROJECT_DIR=$(dirname "$(realpath "$0")")/..
+SELF_DIR=$(dirname "$(realpath "$0")")
+PROJECT_DIR=$(realpath "${SELF_DIR}/..")
 
 # Check if the container already exists. If it does, remove the old container
 docker ps -a | grep ${CONTAINER_NAME} &> /dev/null
