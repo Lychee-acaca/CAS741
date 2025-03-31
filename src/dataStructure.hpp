@@ -13,7 +13,7 @@ class DoublyLL_Node {
  public:
   DoublyLL_Node(float data, DoublyLL_Node *pre = nullptr,
                 DoublyLL_Node *next = nullptr)
-      : data(data), pre(pre), next(next){};
+      : data(data), pre(pre), next(next) {}
   ~DoublyLL_Node(void) {}
   void setPre(DoublyLL_Node *node) { pre = node; }
   void setNext(DoublyLL_Node *node) { next = node; }

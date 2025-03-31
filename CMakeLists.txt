@@ -24,3 +24,30 @@ aux_source_directory(${PROJECT_SOURCE_DIR}/src SRC_LIST)
 
 # Add executable target (name of executable and source files)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
+
+# GoogleTest
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v1.16.0.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+set(PROJECT_TEST_NAME "${PROJECT_NAME}_test")
+
+add_executable(
+  ${PROJECT_TEST_NAME}
+  ${PROJECT_SOURCE_DIR}/test/unitTest/dataStructure_Test.cpp
+  ${PROJECT_SOURCE_DIR}/src/dataStructure.cpp
+)
+
+target_link_libraries(
+  ${PROJECT_TEST_NAME}
+  GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(${PROJECT_TEST_NAME})
