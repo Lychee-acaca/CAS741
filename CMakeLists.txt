@@ -38,10 +38,13 @@ enable_testing()
 
 set(PROJECT_TEST_NAME "${PROJECT_NAME}_test")
 
+aux_source_directory(${PROJECT_SOURCE_DIR}/test/unitTest TEST_LIST)
+
 add_executable(
   ${PROJECT_TEST_NAME}
-  ${PROJECT_SOURCE_DIR}/test/unitTest/dataStructure_Test.cpp
+  ${TEST_LIST}
   ${PROJECT_SOURCE_DIR}/src/dataStructure.cpp
+  ${PROJECT_SOURCE_DIR}/src/mmath.cpp
 )
 
 target_link_libraries(
