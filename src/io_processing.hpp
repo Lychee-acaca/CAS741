@@ -24,6 +24,6 @@ class Signal {
 
 class IO_Processing {
  public:
-  IO_Processing(void) {}
-  Signal *readFromFile(std::string);
+  static Signal *readFromFile(const std::string);
+  static void writeToFile(const std::string, Signal *);
 };

@@ -17,7 +17,7 @@ Signal *IO_Processing::readFromFile(std::string filename) {
   std::ifstream file(filename);
 
   if (!file) {
-    std::cerr << "unable to open the file" << std::endl;
+    std::cerr << "unable to open the file " << filename << std::endl;
     return nullptr;
   }
 
@@ -36,4 +36,22 @@ Signal *IO_Processing::readFromFile(std::string filename) {
 
   file.close();
   return sig;
+}
+
+void IO_Processing::writeToFile(std::string filename, Signal *x) {
+  std::ofstream file(filename);
+
+  if (!file) {
+    std::cerr << "unable to open the file " << filename << std::endl;
+    return;
+  }
+
+  file << x->fs << std::endl;
+
+  for (auto it = x->signal->begin(); it != x->signal->end(); ++it) {
+    file << (*it) << std::endl;
+  }
+
+  file.close();
+  return;
 }
