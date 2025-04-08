@@ -95,5 +95,9 @@ int main() {
 
   IO_Processing::writeToFile("../../../data/output/100_MWI2.txt", sig_MWI2);
 
+  DoublyLL *approxPeaks = MathFunc::findApproxPeak(sig_MWI2);
+
+  IO_Processing::writeToFile("../../../data/output/100_apeaks.txt",
+                             approxPeaks);
   return 0;
 }

@@ -38,6 +38,22 @@ Signal *IO_Processing::readFromFile(std::string filename) {
   return sig;
 }
 
+void IO_Processing::writeToFile(std::string filename, DoublyLL *x) {
+  std::ofstream file(filename);
+
+  if (!file) {
+    std::cerr << "unable to open the file " << filename << std::endl;
+    return;
+  }
+
+  for (auto it = x->begin(); it != x->end(); ++it) {
+    file << (*it) << std::endl;
+  }
+
+  file.close();
+  return;
+}
+
 void IO_Processing::writeToFile(std::string filename, Signal *x) {
   std::ofstream file(filename);
 

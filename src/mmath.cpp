@@ -92,3 +92,23 @@ Signal *MathFunc::calMWI(Signal *sig, int windowSize) {
   delete paddingSig;
   return res;
 }
+
+DoublyLL *MathFunc::findApproxPeak(Signal *sig) {
+  DoublyLL *res = new DoublyLL();
+  if (sig->signal->getLen() < 3) {
+    return res;
+  }
+  auto it = sig->signal->begin();
+  float p1 = *(it++);
+  float p2 = *(it++);
+  int cnt = 1;
+  for (; it != sig->signal->end(); ++it) {
+    if (p1 <= p2 && p2 >= *(it)) {
+      res->push_back(cnt);
+    }
+    p1 = p2;
+    p2 = *(it);
+    ++cnt;
+  }
+  return res;
+}

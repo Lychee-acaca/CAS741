@@ -25,5 +25,6 @@ class Signal {
 class IO_Processing {
  public:
   static Signal *readFromFile(const std::string);
+  static void writeToFile(const std::string, DoublyLL *);
   static void writeToFile(const std::string, Signal *);
 };
