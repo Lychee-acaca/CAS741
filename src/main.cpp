@@ -75,5 +75,25 @@ int main() {
   Signal *sig_HPF = HPF(sig_LPF);
   IO_Processing::writeToFile("../../../data/output/100_HPF.txt", sig_HPF);
 
+  Signal *sig_norm = MathFunc::calNorm(sig_HPF, true);
+
+  IO_Processing::writeToFile("../../../data/output/100_norm.txt", sig_norm);
+
+  Signal *sig_diff = MathFunc::calDiff(sig_norm);
+
+  IO_Processing::writeToFile("../../../data/output/100_diff.txt", sig_diff);
+
+  Signal *sig_square = MathFunc::calSquare(sig_diff, true);
+
+  IO_Processing::writeToFile("../../../data/output/100_square.txt", sig_square);
+
+  Signal *sig_MWI = MathFunc::calMWI(sig_square);
+
+  IO_Processing::writeToFile("../../../data/output/100_MWI.txt", sig_MWI);
+
+  Signal *sig_MWI2 = MathFunc::calMWI(sig_MWI, 25);
+
+  IO_Processing::writeToFile("../../../data/output/100_MWI2.txt", sig_MWI2);
+
   return 0;
 }

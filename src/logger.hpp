@@ -18,7 +18,7 @@ class Logger {
     static Logger instance;
     return &instance;
   }
-  void log(std::string, LogLevel);
+  void log(std::string, LogLevel = LogLevel::LOW);
   void setLogLevel(LogLevel ll) { logLevel = ll; }
   void setLogPath(std::string);
 

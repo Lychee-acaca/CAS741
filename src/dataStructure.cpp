@@ -76,4 +76,6 @@ float DoublyLL::pop_back(void) {
   return res;
 }
 
+void DoublyLL::push_head(float data) { insert(0, data); }
+
 void DoublyLL::push_back(float data) { insert(len, data); }

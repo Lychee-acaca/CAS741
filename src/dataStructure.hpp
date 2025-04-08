@@ -57,6 +57,7 @@ class DoublyLL {
   void insert(int, float);
   float pop_head(void);
   float pop_back(void);
+  void push_head(float);
   void push_back(float);
 
   class Iterator {
