@@ -12,6 +12,7 @@
 #include "src/io_processing.hpp"
 
 #define MMATH_GET_MAX(A, B) ((A) > (B) ? (A) : (B))
+#define MMATH_GET_MIN(A, B) ((A) < (B) ? (A) : (B))
 #define MMATH_FLOAT_INF (100000000.0f)
 #define MMATH_DEFAULT_WINDOWSIZE_FACTOR (0.150f)
 
@@ -22,6 +23,7 @@ class MathFunc {
   static Signal *calNorm(Signal *, bool = false);
   static Signal *calMWI(Signal *, int = -1);
   static DoublyLL *findApproxPeak(Signal *);
-  static Signal *calThreshold(const Signal *, float th);
+  static DoublyLL *calThreshold(Signal *, DoublyLL *);
+  static DoublyLL *refineRPeaksOnRawSignal(Signal *, DoublyLL *, int = 300);
   static Signal *calRMSE(const Signal *, const Signal *);
 };

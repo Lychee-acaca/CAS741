@@ -112,3 +112,96 @@ DoublyLL *MathFunc::findApproxPeak(Signal *sig) {
   }
   return res;
 }
+
+// TODO(Jared): DoublyLL要改成模板类，索引不应该使用int类型
+
+DoublyLL *MathFunc::calThreshold(Signal *sig, DoublyLL *aPeaks) {
+  DoublyLL *res = new DoublyLL();
+  if (aPeaks->getLen() < 8) {
+    Logger::getInstance()->log("Not enough peaks to initialize thresholds!",
+                               Logger::LogLevel::HIGH);
+    return res;
+  }
+  float SPKF = 0, NPKF = 0;
+
+  auto aPeaks_it = aPeaks->begin();
+  for (int i = 0; i < 4; ++i) {
+    SPKF += sig->signal->getIndex(*(aPeaks_it++))->getData();
+  }
+  for (int i = 4; i < 8; ++i) {
+    NPKF += sig->signal->getIndex(*(aPeaks_it++))->getData();
+  }
+  SPKF /= 4.0;
+  NPKF /= 4.0;
+
+  float THRESHOLD1 = NPKF + 0.25 * (SPKF - NPKF);
+
+  int last_qrs_index = -1e9;
+  int RR_missed_limit = static_cast<int>(1.66 * sig->fs);
+
+  auto signal_it = sig->signal->begin();
+  int pre_peak = 0;
+  for (aPeaks_it = aPeaks->begin(); aPeaks_it != aPeaks->end(); ++aPeaks_it) {
+    int peak = *aPeaks_it;
+    for (int i = 0; i < peak - pre_peak; ++i) {
+      ++signal_it;
+    }
+    float peak_val = *(signal_it);
+    pre_peak = peak;
+
+    if (peak_val > THRESHOLD1) {
+      res->push_back(peak);
+      SPKF = 0.125 * peak_val + 0.875 * SPKF;
+      last_qrs_index = peak;
+    } else {
+      NPKF = 0.125 * peak_val + 0.875 * NPKF;
+    }
+
+    THRESHOLD1 = NPKF + 0.25 * (SPKF - NPKF);
+    float THRESHOLD2 = 0.5 * THRESHOLD1;
+
+    if ((peak - last_qrs_index > RR_missed_limit) && (peak_val > THRESHOLD2)) {
+      res->push_back(peak);
+      SPKF = 0.25 * peak_val + 0.75 * SPKF;
+      last_qrs_index = peak;
+      THRESHOLD1 = NPKF + 0.25 * (SPKF - NPKF);
+    }
+  }
+
+  return res;
+}
+
+DoublyLL *MathFunc::refineRPeaksOnRawSignal(Signal *sig, DoublyLL *roughPeaks,
+                                            int windowMs) {
+  DoublyLL *res = new DoublyLL();
+  int half_window = static_cast<int>((windowMs * sig->fs) / 1000 / 2);
+
+  auto sig_it = sig->signal->begin();
+  int pre_roughPeak = 0;
+  for (auto it = roughPeaks->begin(); it != roughPeaks->end(); ++it) {
+    int roughPeak = *(it);
+    for (int i = 0; i < roughPeak - pre_roughPeak; ++i) {
+      ++sig_it;
+    }
+    pre_roughPeak = roughPeak;
+    int start = MMATH_GET_MAX(0, roughPeak - half_window);
+    int end = MMATH_GET_MIN(static_cast<int>(sig->signal->getLen()) - 1,
+                            roughPeak + half_window);
+    auto sig_it2 = sig_it;
+    for (int i = roughPeak; i > start; --i) {
+      --sig_it2;
+    }
+
+    double max_val = *(sig_it2);
+    int max_idx = start;
+    for (int i = start + 1; i <= end; ++i) {
+      if (*(++sig_it2) > max_val) {
+        max_val = *(sig_it2);
+        max_idx = i;
+      }
+    }
+    res->push_back(max_idx);
+  }
+
+  return res;
+}

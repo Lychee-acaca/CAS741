@@ -71,25 +71,26 @@ int main() {
   Logger::getInstance()->log("Hello", Logger::LogLevel::HIGH);
   Signal *sig = IO_Processing::readFromFile("../../../data/100.txt");
   Signal *sig_LPF = LPF(sig);
-  IO_Processing::writeToFile("../../../data/output/100_LPF.txt", sig_LPF);
+  // IO_Processing::writeToFile("../../../data/output/100_LPF.txt", sig_LPF);
   Signal *sig_HPF = HPF(sig_LPF);
-  IO_Processing::writeToFile("../../../data/output/100_HPF.txt", sig_HPF);
+  // IO_Processing::writeToFile("../../../data/output/100_HPF.txt", sig_HPF);
 
   Signal *sig_norm = MathFunc::calNorm(sig_HPF, true);
 
-  IO_Processing::writeToFile("../../../data/output/100_norm.txt", sig_norm);
+  // IO_Processing::writeToFile("../../../data/output/100_norm.txt", sig_norm);
 
   Signal *sig_diff = MathFunc::calDiff(sig_norm);
 
-  IO_Processing::writeToFile("../../../data/output/100_diff.txt", sig_diff);
+  // IO_Processing::writeToFile("../../../data/output/100_diff.txt", sig_diff);
 
   Signal *sig_square = MathFunc::calSquare(sig_diff, true);
 
-  IO_Processing::writeToFile("../../../data/output/100_square.txt", sig_square);
+  // IO_Processing::writeToFile("../../../data/output/100_square.txt",
+  // sig_square);
 
   Signal *sig_MWI = MathFunc::calMWI(sig_square);
 
-  IO_Processing::writeToFile("../../../data/output/100_MWI.txt", sig_MWI);
+  // IO_Processing::writeToFile("../../../data/output/100_MWI.txt", sig_MWI);
 
   Signal *sig_MWI2 = MathFunc::calMWI(sig_MWI, 25);
 
@@ -99,5 +100,15 @@ int main() {
 
   IO_Processing::writeToFile("../../../data/output/100_apeaks.txt",
                              approxPeaks);
+
+  DoublyLL *MWI2_Peaks = MathFunc::calThreshold(sig_MWI2, approxPeaks);
+
+  IO_Processing::writeToFile("../../../data/output/100_MWI2peaks.txt",
+                             MWI2_Peaks);
+
+  DoublyLL *finalPeaks = MathFunc::refineRPeaksOnRawSignal(sig, MWI2_Peaks);
+
+  IO_Processing::writeToFile("../../../data/output/100_fpeaks.txt", finalPeaks);
+
   return 0;
 }
