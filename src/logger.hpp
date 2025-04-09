@@ -14,6 +14,8 @@
 class Logger {
  public:
   enum LogLevel { LOW, MEDIUM, HIGH };
+  static std::string getLevelString(LogLevel);
+
   static Logger *getInstance(void) {
     static Logger instance;
     return &instance;

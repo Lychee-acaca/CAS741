@@ -13,11 +13,14 @@
 #include <iostream>
 #include <string>
 
+#include "src/logger.hpp"
+
 Signal *IO_Processing::readFromFile(std::string filename) {
   std::ifstream file(filename);
 
   if (!file) {
-    std::cerr << "unable to open the file " << filename << std::endl;
+    Logger::getInstance()->log("unable to open the file " + filename,
+                               Logger::LogLevel::HIGH);
     return nullptr;
   }
 
@@ -35,6 +38,7 @@ Signal *IO_Processing::readFromFile(std::string filename) {
   }
 
   file.close();
+  Logger::getInstance()->log("File read: " + filename, Logger::LogLevel::HIGH);
   return sig;
 }
 
@@ -42,7 +46,8 @@ void IO_Processing::writeToFile(std::string filename, DoublyLL<int> *x) {
   std::ofstream file(filename);
 
   if (!file) {
-    std::cerr << "unable to open the file " << filename << std::endl;
+    Logger::getInstance()->log("unable to open the file " + filename,
+                               Logger::LogLevel::HIGH);
     return;
   }
 
@@ -51,6 +56,8 @@ void IO_Processing::writeToFile(std::string filename, DoublyLL<int> *x) {
   }
 
   file.close();
+  Logger::getInstance()->log("File written: " + filename,
+                             Logger::LogLevel::HIGH);
   return;
 }
 
@@ -58,7 +65,8 @@ void IO_Processing::writeToFile(std::string filename, Signal *x) {
   std::ofstream file(filename);
 
   if (!file) {
-    std::cerr << "unable to open the file " << filename << std::endl;
+    Logger::getInstance()->log("unable to open the file " + filename,
+                               Logger::LogLevel::HIGH);
     return;
   }
 
@@ -69,5 +77,7 @@ void IO_Processing::writeToFile(std::string filename, Signal *x) {
   }
 
   file.close();
+  Logger::getInstance()->log("File written: " + filename,
+                             Logger::LogLevel::HIGH);
   return;
 }

@@ -68,6 +68,7 @@ Signal *HPF(Signal *sig) {
 }
 
 int main() {
+  Logger::getInstance()->setLogLevel(Logger::LogLevel::LOW);
   Logger::getInstance()->log("Hello", Logger::LogLevel::HIGH);
   Signal *sig = IO_Processing::readFromFile("../../../data/100.txt");
   Signal *sig_LPF = LPF(sig);
