@@ -12,29 +12,34 @@
 #include <cstddef>
 #include <iterator>
 
+template <typename T>
+class DoublyLL;
+
+template <typename T>
 class DoublyLL_Node {
  public:
-  DoublyLL_Node(float data, DoublyLL_Node *pre = nullptr,
-                DoublyLL_Node *next = nullptr)
+  DoublyLL_Node(T data, DoublyLL_Node<T> *pre = nullptr,
+                DoublyLL_Node<T> *next = nullptr)
       : data(data), pre(pre), next(next) {}
   ~DoublyLL_Node(void) {}
-  void setPre(DoublyLL_Node *node) { pre = node; }
-  void setNext(DoublyLL_Node *node) { next = node; }
-  void setData(float data) { this->data = data; }
-  DoublyLL_Node *getPre(void) { return pre; }
-  DoublyLL_Node *getNext(void) { return next; }
-  float getData(void) { return data; }
+  void setPre(DoublyLL_Node<T> *node) { pre = node; }
+  void setNext(DoublyLL_Node<T> *node) { next = node; }
+  void setData(T data) { this->data = data; }
+  DoublyLL_Node<T> *getPre(void) { return pre; }
+  DoublyLL_Node<T> *getNext(void) { return next; }
+  T getData(void) { return data; }
 
  private:
-  friend class DoublyLL;
-  float data;
-  DoublyLL_Node *pre, *next;
+  friend class DoublyLL<T>;
+  T data;
+  DoublyLL_Node<T> *pre, *next;
 };
 
+template <typename T>
 class DoublyLL {
  public:
   DoublyLL(void) : len(0) {
-    tail = head = new DoublyLL_Node(0, nullptr, nullptr);
+    tail = head = new DoublyLL_Node<T>(T(), nullptr, nullptr);
   }
   ~DoublyLL(void) {
     while (head != tail) {
@@ -43,37 +48,98 @@ class DoublyLL {
     delete head;
   }
   DoublyLL(const DoublyLL &d) : len(0) {
-    tail = head = new DoublyLL_Node(0, nullptr, nullptr);
-    DoublyLL_Node *d_ptr = d.head->getNext();
+    tail = head = new DoublyLL_Node<T>(T(), nullptr, nullptr);
+    DoublyLL_Node<T> *d_ptr = d.head->getNext();
     while (d_ptr != nullptr) {
       this->push_back(d_ptr->getData());
       d_ptr = d_ptr->getNext();
     }
   }
-  DoublyLL_Node *getIndex(int);
+  DoublyLL_Node<T> *getIndex(int index) {
+    if (index == -1) {
+      return head;
+    }
+
+    if (index <= len / 2) {
+      DoublyLL_Node<T> *now = head->getNext();
+      for (int i = 0; i < index; ++i) {
+        if (now == nullptr) {
+          return nullptr;
+        }
+        now = now->getNext();
+      }
+      return now;
+    } else {
+      DoublyLL_Node<T> *now = tail;
+      for (int i = 0; i < len - index - 1; ++i) {
+        if (now == head) {
+          return nullptr;
+        }
+        now = now->getPre();
+      }
+      return now;
+    }
+  }
 
   int getLen(void) { return len; }
-  void remove(int);
-  void insert(int, float);
-  float pop_head(void);
-  float pop_back(void);
-  void push_head(float);
-  void push_back(float);
+  void remove(int index) {
+    DoublyLL_Node<T> *target = getIndex(index);
+    if (target == nullptr) {
+      return;
+    }
+    if (index == len - 1) {
+      tail = tail->getPre();
+    }
+    target->getPre()->setNext(target->getNext());
+    if (target->getNext() != nullptr) {
+      target->getNext()->setPre(target->getPre());
+    }
+    delete target;
+    --len;
+  }
+
+  void insert(int index, T data) {
+    DoublyLL_Node<T> *pre = getIndex(index - 1);
+    DoublyLL_Node<T> *newNode = new DoublyLL_Node<T>(data, pre, pre->getNext());
+    if (pre->getNext() != nullptr) {
+      pre->getNext()->setPre(newNode);
+    }
+    pre->setNext(newNode);
+    if (index == len) {
+      tail = tail->getNext();
+    }
+    ++len;
+  }
+
+  T pop_head(void) {
+    T res = getIndex(0)->getData();
+    remove(0);
+    return res;
+  }
+
+  T pop_back(void) {
+    T res = getIndex(len - 1)->getData();
+    remove(len - 1);
+    return res;
+  }
+
+  void push_head(T data) { insert(0, data); }
+  void push_back(T data) { insert(len, data); }
 
   class Iterator {
    private:
-    DoublyLL_Node *current;
+    DoublyLL_Node<T> *current;
 
    public:
-    using value_type = float;
+    using value_type = T;
     using difference_type = std::ptrdiff_t;
-    using pointer = float *;
-    using reference = float &;
+    using pointer = T *;
+    using reference = T &;
     using iterator_category = std::bidirectional_iterator_tag;
 
-    explicit Iterator(DoublyLL_Node *node) : current(node) {}
+    explicit Iterator(DoublyLL_Node<T> *node) : current(node) {}
 
-    float &operator*() { return current->data; }
+    T &operator*() { return current->data; }
 
     Iterator &operator++() {
       if (current) current = current->getNext();
@@ -109,6 +175,6 @@ class DoublyLL {
   Iterator end() { return Iterator(nullptr); }
 
  private:
-  DoublyLL_Node *head, *tail;
+  DoublyLL_Node<T> *head, *tail;
   int len;
 };

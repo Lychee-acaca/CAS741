@@ -38,7 +38,7 @@ Signal *IO_Processing::readFromFile(std::string filename) {
   return sig;
 }
 
-void IO_Processing::writeToFile(std::string filename, DoublyLL *x) {
+void IO_Processing::writeToFile(std::string filename, DoublyLL<int> *x) {
   std::ofstream file(filename);
 
   if (!file) {

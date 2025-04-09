@@ -14,7 +14,7 @@
 #include "test/unitTest/general.hpp"
 
 TEST(DoublyLL_Test, BasicOperations) {
-  DoublyLL *d1 = new DoublyLL();
+  DoublyLL<float> *d1 = new DoublyLL<float>();
   d1->push_back(1.23f);
   d1->push_back(2.23f);
   d1->push_back(3.23f);

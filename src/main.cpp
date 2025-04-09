@@ -16,8 +16,8 @@
 #include "src/mmath.hpp"
 
 Signal *LPF(Signal *sig) {
-  DoublyLL *b = new DoublyLL();
-  DoublyLL *a = new DoublyLL();
+  DoublyLL<float> *b = new DoublyLL<float>();
+  DoublyLL<float> *a = new DoublyLL<float>();
 
   b->push_back(6.68607912e-05);
   b->push_back(2.67443165e-04);
@@ -42,8 +42,8 @@ Signal *LPF(Signal *sig) {
 }
 
 Signal *HPF(Signal *sig) {
-  DoublyLL *b = new DoublyLL();
-  DoublyLL *a = new DoublyLL();
+  DoublyLL<float> *b = new DoublyLL<float>();
+  DoublyLL<float> *a = new DoublyLL<float>();
 
   b->push_back(0.89220304f);
   b->push_back(-3.56881217f);
@@ -96,17 +96,18 @@ int main() {
 
   IO_Processing::writeToFile("../../../data/output/100_MWI2.txt", sig_MWI2);
 
-  DoublyLL *approxPeaks = MathFunc::findApproxPeak(sig_MWI2);
+  DoublyLL<int> *approxPeaks = MathFunc::findApproxPeak(sig_MWI2);
 
   IO_Processing::writeToFile("../../../data/output/100_apeaks.txt",
                              approxPeaks);
 
-  DoublyLL *MWI2_Peaks = MathFunc::calThreshold(sig_MWI2, approxPeaks);
+  DoublyLL<int> *MWI2_Peaks = MathFunc::calThreshold(sig_MWI2, approxPeaks);
 
   IO_Processing::writeToFile("../../../data/output/100_MWI2peaks.txt",
                              MWI2_Peaks);
 
-  DoublyLL *finalPeaks = MathFunc::refineRPeaksOnRawSignal(sig, MWI2_Peaks);
+  DoublyLL<int> *finalPeaks =
+      MathFunc::refineRPeaksOnRawSignal(sig, MWI2_Peaks);
 
   IO_Processing::writeToFile("../../../data/output/100_fpeaks.txt", finalPeaks);
 

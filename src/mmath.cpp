@@ -93,8 +93,8 @@ Signal *MathFunc::calMWI(Signal *sig, int windowSize) {
   return res;
 }
 
-DoublyLL *MathFunc::findApproxPeak(Signal *sig) {
-  DoublyLL *res = new DoublyLL();
+DoublyLL<int> *MathFunc::findApproxPeak(Signal *sig) {
+  DoublyLL<int> *res = new DoublyLL<int>();
   if (sig->signal->getLen() < 3) {
     return res;
   }
@@ -113,10 +113,8 @@ DoublyLL *MathFunc::findApproxPeak(Signal *sig) {
   return res;
 }
 
-// TODO(Jared): DoublyLL要改成模板类，索引不应该使用int类型
-
-DoublyLL *MathFunc::calThreshold(Signal *sig, DoublyLL *aPeaks) {
-  DoublyLL *res = new DoublyLL();
+DoublyLL<int> *MathFunc::calThreshold(Signal *sig, DoublyLL<int> *aPeaks) {
+  DoublyLL<int> *res = new DoublyLL<int>();
   if (aPeaks->getLen() < 8) {
     Logger::getInstance()->log("Not enough peaks to initialize thresholds!",
                                Logger::LogLevel::HIGH);
@@ -171,9 +169,10 @@ DoublyLL *MathFunc::calThreshold(Signal *sig, DoublyLL *aPeaks) {
   return res;
 }
 
-DoublyLL *MathFunc::refineRPeaksOnRawSignal(Signal *sig, DoublyLL *roughPeaks,
-                                            int windowMs) {
-  DoublyLL *res = new DoublyLL();
+DoublyLL<int> *MathFunc::refineRPeaksOnRawSignal(Signal *sig,
+                                                 DoublyLL<int> *roughPeaks,
+                                                 int windowMs) {
+  DoublyLL<int> *res = new DoublyLL<int>();
   int half_window = static_cast<int>((windowMs * sig->fs) / 1000 / 2);
 
   auto sig_it = sig->signal->begin();

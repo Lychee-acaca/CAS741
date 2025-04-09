@@ -22,8 +22,9 @@ class MathFunc {
   static Signal *calDiff(Signal *);
   static Signal *calNorm(Signal *, bool = false);
   static Signal *calMWI(Signal *, int = -1);
-  static DoublyLL *findApproxPeak(Signal *);
-  static DoublyLL *calThreshold(Signal *, DoublyLL *);
-  static DoublyLL *refineRPeaksOnRawSignal(Signal *, DoublyLL *, int = 300);
+  static DoublyLL<int> *findApproxPeak(Signal *);
+  static DoublyLL<int> *calThreshold(Signal *, DoublyLL<int> *);
+  static DoublyLL<int> *refineRPeaksOnRawSignal(Signal *, DoublyLL<int> *,
+                                                int = 300);
   static Signal *calRMSE(const Signal *, const Signal *);
 };

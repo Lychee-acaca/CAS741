@@ -44,7 +44,6 @@ add_executable(
   ${PROJECT_TEST_NAME}
   ${TEST_LIST}
   ${PROJECT_SOURCE_DIR}/src/logger.cpp
-  ${PROJECT_SOURCE_DIR}/src/dataStructure.cpp
   ${PROJECT_SOURCE_DIR}/src/mmath.cpp
   ${PROJECT_SOURCE_DIR}/src/generalDigitalFilter.cpp
 )

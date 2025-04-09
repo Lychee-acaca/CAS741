@@ -15,8 +15,8 @@
 #include "test/unitTest/general.hpp"
 
 TEST(GDF_Test, RegularizeTest1) {
-  DoublyLL *b = new DoublyLL();
-  DoublyLL *a = new DoublyLL();
+  DoublyLL<float> *b = new DoublyLL<float>();
+  DoublyLL<float> *a = new DoublyLL<float>();
   b->push_back(2.0f);
   b->push_back(3.0f);
   b->push_back(4.0f);
@@ -41,8 +41,8 @@ TEST(GDF_Test, RegularizeTest1) {
 
 TEST(GDF_Test, RegularizeTest2) {
   GeneralDigitalFilter *gdf = new GeneralDigitalFilter();
-  DoublyLL *b = new DoublyLL();
-  DoublyLL *a = new DoublyLL();
+  DoublyLL<float> *b = new DoublyLL<float>();
+  DoublyLL<float> *a = new DoublyLL<float>();
   b->push_back(5.3f);
   b->push_back(4.2f);
   b->push_back(3.7f);
@@ -78,8 +78,8 @@ TEST(GDF_Test, LfilterTest1) {
                  2.816704f, 2.7749632f, 1.99725056f, 4.01162445f};
 
   Signal *x = new Signal(200);
-  DoublyLL *b = new DoublyLL();
-  DoublyLL *a = new DoublyLL();
+  DoublyLL<float> *b = new DoublyLL<float>();
+  DoublyLL<float> *a = new DoublyLL<float>();
 
   for (int i = 0; i < 3; ++i) {
     b->push_back(ib[i]);
