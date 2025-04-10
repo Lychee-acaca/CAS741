@@ -15,6 +15,28 @@
 
 #include "src/logger.hpp"
 
+DoublyLL<int> *IO_Processing::readAnnFromFile(const std::string filename) {
+  std::ifstream file(filename);
+
+  if (!file) {
+    Logger::getInstance()->log("unable to open the file " + filename,
+                               Logger::LogLevel::HIGH);
+    return nullptr;
+  }
+
+  DoublyLL<int> *ind = new DoublyLL<int>();
+  std::string line;
+
+  while (std::getline(file, line)) {
+    int ind_num = std::stoi(line);
+    ind->push_back(ind_num);
+  }
+
+  file.close();
+  Logger::getInstance()->log("File read: " + filename, Logger::LogLevel::HIGH);
+  return ind;
+}
+
 Signal *IO_Processing::readFromFile(std::string filename) {
   std::ifstream file(filename);
 

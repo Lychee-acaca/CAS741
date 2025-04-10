@@ -22,5 +22,4 @@ class MathFunc {
   static Signal *calDiff(Signal *);
   static Signal *calNorm(Signal *, bool = false);
   static Signal *calMWI(Signal *, int = -1);
-  static Signal *calRMSE(const Signal *, const Signal *);
 };
