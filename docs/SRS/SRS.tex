@@ -311,9 +311,10 @@ channel.
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
-The intended readers of this document include individuals with a background in
-signal processing, biomedical engineering, and software development,
-particularly those working with digital filters and ECG signal analysis.
+The intended readers of this document are upper-level undergraduate or graduate
+students, researchers, and professionals with a background in signal processing,
+biomedical engineering, or software development, particularly those experienced
+in digital filters and ECG signal analysis.
 
 \subsection{Organization of Document}
 
@@ -337,10 +338,10 @@ characteristics and lists the system constraints.
 \subsection{System Context}
 
 The RwaveDetecion system receives sample frequency $f_s$ and discrete time
-domain ECG signal $u$ from the ADC.  Based on this information, the index of
-each R-wave peak $R$ can be calculated and returned to the user.  If the user
-provides annotated data $A$, which is optional, the system will return the
-$\text{RMSE}$ between $A$ and $R$ additionally.
+domain ECG signal $u$ from the ADC(Analog-to-Digital Converter).  Based on this
+information, the index of each R-wave peak $R$ can be calculated and returned to
+the user.  If the user provides annotated data $A$, which is optional, the
+system will return the $\text{RMSE}$ between $A$ and $R$ additionally.
 
 \begin{figure}[h!]
 \begin{center}
@@ -376,9 +377,12 @@ should have an understanding of undergraduate level mathematics.
 
 \subsection{System Constraints}
 
-RwaveDetection should be able to process data in real time and it can be used in
-various low performance embedded devices, so it requires a Low-Level programming
-language to ensure efficiency and compatibility.
+RwaveDetection must process data in real time with a maximum latency of 50
+milliseconds per data sample, ensuring suitability for real-time monitoring
+systems. The algorithm must be based on the Pan-Tompkins method for QRS complex
+detection to maintain accuracy and efficiency. To support various
+low-performance embedded devices, the implementation must prioritize efficiency
+and compatibility with the target hardware.
 
 \section{Specific System Description}
 
@@ -401,12 +405,16 @@ easier to correctly understand the requirements:
 \begin{itemize}
 
 \item QRS complex: the combination of three of the graphical deflections seen on
-a typical electrocardiogram (ECG or EKG)\cite{wiki:QRS_complex}
+a typical electrocardiogram (ECG or EKG)\cite{wiki:QRS_complex}, comprising
+three distinct graphical deflections — the Q wave, R wave, and S wave. It
+corresponds to the depolarization of the ventricles, which is a crucial phase in
+the heart's electrical cycle, reflecting the contraction of the ventricles. This
+complex is often used to assess heart rhythm and detect abnormalities
 \item R-wave: represents the peak of ventricular depolarization
 \item Filter: a device or process that removes some unwanted components or
 features from a signal\cite{wiki:Filter_(signal_processing)}
 \item Utility frequency: the nominal frequency of the oscillations of
-alternating current (AC) in a wide area synchronous grid transmitted from a
+Alternating Current (AC) in a wide area synchronous grid transmitted from a
 power station to the end-user.\cite{wiki:Utility_frequency}
 
 \end{itemize}
@@ -565,13 +573,8 @@ input ECG signal is of high quality.
   \url{https://en.wikipedia.org/wiki/Transfer_function}
 }
 % #8 Referenced by
-{
-  \tref{Butterworth Filter}
-  \tref{Chebyshev Filter}
-  \dref{B-trans}
-  \dref{FDE}
-  \iref{I_find_index}
-}
+{ \tref{Butterworth Filter}, \tref{Chebyshev Filter}, \dref{B-trans},
+\dref{FDE}, \iref{I_find_index} }
 % #9 Preconditions
 { None }
 % #1 derivation - not applicable by default
@@ -603,11 +606,7 @@ no ripples) in the passband and rolls off towards zero in the stopband.  }
   \url{https://en.wikipedia.org/wiki/Butterworth_filter}
 }
 % #8 Referenced by
-{
-  \dref{B-trans}
-  \dref{FDE}
-  \iref{I_find_index}
-}
+{ \dref{B-trans}, \dref{FDE}, \iref{I_find_index} }
 % #9 Preconditions
 { None }
 % #1 derivation - not applicable by default
@@ -640,11 +639,7 @@ either passband ripple (type I) or stopband ripple (type II).  }
   \url{https://en.wikipedia.org/wiki/Chebyshev_filter}
 }
 % #8 Referenced by
-{
-  \dref{B-trans}
-  \dref{FDE}
-  \iref{I_find_index}
-}
+{ \dref{B-trans}, \dref{FDE}, \iref{I_find_index} }
 % #9 Preconditions
 { None }
 % #1 derivation - not applicable by default
@@ -676,10 +671,7 @@ the input signal is compared to a threshold value.}
 % #7 Source
 {}
 % #8 Referenced by
-{
-  \iref{I_find_index}
-  \iref{I_RMSE}
-}
+{ \iref{I_find_index}, \iref{I_RMSE} }
 % #9 Preconditions
 { None }
 % #1 derivation - not applicable by default
@@ -962,18 +954,19 @@ continuous period of $n$ where $u_{th}[n]$ is non-zero.
   \hline
   Label& \bf calculate $\text{RMSE}$ between $A$ and $R$ \\
   \hline
-  Input& $A$, $R$, $L$\\
+  Input& $A$, $R$\\
   \hline
   Output&
   \begin{equation}
     \text{RMSE} = \sqrt{\sum_{i=1}^{n}\frac{(A[i]-R[i])^2}{n}} \nonumber
   \end{equation} \\
+  & In special cases: If the lengths of $A$ and $R$ are not the same, for each
+  element of $A$, find the closest element in $R$ within the tolerance range,
+  and then calculate the RMSE based on this. \\
   \hline
   Description& $A$ is the sequence of integers containing annotated index. \\
   & $R$ is the sequence of integers containing calculated index from
   \iref{I_find_index}. \\
-  & $L$ is the length of $A$ and $R$.  Normally they are equal since we assumed
-  \aref{A_high_quality}.  \\
   \hline
   Sources& None \\
   \hline
@@ -1066,29 +1059,40 @@ qualities that the software is expected to exhibit.
 
 \noindent \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_basic_filters}:] Implement
-basic IIR and FIR filters using difference equations
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_basic_filters}:] Basic IIR and
+FIR filters using difference equations, where the input is discrete signal data
+and filter coefficients, and the output is the filtered signal.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Butterworth}:] Implement
-parameter derivation of Butterworth filters
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Butterworth}:] Parameter
+derivation of Butterworth filters, where the input is the desired filter order
+and cutoff frequency, and the output is the Butterworth filter coefficients.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Chebyshev}:] Implement
-parameter derivation of Chebyshev filters
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Chebyshev}:] Parameter
+derivation of Chebyshev filters, where the input is the desired filter order,
+cutoff frequency, and ripple factor, and the output is the Chebyshev filter
+coefficients.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_squaring}:] Implement squaring
-function
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_squaring}:] Squaring function,
+where the input is a signal or value, and the output is the squared signal or
+value.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_thresholding}:] Implement
-thresholding function
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_thresholding}:] Thresholding
+function, where the input is a signal or value with a threshold level, and the
+output is the signal with values above the threshold retained and others set to
+zero (or based on the chosen condition).
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_RMSE}:] Implement RMSE
-calculating function
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_RMSE}:] RMSE calculation,
+where the input is a predicted signal and a reference (actual) signal, and the
+output is the RMSE value.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_R_wave_position}:] Combine
-mathematical functions and filters to calculate R-wave position
+mathematical functions and filters to calculate the R-wave position, where the
+input is the filtered signal and mathematical functions, and the output is the
+calculated R-wave position.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_cal_RMSE}:] Combine annotated
-data and detected R-wave index to calculate RMSE
+data and detected R-wave index to calculate RMSE, where the input is the
+annotated data and the detected R-wave index, and the output is the RMSE value.
 
 \end{itemize}
 
@@ -1097,19 +1101,20 @@ data and detected R-wave index to calculate RMSE
 \noindent \begin{itemize}
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:]
-  \textbf{Usability} The code uses external automated tools to generate user
-  manuals.
+  \textbf{Usability} The system must generate user manuals automatically using
+  external tools.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-  \textbf{Maintainability} The code is tested with complete verification and
-  validation plan.
+  \textbf{Maintainability} The system must be fully tested with a comprehensive
+  verification and validation plan.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-  \textbf{Portability} Write cross-platform and portable code, works on at least
-  Linux, Windows.
+  \textbf{Portability} The code must be cross-platform and work on at least
+  Linux and Windows.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Reusability}:]
-  \textbf{Reusability} The code is modularized.
+  \textbf{Reusability} The code must be modular to facilitate reuse in different
+  contexts.
 
 \end{itemize}
 
