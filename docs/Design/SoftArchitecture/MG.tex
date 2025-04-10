@@ -42,6 +42,8 @@
 & {\bf Notes}\\
 \midrule
 Mar 17, 2025 & 1.0 & Creation\\
+April 10, 2025 & 1.1 & Modified the dependencies between two modules and added
+annotations to the Figure \ref{FigUH}\\
 \bottomrule
 \end{tabularx}
 
@@ -213,13 +215,13 @@ Module
 \multirow{5}{0.3\textwidth}{Behaviour-Hiding Module}
 & General Digital Filter Module \\
 & Specified IIR Filter Module \\
-& Math Module \\
 & Pan Tompkins Algorithm Module \\
 & Annotated Data RMSE Module \\
+& Rwave Detect Module \\
 \midrule
 
 \multirow{4}{0.3\textwidth}{Software Decision Module}
-& Rwave Detect Module \\
+& Math Module \\
 & Input Output Processing Module \\
 & Error Handler Module \\
 & Logger Module \\
@@ -297,17 +299,6 @@ other parameters to output a set of usable filter parameters.
 \item[Type of Module:] Library
 \end{description}
 
-\subsubsection{Math Module (\mref{mMath})}
-
-\begin{description}
-\item[Secrets:]The specific implementation methods and algorithms for various
-mathematical functions.
-\item[Services:]Provide interfaces for mathematical functions such as square,
-thresholding, and RMSE calculation.
-\item[Implemented By:] \progname
-\item[Type of Module:] Library
-\end{description}
-
 \subsubsection{Pan Tompkins Algorithm Module (\mref{mAlg})}
 
 \begin{description}
@@ -330,6 +321,15 @@ annotated indices, and output the RMSE between two sequences.
 \item[Type of Module:] Library
 \end{description}
 
+\subsubsection{Rwave Detect Module (\mref{mRwave})}
+
+\begin{description}
+\item[Secrets:]The method and order for initializing and calling various
+internal required modules.
+\item[Services:]Provides an entry point to the entire program.
+\item[Implemented By:] \progname
+\end{description}
+
 
 \subsection{Software Decision Module}
 
@@ -344,13 +344,15 @@ annotated indices, and output the RMSE between two sequences.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Rwave Detect Module (\mref{mRwave})}
+\subsubsection{Math Module (\mref{mMath})}
 
 \begin{description}
-\item[Secrets:]The method and order for initializing and calling various
-internal required modules.
-\item[Services:]Provides an entry point to the entire program.
+\item[Secrets:]The specific implementation methods and algorithms for various
+mathematical functions.
+\item[Services:]Provide interfaces for mathematical functions such as square,
+thresholding, and RMSE calculation.
 \item[Implemented By:] \progname
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Input Output Processing Module (\mref{mIO})}
