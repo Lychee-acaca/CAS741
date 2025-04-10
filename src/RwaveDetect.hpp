@@ -13,5 +13,5 @@
 
 class RwaveDetect {
  public:
-  static void detect(std::string, std::string, std::string);
+  static float detect(std::string, std::string, std::string);
 };

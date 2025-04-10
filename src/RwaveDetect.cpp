@@ -17,17 +17,18 @@
 #include "src/logger.hpp"
 #include "src/pantomp.hpp"
 
-void RwaveDetect::detect(std::string sig_path, std::string ann_path,
-                         std::string output_path) {
+float RwaveDetect::detect(std::string sig_path, std::string ann_path,
+                          std::string output_path) {
   Signal* sig = IO_Processing::readFromFile(sig_path);
 
   PanTompSolver ps;
   DoublyLL<int>* finalPeaks = ps.findPeak(sig);
 
   annRMSE_Solver as;
+  float RMSE = 0;
   if (ann_path != "") {
     DoublyLL<int>* ann = IO_Processing::readAnnFromFile(ann_path);
-    float RMSE = as.calRMSE(finalPeaks, ann);
+    RMSE = as.calRMSE(finalPeaks, ann);
     Logger::getInstance()->log("RMSE = " + std::to_string(RMSE));
     delete ann;
   }
@@ -36,4 +37,5 @@ void RwaveDetect::detect(std::string sig_path, std::string ann_path,
 
   delete sig;
   delete finalPeaks;
+  return RMSE;
 }

@@ -49,12 +49,14 @@ set(PROJECT_TEST_NAME "${PROJECT_NAME}_test")
 
 aux_source_directory(${PROJECT_SOURCE_DIR}/test/unitTest TEST_LIST)
 
+aux_source_directory(${PROJECT_SOURCE_DIR}/src TEST_SRC_LIST)
+
+list(REMOVE_ITEM TEST_SRC_LIST "${PROJECT_SOURCE_DIR}/src/main.cpp")
+
 add_executable(
   ${PROJECT_TEST_NAME}
   ${TEST_LIST}
-  ${PROJECT_SOURCE_DIR}/src/logger.cpp
-  ${PROJECT_SOURCE_DIR}/src/mmath.cpp
-  ${PROJECT_SOURCE_DIR}/src/generalDigitalFilter.cpp
+  ${TEST_SRC_LIST}
 )
 
 target_link_libraries(
