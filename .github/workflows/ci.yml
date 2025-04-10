@@ -22,8 +22,7 @@ jobs:
 
       - name: Run build and tests inside Docker
         run: |
-          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace
-          lycheeacaca/rwave-dev:latest /bin/bash -c "
+          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace lycheeacaca/rwave-dev:latest /bin/bash -c "
             export PATH=/workspace/venv/bin:$PATH
             ./build.sh
             ./test/test_all.sh
