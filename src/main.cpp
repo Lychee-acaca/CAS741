@@ -9,14 +9,10 @@
 
 #include <algorithm>
 #include <filesystem>  // NOLINT
-#include <iostream>
 #include <string>
 
-#include "src/annRMSE.hpp"
-#include "src/dataStructure.hpp"
-#include "src/io_processing.hpp"
+#include "src/RwaveDetect.hpp"
 #include "src/logger.hpp"
-#include "src/pantomp.hpp"
 
 std::string getCmdOption(char** begin, char** end, const std::string& option) {
   char** itr = std::find(begin, end, option);
@@ -28,27 +24,6 @@ std::string getCmdOption(char** begin, char** end, const std::string& option) {
 
 bool cmdOptionExists(char** begin, char** end, const std::string& option) {
   return std::find(begin, end, option) != end;
-}
-
-void RwaveDetect(std::string sig_path, std::string ann_path,
-                 std::string output_path) {
-  Signal* sig = IO_Processing::readFromFile(sig_path);
-
-  PanTompSolver ps;
-  DoublyLL<int>* finalPeaks = ps.findPeak(sig);
-
-  annRMSE_Solver as;
-  if (ann_path != "") {
-    DoublyLL<int>* ann = IO_Processing::readAnnFromFile(ann_path);
-    float RMSE = as.calRMSE(finalPeaks, ann);
-    Logger::getInstance()->log("RMSE = " + std::to_string(RMSE));
-    delete ann;
-  }
-
-  IO_Processing::writeToFile(output_path, finalPeaks);
-
-  delete sig;
-  delete finalPeaks;
 }
 
 int main(int argc, char* argv[]) {
@@ -78,6 +53,6 @@ int main(int argc, char* argv[]) {
     output_path += "/output.txt";
   }
 
-  RwaveDetect(sig_path, ann_path, output_path);
+  RwaveDetect::detect(sig_path, ann_path, output_path);
   return 0;
 }
