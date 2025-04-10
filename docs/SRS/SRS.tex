@@ -120,7 +120,7 @@
 
 \begin{document}
 
-\title{Software Requirements Specification for \progname: subtitle describing software} 
+\title{Software Requirements Specification for \progname} 
 \author{\authname}
 \date{\today}
 	
@@ -140,6 +140,7 @@
 & {\bf Notes}\\
 \midrule
 January 16, 2025 & 1.0 & Creation\\
+April 10, 2025 & 1.1 & Revision\\
 \bottomrule
 \end{tabularx}
 
@@ -233,6 +234,7 @@ $z$ & N/A & complex frequency variable in the Z-domain, $z=e^{j2\pi f}$ \\
   ECG & Electrocardiography\\
   ADC & Analog-to-Digital Converter \\
   RMSE & Root Mean Square Error\\
+  QRS & Cardiac cycle \\
   \bottomrule
 \end{tabular}\\
 
@@ -243,7 +245,9 @@ unit. In other word, we define $j^2 = -1$.
 
 In discrete signal processing, square brackets are used to represent discrete
 signals and round brackets are used to represent continuous signals.  For
-instance, $u(t)$ is continuous signal and $u[n]$ is discrete signal.
+instance, $u(t)$ represents the signal amplitude of a continuous-time signal at
+time $t$, and $u[n]$ represents the signal amplitude of a discrete-time signal
+at the $n$th index.
 
 \newpage
 
@@ -254,15 +258,32 @@ instance, $u(t)$ is continuous signal and $u[n]$ is discrete signal.
 R-wave detection is a critical task in ECG signal processing, serving important
 purposes such as heart rate calculation, arrhythmia analysis, cardiac conduction
 evaluation, and heart disease diagnosis.  The patient's ECG signal is sampled by
-the sensor and converted into a digital signal, where we can detect R-waves.
+the sensor and converted into a digital signal, where we can detect R-waves. In
+the ECG waveform, the R-wave refers to the peak of the QRS complex, which
+represents the electrical depolarization of the heart’s ventricles — typically
+the most prominent feature in an ECG cycle.
+
 However, since the sampling is not under an ideal condition, a large amount of
-clutter wave is mixed into the original signal, such as electrical noises and
-utility frequency.
+clutter wave is mixed into the original signal, such as electrical noise and
+utility frequency interference (commonly 50 or 60 Hz depending on region,
+originating from power lines).
 
 There are many algorithms for detecting R-waves.  This project will focus on
 reimplementing the Pan-Tompkins\cite{4122029} algorithm.  All filter parameters
 used in the algorithm will be automatically derived according to requirements
-without relying on external libraries.
+without relying on external libraries. The software system designed in this
+project is named \progname.
+
+To clarify the concepts described above, a sample ECG figure with R-wave is
+provided in the Figure \ref{Fig_Rwave}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=1.0\textwidth]{Rwave}
+    \caption{A sample ECG waveform with red dots indicating the position of each R-wave.}
+    \label{Fig_Rwave} 
+  \end{center}
+\end{figure}
 
 \subsection{Purpose of Document}
 
