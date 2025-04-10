@@ -2,11 +2,12 @@ name: RwaveDetect CI Workflow
 
 on:
   push:
-    branches:
-      - dev
+    branches: dev
+    paths-ignore: [docs/**]
+
   pull_request:
-    branches:
-      - main
+    branches: main
+    paths-ignore: [docs/**]
 
 jobs:
   build:
