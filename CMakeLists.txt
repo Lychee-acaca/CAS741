@@ -14,6 +14,15 @@ endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 
+# Only apply coverage flags for GCC
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set(COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
+    set(COVERAGE_LINK_FLAGS "-fprofile-arcs -ftest-coverage")
+
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${COVERAGE_COMPILE_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} ${COVERAGE_LINK_FLAGS}")
+endif()
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
 
 # Add include directories

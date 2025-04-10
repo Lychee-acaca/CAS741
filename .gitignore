@@ -1,6 +1,7 @@
 ## Project related
 /build/
 /data/
+/cover_report/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
