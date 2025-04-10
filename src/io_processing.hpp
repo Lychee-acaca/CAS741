@@ -15,15 +15,17 @@
 
 class Signal {
  public:
-  explicit Signal(int fs = 0) : signal(new DoublyLL()), fs(fs) {}
+  explicit Signal(int fs = 0) : signal(new DoublyLL<float>()), fs(fs) {}
   explicit Signal(const Signal &s)
-      : signal(new DoublyLL(*(s.signal))), fs(s.fs) {}
-  DoublyLL *signal;
+      : signal(new DoublyLL<float>(*(s.signal))), fs(s.fs) {}
+  DoublyLL<float> *signal;
   int fs;
 };
 
 class IO_Processing {
  public:
+  static DoublyLL<int> *readAnnFromFile(const std::string);
   static Signal *readFromFile(const std::string);
+  static void writeToFile(const std::string, DoublyLL<int> *);
   static void writeToFile(const std::string, Signal *);
 };

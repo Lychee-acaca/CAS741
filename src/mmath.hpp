@@ -11,9 +11,15 @@
 
 #include "src/io_processing.hpp"
 
+#define MMATH_GET_MAX(A, B) ((A) > (B) ? (A) : (B))
+#define MMATH_GET_MIN(A, B) ((A) < (B) ? (A) : (B))
+#define MMATH_FLOAT_INF (1.0E9f)
+#define MMATH_DEFAULT_WINDOWSIZE_FACTOR (0.150f)
+
 class MathFunc {
  public:
   static Signal *calSquare(Signal *, bool = false);
-  static Signal *calThreshold(const Signal *, float th);
-  static Signal *calRMSE(const Signal *, const Signal *);
+  static Signal *calDiff(Signal *);
+  static Signal *calNorm(Signal *, bool = false);
+  static Signal *calMWI(Signal *, int = -1);
 };

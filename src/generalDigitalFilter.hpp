@@ -14,25 +14,26 @@
 
 class GeneralDigitalFilter {
  public:
-  explicit GeneralDigitalFilter(DoublyLL *b = nullptr, DoublyLL *a = nullptr)
+  explicit GeneralDigitalFilter(DoublyLL<float> *b = nullptr,
+                                DoublyLL<float> *a = nullptr)
       : b(b), a(a) {
     if (a) {
       regularize();
     }
   }
 
-  void setParam(DoublyLL *b = nullptr, DoublyLL *a = nullptr) {
+  void setParam(DoublyLL<float> *b = nullptr, DoublyLL<float> *a = nullptr) {
     this->b = b;
     this->a = a;
     regularize();
   }
 
-  DoublyLL *get_b(void) { return b; }
-  DoublyLL *get_a(void) { return a; }
+  DoublyLL<float> *get_b(void) { return b; }
+  DoublyLL<float> *get_a(void) { return a; }
 
   Signal *lfilter(Signal *x);
 
  private:
-  DoublyLL *b, *a;
+  DoublyLL<float> *b, *a;
   void regularize(void);
 };

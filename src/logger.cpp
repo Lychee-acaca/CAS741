@@ -9,12 +9,31 @@
 
 #include "src/logger.hpp"
 
+#include <chrono>
+#include <iomanip>
 #include <iostream>
 #include <string>
 
-void Logger::log(std::string msg, LogLevel ll = LogLevel::LOW) {
+std::string Logger::getLevelString(LogLevel ll) {
+  switch (ll) {
+    case LOW:
+      return "LOW";
+    case MEDIUM:
+      return "MEDIUM";
+    case HIGH:
+      return "HIGH";
+    default:
+      return "UNKNOWN";
+  }
+}
+
+void Logger::log(std::string msg, LogLevel ll) {
+  auto now = std::chrono::system_clock::now();
+  std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+  std::tm local_tm = *std::localtime(&now_time_t);
   if (ll >= logLevel) {
-    std::cout << msg << std::endl;
+    std::cout << std::put_time(&local_tm, "%H:%M:%S ") << "["
+              << getLevelString(ll) << "] " << msg << std::endl;
   }
   return;
 }

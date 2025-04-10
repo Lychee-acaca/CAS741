@@ -4,22 +4,25 @@ SELF_DIR=$(dirname "$(realpath "$0")")
 SOURCE_DIR=$(realpath "${SELF_DIR}/../src")
 TEST_DIR=$(realpath "${SELF_DIR}/unitTest")
 
-echo "Running cppcheck on $SOURCE_DIR"
-cppcheck --enable=all --inconclusive --check-config --quiet --suppress=missingInclude "$SOURCE_DIR"
+run_cppcheck() {
+    local target_dir="$1"
+    local output
 
-if [ $? -eq 0 ]; then
-    echo "Cppcheck analysis on $SOURCE_DIR completed successfully."
-else
-    echo "Cppcheck analysis on $SOURCE_DIR found issues."
-    exit 1
-fi
+    echo "Running cppcheck on $target_dir"
+    output=$(cppcheck --enable=all --inconclusive --quiet --suppress=missingInclude "$target_dir" 2>&1)
+    local status=$?
 
-echo "Running cppcheck on $TEST_DIR"
-cppcheck --enable=all --inconclusive --check-config --quiet --suppress=missingInclude "$TEST_DIR"
+    if [[ -n "$output" ]]; then
+        echo "Cppcheck analysis on $target_dir found issues:"
+        echo "$output"
+        exit 1
+    elif [[ $status -ne 0 ]]; then
+        echo "Cppcheck encountered an error while analyzing $target_dir."
+        exit 1
+    else
+        echo "Cppcheck analysis on $target_dir completed successfully."
+    fi
+}
 
-if [ $? -eq 0 ]; then
-    echo "Cppcheck analysis on $TEST_DIR completed successfully."
-else
-    echo "Cppcheck analysis on $TEST_DIR found issues."
-    exit 1
-fi
+run_cppcheck "$SOURCE_DIR"
+run_cppcheck "$TEST_DIR"
