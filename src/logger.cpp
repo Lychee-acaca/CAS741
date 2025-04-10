@@ -9,7 +9,7 @@
 
 #include "src/logger.hpp"
 
-#include <chrono>
+#include <chrono>  // NOLINT
 #include <iomanip>
 #include <iostream>
 #include <string>
