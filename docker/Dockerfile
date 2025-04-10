@@ -18,7 +18,7 @@ RUN python3 -m venv /workspace/venv
 
 RUN /workspace/venv/bin/pip install cpplint
 
-RUN echo "export PATH=/workspace/venv/bin:$PATH" >> ~/.bashrc
+ENV PATH="/workspace/venv/bin:$PATH"
 
 WORKDIR /workspace/rwave
 
