@@ -1,0 +1,28 @@
+name: RwaveDetect CI Workflow
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        run: |
+          docker pull lycheeacaca/rwave-dev:latest
+
+      - name: Run build and tests inside Docker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace lycheeacaca/rwave-dev:latest /bin/bash -c "
+            ./build.sh
+            ./test/test_all.sh
+          "
