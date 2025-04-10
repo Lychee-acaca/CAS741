@@ -13,7 +13,7 @@
 
 #define MMATH_GET_MAX(A, B) ((A) > (B) ? (A) : (B))
 #define MMATH_GET_MIN(A, B) ((A) < (B) ? (A) : (B))
-#define MMATH_FLOAT_INF (100000000.0f)
+#define MMATH_FLOAT_INF (1.0E9f)
 #define MMATH_DEFAULT_WINDOWSIZE_FACTOR (0.150f)
 
 class MathFunc {
@@ -22,9 +22,5 @@ class MathFunc {
   static Signal *calDiff(Signal *);
   static Signal *calNorm(Signal *, bool = false);
   static Signal *calMWI(Signal *, int = -1);
-  static DoublyLL<int> *findApproxPeak(Signal *);
-  static DoublyLL<int> *calThreshold(Signal *, DoublyLL<int> *);
-  static DoublyLL<int> *refineRPeaksOnRawSignal(Signal *, DoublyLL<int> *,
-                                                int = 300);
   static Signal *calRMSE(const Signal *, const Signal *);
 };
