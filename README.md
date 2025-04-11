@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/Lychee-acaca/CAS741/actions/workflows/ci.yml/badge.svg)](https://github.com/Lychee-acaca/CAS741/actions/workflows/ci.yml)
 [![Codecov](https://codecov.io/gh/Lychee-acaca/CAS741/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Lychee-acaca/CAS741)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 Developer Names: Junwei Lin
 
