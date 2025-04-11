@@ -48,12 +48,6 @@ static void squareTest(const std::string &filename, bool inplace = false) {
   }
 }
 
-TEST(Math_Test, calSquare1) { squareTest("../test/unitTest/data/square1.txt"); }
-
-TEST(Math_Test, calSquare_inplace) {
-  squareTest("../test/unitTest/data/square1.txt", true);
-}
-
 class calSquareSuite
     : public ::testing::TestWithParam<std::tuple<std::string, bool>> {};
 
