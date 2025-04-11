@@ -1,5 +1,7 @@
 # RwaveDetection
 
+![Codecov](https://codecov.io/gh/Lychee-acaca/CAS741/branch/main/graph/badge.svg)
+
 Developer Names: Junwei Lin
 
 Date of project start: January 16, 2025
