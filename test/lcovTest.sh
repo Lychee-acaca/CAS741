@@ -19,11 +19,11 @@ lcov -a "$TMPDIR/base.info" -a "$TMPDIR/test.info" -o "$TMPDIR/total.info"
 
 lcov --extract "$TMPDIR/total.info" "$(pwd)/src/*" -o "$TMPDIR/extract.info"
 
-lcov --remove "$TMPDIR/extract.info" "$(pwd)/src/main.cpp" -o "$TMPDIR/final.info"
+lcov --remove "$TMPDIR/extract.info" "$(pwd)/src/main.cpp" -o "./final.info"
 
 rm -rf ./cover_report
 
-genhtml -o ./cover_report --legend --title "lcov" --prefix=./ "$TMPDIR/final.info"
+genhtml -o ./cover_report --legend --title "lcov" --prefix=./ "./final.info"
 
 rm -rf "$TMPDIR"
 
