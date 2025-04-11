@@ -27,6 +27,7 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option) {
 }
 
 int main(int argc, char* argv[]) {
+  Logger::getInstance()->setLogPath("log.txt");
   Logger::getInstance()->setLogLevel(Logger::LogLevel::LOW);
   Logger::getInstance()->log("Hello", Logger::LogLevel::HIGH);
 

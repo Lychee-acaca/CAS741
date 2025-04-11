@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include <fstream>
+#include <iostream>
 #include <string>
 
 class Logger {
@@ -25,6 +27,16 @@ class Logger {
   void setLogPath(std::string);
 
  private:
-  Logger(void) : logLevel(LogLevel::MEDIUM) {}
+  Logger(void) : logLevel(LogLevel::MEDIUM) {
+    logfile = nullptr;
+    setLogPath("log.txt");
+  }
+
+  ~Logger(void) {
+    logfile->close();
+    delete logfile;
+  }
+
   LogLevel logLevel;
+  std::ofstream *logfile;
 };
