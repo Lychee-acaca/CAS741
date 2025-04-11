@@ -18,26 +18,8 @@
 #include "src/dataStructure.hpp"
 #include "test/unitTest/general.hpp"
 
-template <typename T>
-int readSeqData(std::ifstream &infile, DoublyLL<T> *data) {
-  int len = 0;
-  if (!(infile >> len)) {
-    std::cerr << "Failed to read the length." << std::endl;
-    return 1;
-  }
-  for (int i = 0; i < len; ++i) {
-    float val;
-    if (!(infile >> val)) {
-      std::cerr << "Failed to read value " << i + 1 << std::endl;
-      return 1;
-    }
-    data->push_back(val);
-  }
-  return 0;
-}
-
-int readTestFile(const std::string &filename, DoublyLL<float> *b,
-                 DoublyLL<float> *a, Signal *sig, Signal *y) {
+static int readTestFile(const std::string &filename, DoublyLL<float> *b,
+                        DoublyLL<float> *a, Signal *sig, Signal *y) {
   std::ifstream infile(filename);
 
   if (!infile) {
@@ -45,23 +27,23 @@ int readTestFile(const std::string &filename, DoublyLL<float> *b,
     return 1;
   }
 
-  if (readSeqData(infile, b)) {
+  if (General::readSeqData(infile, b)) {
     return 1;
   }
-  if (readSeqData(infile, a)) {
+  if (General::readSeqData(infile, a)) {
     return 1;
   }
-  if (readSeqData(infile, sig->signal)) {
+  if (General::readSeqData(infile, sig->signal)) {
     return 1;
   }
-  if (readSeqData(infile, y->signal)) {
+  if (General::readSeqData(infile, y->signal)) {
     return 1;
   }
 
   return 0;
 }
 
-void LfilterTest(const std::string &filename) {
+static void LfilterTest(const std::string &filename) {
   DoublyLL<float> *b = new DoublyLL<float>();
   DoublyLL<float> *a = new DoublyLL<float>();
   Signal *sig = new Signal(1);
@@ -72,17 +54,7 @@ void LfilterTest(const std::string &filename) {
 
   Signal *y_hat = gdf->lfilter(sig);
 
-  EXPECT_EQ(y->signal->getLen(), y_hat->signal->getLen());
-
-  auto y_it = y->signal->begin();
-  auto y_hat_it = y_hat->signal->begin();
-  float sum = 0;
-  for (; y_it != y->signal->end(); ++y_it, ++y_hat_it) {
-    sum += std::pow((*y_it) - (*y_hat_it), 2.0);
-  }
-  sum /= y->signal->getLen();
-
-  EXPECT_LE(std::sqrt(sum), 1e-5);
+  EXPECT_LE(General::RMSE(y->signal, y_hat->signal), 1e-5);
 
   delete b;
   delete a;
@@ -155,7 +127,7 @@ TEST_P(LfilterTestSuite, RunsLfilterOnFile) {
   LfilterTest(file);
 }
 
-std::vector<std::string> generateFilePaths() {
+static std::vector<std::string> generateFilePaths() {
   std::vector<std::string> paths;
   for (int i = 1; i <= 20; ++i) {
     paths.push_back("../test/unitTest/data/lfilter" + std::to_string(i) +

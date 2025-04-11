@@ -14,53 +14,64 @@
 #include "src/dataStructure.hpp"
 #include "test/unitTest/general.hpp"
 
-TEST(Math_Test, calSquare) {
-  Signal *sig = new Signal();
-  sig->signal->push_back(1.2f);
-  sig->signal->push_back(-2.1f);
-  sig->signal->push_back(-1.0f);
-  sig->signal->push_back(2.0f);
-  sig->signal->push_back(3.0f);
+static int readTestFile(const std::string &filename, Signal *x, Signal *y) {
+  std::ifstream infile(filename);
 
-  Signal *sig_square = MathFunc::calSquare(sig);
+  if (!infile) {
+    std::cerr << "Failed to open file: " << filename << std::endl;
+    return 1;
+  }
 
-  EXPECT_NEAR(sig_square->signal->getIndex(0)->getData(), 1.44f,
-              FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig_square->signal->getIndex(1)->getData(), 4.41f,
-              FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig_square->signal->getIndex(2)->getData(), 1.0f,
-              FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig_square->signal->getIndex(3)->getData(), 4.0f,
-              FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig_square->signal->getIndex(4)->getData(), 9.0f,
-              FLOAT_TOLERANCE);
+  if (General::readSeqData(infile, x->signal)) {
+    return 1;
+  }
+  if (General::readSeqData(infile, y->signal)) {
+    return 1;
+  }
 
-  EXPECT_EQ(sig_square->signal->getIndex(4)->getNext(), nullptr);
-
-  delete sig_square;
-
-  delete sig;
+  return 0;
 }
+
+static void squareTest(const std::string &filename, bool inplace = false) {
+  Signal *x = new Signal(1);
+  Signal *y = new Signal(1);
+  EXPECT_EQ(readTestFile(filename, x, y), 0);
+
+  Signal *y_hat = MathFunc::calSquare(x, inplace);
+
+  EXPECT_LE(General::RMSE(y->signal, y_hat->signal), 1e-5);
+
+  delete x;
+  delete y;
+  if (!inplace) {
+    delete y_hat;
+  }
+}
+
+TEST(Math_Test, calSquare1) { squareTest("../test/unitTest/data/square1.txt"); }
 
 TEST(Math_Test, calSquare_inplace) {
-  Signal *sig = new Signal();
-  sig->signal->push_back(1.2f);
-  sig->signal->push_back(-2.1f);
-  sig->signal->push_back(-1.0f);
-  sig->signal->push_back(2.0f);
-  sig->signal->push_back(3.0f);
-
-  Signal *sig_square = MathFunc::calSquare(sig, true);
-
-  EXPECT_EQ(sig, sig_square);
-
-  EXPECT_NEAR(sig->signal->getIndex(0)->getData(), 1.44f, FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig->signal->getIndex(1)->getData(), 4.41f, FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig->signal->getIndex(2)->getData(), 1.0f, FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig->signal->getIndex(3)->getData(), 4.0f, FLOAT_TOLERANCE);
-  EXPECT_NEAR(sig->signal->getIndex(4)->getData(), 9.0f, FLOAT_TOLERANCE);
-
-  EXPECT_EQ(sig->signal->getIndex(4)->getNext(), nullptr);
-
-  delete sig;
+  squareTest("../test/unitTest/data/square1.txt", true);
 }
+
+class calSquareSuite
+    : public ::testing::TestWithParam<std::tuple<std::string, bool>> {};
+
+TEST_P(calSquareSuite, RunsLfilterOnFile) {
+  auto [file, inplace] = GetParam();
+  squareTest(file, inplace);
+}
+
+static std::vector<std::tuple<std::string, bool>> generateFilePaths() {
+  std::vector<std::tuple<std::string, bool>> paths;
+  for (int i = 1; i <= 20; ++i) {
+    std::string filepath =
+        "../test/unitTest/data/square" + std::to_string(i) + ".txt";
+    paths.emplace_back(filepath, false);
+    paths.emplace_back(filepath, true);
+  }
+  return paths;
+}
+
+INSTANTIATE_TEST_SUITE_P(Math_Test, calSquareSuite,
+                         ::testing::ValuesIn(generateFilePaths()));
