@@ -27,3 +27,10 @@ jobs:
             ./build.sh
             ./test/test_all.sh
           "
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ${{ github.workspace }}/final.info
+          fail_ci_if_error: true
