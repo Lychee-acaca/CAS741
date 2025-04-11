@@ -10,9 +10,87 @@
 #include "src/generalDigitalFilter.hpp"
 
 #include <gtest/gtest.h>
+#include <math.h>
+
+#include <fstream>
+#include <string>
 
 #include "src/dataStructure.hpp"
 #include "test/unitTest/general.hpp"
+
+template <typename T>
+int readSeqData(std::ifstream &infile, DoublyLL<T> *data) {
+  int len = 0;
+  if (!(infile >> len)) {
+    std::cerr << "Failed to read the length." << std::endl;
+    return 1;
+  }
+  for (int i = 0; i < len; ++i) {
+    float val;
+    if (!(infile >> val)) {
+      std::cerr << "Failed to read value " << i + 1 << std::endl;
+      return 1;
+    }
+    data->push_back(val);
+  }
+  return 0;
+}
+
+int readTestFile(const std::string &filename, DoublyLL<float> *b,
+                 DoublyLL<float> *a, Signal *sig, Signal *y) {
+  std::ifstream infile(filename);
+
+  if (!infile) {
+    std::cerr << "Failed to open file: " << filename << std::endl;
+    return 1;
+  }
+
+  if (readSeqData(infile, b)) {
+    return 1;
+  }
+  if (readSeqData(infile, a)) {
+    return 1;
+  }
+  if (readSeqData(infile, sig->signal)) {
+    return 1;
+  }
+  if (readSeqData(infile, y->signal)) {
+    return 1;
+  }
+
+  return 0;
+}
+
+void LfilterTest(const std::string &filename) {
+  DoublyLL<float> *b = new DoublyLL<float>();
+  DoublyLL<float> *a = new DoublyLL<float>();
+  Signal *sig = new Signal(1);
+  Signal *y = new Signal(1);
+  EXPECT_EQ(readTestFile(filename, b, a, sig, y), 0);
+
+  GeneralDigitalFilter *gdf = new GeneralDigitalFilter(b, a);
+
+  Signal *y_hat = gdf->lfilter(sig);
+
+  EXPECT_EQ(y->signal->getLen(), y_hat->signal->getLen());
+
+  auto y_it = y->signal->begin();
+  auto y_hat_it = y_hat->signal->begin();
+  float sum = 0;
+  for (; y_it != y->signal->end(); ++y_it, ++y_hat_it) {
+    sum += std::pow((*y_it) - (*y_hat_it), 2.0);
+  }
+  sum /= y->signal->getLen();
+
+  EXPECT_LE(std::sqrt(sum), 1e-5);
+
+  delete b;
+  delete a;
+  delete sig;
+  delete y;
+  delete gdf;
+  delete y_hat;
+}
 
 TEST(GDF_Test, RegularizeTest1) {
   DoublyLL<float> *b = new DoublyLL<float>();
@@ -70,36 +148,21 @@ TEST(GDF_Test, RegularizeTest2) {
   delete a;
 }
 
-TEST(GDF_Test, LfilterTest1) {
-  float ib[3] = {0.4f, 0.3f, 0.2f};
-  float ia[4] = {0.5f, 0.6f, 0.7f, 0.8f};
-  float ix[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
-  float iy[9] = {0.8f,      1.24f,      1.392f,      1.1136f,    2.33088f,
-                 2.816704f, 2.7749632f, 1.99725056f, 4.01162445f};
+class LfilterTestSuite : public ::testing::TestWithParam<std::string> {};
 
-  Signal *x = new Signal(200);
-  DoublyLL<float> *b = new DoublyLL<float>();
-  DoublyLL<float> *a = new DoublyLL<float>();
-
-  for (int i = 0; i < 3; ++i) {
-    b->push_back(ib[i]);
-  }
-  for (int i = 0; i < 4; ++i) {
-    a->push_back(ia[i]);
-  }
-  for (int i = 0; i < 9; ++i) {
-    x->signal->push_back(ix[i]);
-  }
-  GeneralDigitalFilter *gdf = new GeneralDigitalFilter(b, a);
-  auto y = gdf->lfilter(x);
-
-  for (int i = 0; i < 9; ++i) {
-    EXPECT_NEAR(y->signal->getIndex(i)->getData(), iy[i], FLOAT_TOLERANCE);
-  }
-
-  delete gdf;
-  delete b;
-  delete a;
-  delete x;
-  delete y;
+TEST_P(LfilterTestSuite, RunsLfilterOnFile) {
+  std::string file = GetParam();
+  LfilterTest(file);
 }
+
+std::vector<std::string> generateFilePaths() {
+  std::vector<std::string> paths;
+  for (int i = 1; i <= 20; ++i) {
+    paths.push_back("../test/unitTest/data/lfilter" + std::to_string(i) +
+                    ".txt");
+  }
+  return paths;
+}
+
+INSTANTIATE_TEST_SUITE_P(GDF_Test, LfilterTestSuite,
+                         ::testing::ValuesIn(generateFilePaths()));
