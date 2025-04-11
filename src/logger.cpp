@@ -27,18 +27,39 @@ std::string Logger::getLevelString(LogLevel ll) {
   }
 }
 
-void Logger::log(std::string msg, LogLevel ll) {
+static std::string getFormattedTimeString(const std::string& msg,
+                                          const std::string& levelStr) {
   auto now = std::chrono::system_clock::now();
   std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
   std::tm local_tm = *std::localtime(&now_time_t);
-  if (ll >= logLevel) {
-    std::cout << std::put_time(&local_tm, "%H:%M:%S ") << "["
-              << getLevelString(ll) << "] " << msg << std::endl;
+  std::ostringstream oss;
+  oss << std::put_time(&local_tm, "%H:%M:%S ");
+  oss << "[" << levelStr << "] " << msg << "\n";
+  return oss.str();
+}
+
+void Logger::log(std::string msg, LogLevel ll) {
+  std::string combine_msg = getFormattedTimeString(msg, getLevelString(ll));
+
+  if (logfile != nullptr) {
+    *(logfile) << combine_msg;
+    logfile->flush();
   }
-  return;
+  if (ll >= logLevel) {
+    std::cout << combine_msg;
+  }
 }
 
 void Logger::setLogPath(std::string filename) {
-  this->log(filename);
-  return;
+  if (logfile != nullptr) {
+    logfile->close();
+    delete logfile;
+  }
+
+  logfile = new std::ofstream(filename, std::ios::app);
+  if (!logfile->is_open()) {
+    std::cerr << "error creating logfile!" << std::endl;
+    delete logfile;
+  }
+  log("Program started.", LogLevel::HIGH);
 }
