@@ -1,7 +1,0 @@
-repos:
-  - repo: local
-    hooks:
-      - id: test-hook
-        name: Test Bash Hook
-        entry: ./test/test_all.sh
-        language: system
