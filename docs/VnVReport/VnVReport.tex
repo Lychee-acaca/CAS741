@@ -3,13 +3,9 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=red,
-    urlcolor=blue
-}
+\usepackage{graphicx}
+\hypersetup{ colorlinks, citecolor=black, filecolor=black, linkcolor=red,
+    urlcolor=blue }
 \usepackage[round]{natbib}
 
 \input{../Comments}
@@ -27,11 +23,10 @@
 
 \section{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X} \toprule {\bf Date} & {\bf Version}
+& {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+April 11, 2025 & 1.0 & Creation\\
 \bottomrule
 \end{tabularx}
 
@@ -48,8 +43,6 @@ Date 2 & 1.1 & Notes\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
-
 \newpage
 
 \tableofcontents
@@ -62,64 +55,210 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document ...
+This document presents the Verification and Validation (VnV) report for the
+project \progname, detailing the results of the system's verification against
+functional and nonfunctional requirements, as well as the validation of its
+correctness and quality.
 
 \section{Functional Requirements Evaluation}
+
+All functional requirements have been verified through unit testing using the
+GoogleTest framework. Each requirement has corresponding test cases designed to
+validate correct behavior under both expected and edge-case conditions. The
+completeness of this coverage is documented in the traceability matrix provided
+in Section~\ref{sec:T2R}, demonstrating that all functional requirements are
+adequately tested.
 
 \section{Nonfunctional Requirements Evaluation}
 
 \subsection{Usability}
-		
-\subsection{Performance}
 
-\subsection{etc.}
-	
-\section{Comparison to Existing Implementation}	
+A comprehensive guide for compilation and usage is provided in the project's
+README.md file, ensuring ease of use for developers and users.
 
-This section will not be appropriate for every project.
+\subsection{Maintainability}
+
+To ensure maintainability, \texttt{cpplint} and \texttt{cppcheck} were used for
+static code analysis. \texttt{cpplint} checks for style and formatting issues,
+ensuring adherence to a consistent coding standard. \texttt{cppcheck} detects
+potential bugs and performance issues.
+
+\subsection{Portability}
+
+The system has been tested and verified on Ubuntu (including Docker
+environments), Debian, and Windows 10. It works consistently across these
+platforms, ensuring portability and compatibility.
+
+\subsection{Reusability}
+
+Through code reviews, it was confirmed that each module is designed with
+reusability in mind, ensuring that components can be easily reused in future
+projects.
 
 \section{Unit Testing}
 
+A comprehensive unit testing process was conducted to validate the
+functionality, robustness, and correctness of the system's core components. A
+total of 89 unit test cases were executed, covering modules including R-wave
+detection, I/O processing, general digital filtering, root mean square error
+(RMSE) evaluation, mathematical operations, and data structures.
+
+\begin{itemize}
+    \item \textbf{Total Test Cases:} 89
+    \item \textbf{Passed:} 89
+    \item \textbf{Failed:} 0
+    \item \textbf{Execution Time:} Approximately 2.18 seconds (with the longest
+    individual test taking about 1.89 seconds)
+\end{itemize}
+
+All unit tests passed successfully, demonstrating high reliability and stability
+of the implemented modules.
+
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+Testing revealed the need for more accessible runtime information, leading to
+the addition of a logger module. To facilitate testing and debugging, the logger
+was configured to output messages to a file instead of standard output.
 
 \section{Automated Testing}
+
+Automated testing is integrated into the development workflow via GitHub
+Actions. The workflow is triggered on each push or pull request and performs the
+following checks:
+
+\begin{itemize}
+    \item \textbf{cpplint:} Checks adherence to the Google C++ Style Guide.
+    \item \textbf{cppcheck:} Performs static analysis to detect potential bugs
+    and code quality issues.
+    \item \textbf{Google Test:} Executes the full suite of unit tests described
+    previously.
+    \item \textbf{LCOV:} Generates code coverage reports to monitor test
+    completeness.
+\end{itemize}
+
+This automated setup ensures consistent code quality, early bug detection, and
+continuous test coverage monitoring throughout the development lifecycle.
+
+\newpage
+
+\section{Trace to Requirements\label{sec:T2R}}
+
+\begin{table}[htbp!]
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+      & FR1& FR2& FR3& FR4& FR5& FR6& FR7& FR8& NFR1& NFR2& NFR3& NFR4 \\
+    \hline
+      TC\_IIR\_FIR           & X& & & & & & & & & & & \\ \hline
+      TC\_BUT\_CHEB          & & X& X& & & & & & & & & \\ \hline
+      TC\_SQUARING           & & & & X& & & & & & & & \\ \hline
+      TC\_THRESHOLDING       & & & & & X& & & & & & & \\ \hline
+      TC\_RMSE               & & & & & & X& & & & & & \\ \hline
+      TC\_ALG                & & & & & & & X& X& & & & \\ \hline
+      TC\_USABILITY          & & & & & & & & & X& & & \\ \hline
+      TC\_MAINTAINABILITY    & & & & & & & & & & X& & \\ \hline
+      TC\_PORTABILITY        & & & & & & & & & & & X& \\ \hline
+      TC\_REUSABILITY        & & & & & & & & & & & & X\\
+    \hline
+    \end{tabular}
+  }
+  \caption{Traceability Matrix Showing the Connections Between Requirements and System Test Cases}
+  \label{Table:tc_trace}
+\end{table}
 		
-\section{Trace to Requirements}
-		
-\section{Trace to Modules}		
+\section{Trace to Modules\label{sec:T2M}}		
+
+\begin{table}[htbp!]
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+      & M1& M2& M3& M4& M5& M6& M7& M8& M9& M10 \\
+    \hline
+    RegularizeTest              & & X& & & & & & & & \\ \hline
+    LfilterTestSuite            & & X& & & & & & & & \\ \hline
+    ButterTest                  & & & X& & & & & & & \\ \hline
+    RWaveDetectionTest          & & & & & X& & X& & & \\ \hline
+    calRMSESuite                & & & & & & X& & & & \\ \hline
+    RWaveDetectionFilterTest    & & & & & X& & X& & & \\ \hline
+    calSquareSuite              & & & & X& & & & & & \\ \hline
+    read                        &X & & & & & & & X& & \\ \hline
+    write                       &X & & & & & & & X& & \\ \hline
+    ErrTest                     & & & & & & & & & X& \\ \hline
+    outputTest                  & & & & & & & & & & X\\
+    \hline
+    \end{tabular}
+  }
+  \caption{Traceability Matrix Showing the Connections Between Unit Tests and Modules}
+  \label{Table:tc_trace}
+\end{table}
+
+\clearpage
 
 \section{Code Coverage Metrics}
+
+Code coverage for this project is evaluated using the \texttt{lcov} tool.
+Automated coverage reports are generated and uploaded through GitHub Actions to
+Codecov. The coverage dashboard can be accessed at:
+
+\begin{center}
+\url{https://app.codecov.io/gh/Lychee-acaca/CAS741}
+\end{center}
+
+As of the current assessment, the overall test coverage is \textbf{95.01\%}. The
+coverage statistics for each major source file are summarized below:
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{File} & \textbf{Lines Covered / Total} & \textbf{Coverage (\%)} \\
+\hline
+\texttt{RwaveDetect.cpp}         & 15 / 15    & 100.00\% \\
+\texttt{annRMSE.cpp}             & 18 / 19    & 94.74\%  \\
+\texttt{annRMSE.hpp}             & 1 / 1      & 100.00\% \\
+\texttt{dataStructure.hpp}       & 91 / 94    & 96.81\%  \\
+\texttt{generalDigitalFilter.cpp}& 24 / 24    & 100.00\% \\
+\texttt{generalDigitalFilter.hpp}& 10 / 10    & 100.00\% \\
+\texttt{io\_processing.cpp}       & 49 / 55    & 89.09\%  \\
+\texttt{io\_processing.hpp}       & 3 / 3      & 100.00\% \\
+\texttt{logger.cpp}              & 33 / 37    & 89.19\%  \\
+\texttt{logger.hpp}              & 12 / 12    & 100.00\% \\
+\texttt{mmath.cpp}               & 50 / 52    & 96.15\%  \\
+\texttt{pantomp.cpp}             & 127 / 134  & 94.78\%  \\
+\texttt{pantomp.hpp}             & 5 / 5      & 100.00\% \\
+\hline
+\end{tabular}
+\end{center}
+
+This high level of coverage demonstrates that most of the critical logic in the
+project has been thoroughly tested.
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}
 
-\newpage{}
-\section*{Appendix --- Reflection}
+% \newpage{}
+% \section*{Appendix --- Reflection}
 
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Reflection.
+% The information in this section will be used to evaluate the team members on the
+% graduate attribute of Reflection.
 
-\input{../Reflection.tex}
+% \input{../Reflection.tex}
 
-\begin{enumerate}
-  \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how
-    did you resolve them?
-  \item Which parts of this document stemmed from speaking to your client(s) or
-  a proxy (e.g. your peers)? Which ones were not, and why?
-  \item In what ways was the Verification and Validation (VnV) Plan different
-  from the activities that were actually conducted for VnV?  If there were
-  differences, what changes required the modification in the plan?  Why did
-  these changes occur?  Would you be able to anticipate these changes in future
-  projects?  If there weren't any differences, how was your team able to clearly
-  predict a feasible amount of effort and the right tasks needed to build the
-  evidence that demonstrates the required quality?  (It is expected that most
-  teams will have had to deviate from their original VnV Plan.)
-\end{enumerate}
+% \begin{enumerate}
+%   \item What went well while writing this deliverable? 
+%   \item What pain points did you experience during this deliverable, and how did
+%     you resolve them?
+%   \item Which parts of this document stemmed from speaking to your client(s) or
+%   a proxy (e.g. your peers)? Which ones were not, and why?
+%   \item In what ways was the Verification and Validation (VnV) Plan different
+%   from the activities that were actually conducted for VnV?  If there were
+%   differences, what changes required the modification in the plan?  Why did
+%   these changes occur?  Would you be able to anticipate these changes in future
+%   projects?  If there weren't any differences, how was your team able to clearly
+%   predict a feasible amount of effort and the right tasks needed to build the
+%   evidence that demonstrates the required quality?  (It is expected that most
+%   teams will have had to deviate from their original VnV Plan.)
+% \end{enumerate}
 
 \end{document}
