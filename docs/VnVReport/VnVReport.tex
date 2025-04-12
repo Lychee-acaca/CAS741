@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{graphicx}
 \hypersetup{ colorlinks, citecolor=black, filecolor=black, linkcolor=red,
     urlcolor=blue }
 \usepackage[round]{natbib}
@@ -54,13 +55,45 @@ April 11, 2025 & 1.0 & Creation\\
 
 \pagenumbering{arabic}
 
-This document ...
+This document presents the Verification and Validation (VnV) report for the
+project \progname, detailing the results of the system's verification against
+functional and nonfunctional requirements, as well as the validation of its
+correctness and quality.
 
 \section{Functional Requirements Evaluation}
+
+All functional requirements have been verified through unit testing using the
+GoogleTest framework. Each requirement has corresponding test cases designed to
+validate correct behavior under both expected and edge-case conditions. The
+completeness of this coverage is documented in the traceability matrix provided
+in Section~\ref{sec:T2R}, demonstrating that all functional requirements are
+adequately tested.
 
 \section{Nonfunctional Requirements Evaluation}
 
 \subsection{Usability}
+
+A comprehensive guide for compilation and usage is provided in the project's
+README.md file, ensuring ease of use for developers and users.
+
+\subsection{Maintainability}
+
+To ensure maintainability, \texttt{cpplint} and \texttt{cppcheck} were used for
+static code analysis. \texttt{cpplint} checks for style and formatting issues,
+ensuring adherence to a consistent coding standard. \texttt{cppcheck} detects
+potential bugs and performance issues.
+
+\subsection{Portability}
+
+The system has been tested and verified on Ubuntu (including Docker
+environments), Debian, and Windows 10. It works consistently across these
+platforms, ensuring portability and compatibility.
+
+\subsection{Reusability}
+
+Through code reviews, it was confirmed that each module is designed with
+reusability in mind, ensuring that components can be easily reused in future
+projects.
 
 \section{Unit Testing}
 
@@ -106,9 +139,33 @@ following checks:
 This automated setup ensures consistent code quality, early bug detection, and
 continuous test coverage monitoring throughout the development lifecycle.
 		
-\section{Trace to Requirements}
+\section{Trace to Requirements\label{sec:T2R}}
+
+\begin{table}[htbp!]
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+      & FR1& FR2& FR3& FR4& FR5& FR6& FR7& FR8& NFR1& NFR2& NFR3& NFR4 \\
+    \hline
+      TC\_IIR\_FIR           & X& & & & & & & & & & & \\ \hline
+      TC\_BUT\_CHEB          & & X& X& & & & & & & & & \\ \hline
+      TC\_SQUARING           & & & & X& & & & & & & & \\ \hline
+      TC\_THRESHOLDING       & & & & & X& & & & & & & \\ \hline
+      TC\_RMSE               & & & & & & X& & & & & & \\ \hline
+      TC\_ALG                & & & & & & & X& X& & & & \\ \hline
+      TC\_USABILITY          & & & & & & & & & X& & & \\ \hline
+      TC\_MAINTAINABILITY    & & & & & & & & & & X& & \\ \hline
+      TC\_PORTABILITY        & & & & & & & & & & & X& \\ \hline
+      TC\_REUSABILITY        & & & & & & & & & & & & X\\
+    \hline
+    \end{tabular}
+  }
+  \caption{Traceability Matrix Showing the Connections Between Requirements and System Test Cases}
+  \label{Table:tc_trace}
+\end{table}
 		
-\section{Trace to Modules}		
+\section{Trace to Modules\label{sec:T2M}}		
 
 \section{Code Coverage Metrics}
 
