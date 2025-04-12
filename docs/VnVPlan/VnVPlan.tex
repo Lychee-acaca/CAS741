@@ -34,6 +34,7 @@
 & {\bf Notes}\\
 \midrule
 Feb 21, 2025 & 1.0 & Creation\\
+April 11, 2025 & 1.1 & Complete unit tests\\
 \bottomrule
 \end{tabularx}
 
@@ -738,82 +739,307 @@ How test will be performed:
 
 \section{Unit Test Description}
 
-Not filled.
+This section outlines the unit testing strategy and plans for verifying the
+functional components of the R-peak detection system. The tests are designed to
+cover both normal and edge-case behavior for each module.
 
-% \wss{This section should not be filled in until after the MIS (detailed design
-%   document) has been completed.}
+\subsection{Unit Testing Scope}
 
-% \wss{Reference your MIS (detailed design document) and explain your overall
-% philosophy for test case selection.}  
+Modules in the scope:
+\begin{itemize}
+  \item General Digital Filter Module
+  \item Specified IIR Filter Module
+  \item Pan Tompkins Algorithm Module
+  \item Annotated Data RMSE Module
+  \item Rwave Detect Module
+  \item Math Module
+  \item Input Output Processing Module
+  \item Error Handler Module
+  \item Logger Module
+\end{itemize}
 
-% \wss{To save space and time, it may be an option to provide less detail in
-% this section.  
-% For the unit tests you can potentially layout your testing strategy here.
-% That is, you can explain how tests will be selected for each module.  For
-% instance, your test building approach could be test cases for each access
-% program, including one test for normal behaviour and as many tests as needed
-% for edge cases.  Rather than create the details of the input and output here,
-% you could point to the unit testing code.  For this to work, you code needs to
-% be well-documented, with meaningful names for all of the tests.}
+Modules outside the scope:
+\begin{itemize}
+  \item Third-party libraries used for filtering or plotting (e.g., SciPy,
+  Matplotlib).
+\end{itemize}
 
-% \subsection{Unit Testing Scope}
-
-% \wss{What modules are outside of the scope.  If there are modules that are
-%   developed by someone else, then you would say here if you aren't planning on
-%   verifying them.  There may also be modules that are part of your software,
-%   but have a lower priority for verification than others.  If this is the
-%   case, explain your rationale for the ranking of module importance.}
-
-% \subsection{Tests for Functional Requirements}
+\subsection{Tests for Functional Requirements}
 
 % \wss{Most of the verification will be through automated unit testing.  If
 %   appropriate specific modules can be verified by a non-testing based
 %   technique.  That can also be documented in this section.}
 
-% \subsubsection{Module 1}
+\subsubsection{General Digital Filter Module (GDFTest)}
 
-% \wss{Include a blurb here to explain why the subsections below cover the
-%   module.  References to the MIS would be good.  You will want tests from a
-%   black box perspective and from a white box perspective.  Explain to the
-%   reader how the tests were selected.}
+The General Digital Filter Module handles filter coefficient regularization and
+signal filtering. The tests will consist of these two parts.
 
-% \begin{enumerate}
+\begin{enumerate}
 
-% \item{test-id1\\}
+\item{UT-1: RegularizeTest\\}
 
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will be
-%   automatic}
+Type: Functional, Automatic
 					
-% Initial State: 
+Initial State: Filter uninitialized
 					
-% Input: 
+Input: A set of filter parameters without regularization
 					
-% Output: \wss{The expected result for the given inputs}
+Output: The regularized $b$ and $a$ coefficient sequences, where $a[0]$ must be
+$1$.
 
-% Test Case Derivation: \wss{Justify the expected value given in the Output
-% field}
+Test Case Derivation: Each element of the $b$ and $a$ sequences is divided by
+$a[0]$.
 
-% How test will be performed: 
+How test will be performed: Using the GoogleTest framework.
+
+\item{UT-2: LfilterTestSuite\\}
+
+Type: Functional, Automatic
 					
-% \item{test-id2\\}
-
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will be
-%   automatic}
+Initial State: Filter initialized
 					
-% Initial State: 
+Input: The filter parameters derived from SciPy, a signal contaminated with
+Gaussian noise, and the corresponding filtered signal obtained using the
+SciPy-derived parameters.
 					
-% Input: 
-					
-% Output: \wss{The expected result for the given inputs}
+Output: The filtered signal computed by the General Digital Filter Module should
+closely match the pseudo oracle output produced by SciPy.
 
-% Test Case Derivation: \wss{Justify the expected value given in the Output
-% field}
+Test Case Derivation: The test cases are substituted into the filter difference
+equation for computation.
 
-% How test will be performed: 
-
-% \item{...\\}
+How test will be performed: Using the GoogleTest framework.
     
-% \end{enumerate}
+\end{enumerate}
+
+\subsubsection{Specified IIR Filter Module (SIIRTest)}
+
+The Specified IIR Filter Module includes automatic derivation of parameters for
+various filters, so tests have been designed to verify the parameter derivation.
+
+\begin{enumerate}
+
+\item{UT-3: ButterTest\\}
+
+Type: Functional, Automatic
+					
+Initial State: Filter uninitialized
+					
+Input: Cutoff frequency and filter order
+					
+Output: The calculated $b$ and $a$ coefficients for the Butterworth filter
+
+Test Case Derivation: The correct derivation of the $b$ and $a$ coefficients
+based on the specified cutoff frequency and filter order.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
+
+\subsubsection{Pan Tompkins Algorithm Module (AlgTest)}
+
+The Pan Tompkins Algorithm Module is responsible for detecting R-waves from
+preprocessed ECG signals. Tests have been designed to verify the accuracy of
+R-wave detection under various conditions.
+
+\begin{enumerate}
+
+\item{UT-4: RWaveDetectionTest\\}
+
+Type: Functional, Automatic
+					
+Initial State: ECG signal preprocessed
+					
+Input: Preprocessed ECG signal
+					
+Output: The detected R-wave locations
+
+Test Case Derivation: The test cases will verify the correctness of R-wave
+detection by comparing the output (detected R-waves) to known ground truth
+locations in the input signals.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
+
+\subsubsection{Annotated Data RMSE Module (RMSETest)}
+
+The Annotated Data RMSE Module calculates the Root Mean Square Error (RMSE)
+between program-generated index sequences and expert-annotated sequences. Tests
+have been designed to verify the correctness of the RMSE calculation.
+
+\begin{enumerate}
+
+\item{UT-5: calRMSESuite\\}
+
+Type: Functional, Automatic
+					
+Initial State: Input sequences (program-generated and expert-annotated)
+available
+					
+Input: Program-generated index sequence and expert-annotated index sequence
+					
+Output: Calculated RMSE value
+
+Test Case Derivation: The RMSE will be calculated by comparing the
+program-generated index sequence with the expert-annotated sequence, using the
+standard RMSE formula.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
+
+\subsubsection{Rwave Detect Module (RwaveDetectTest)}
+
+The Rwave Detect Module is responsible for detecting R-wave locations from raw,
+unfiltered ECG signals. The test ensures that the module correctly processes the
+signal through the full filtering chain and accurately detects the R-wave
+indices.
+
+\begin{enumerate}
+
+\item{UT-6: RWaveDetectionFilterTest\\}
+
+Type: Functional, Automatic
+					
+Initial State: Raw, unfiltered ECG signal
+					
+Input: Unfiltered ECG signal
+					
+Output: Detected R-wave indices after complete filtering process
+
+Test Case Derivation: The test will check whether the R-wave detection process
+accurately identifies the R-wave locations after the entire filtering chain is
+applied, comparing the detected indices to annotated data.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
+
+\subsubsection{Math Module (MathTest)}
+
+The Math Module focuses on performing mathematical operations, specifically
+testing the squaring function. The test will ensure that the module correctly
+computes the square of each element in a given input sequence.
+
+\begin{enumerate}
+
+\item{UT-7: calSquareSuite\\}
+
+Type: Functional, Automatic
+					
+Initial State: Sequence of floating numbers available for squaring
+					
+Input: A sequence of floating numbers
+					
+Output: A sequence where each element is the square of the corresponding input
+element
+
+Test Case Derivation: The test cases will verify that each element in the input
+sequence is squared correctly, ensuring the expected output for each input
+value.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
+
+\subsubsection{Input Output Processing Module (IOTest)}
+
+The Input Output Processing Module is responsible for reading input data from
+files and processing it into internal data structures. The test will ensure that
+the module correctly handles file input and converts the data into the
+appropriate structure.
+
+\begin{enumerate}
+
+\item{UT-8: read\\}
+
+Type: Functional, Automatic
+					
+Initial State: Input file containing floating-point data ready for processing
+					
+Input: A file containing a sequence of floating-point numbers
+					
+Output: The corresponding data structure representing the sequence of
+floating-point numbers
+
+Test Case Derivation: The test cases will verify that the module correctly reads
+the data from the input file and converts it into the expected internal data
+structure without errors.
+
+How test will be performed: Using the GoogleTest framework.
+
+\item{UT-9: write\\}
+
+Type: Functional, Automatic
+
+Initial State: Internal data structure containing a sequence of floating-point
+numbers
+
+Input: The internal data structure with a sequence of floating-point numbers
+
+Output: A file containing the corresponding sequence of floating-point numbers
+
+Test Case Derivation: The test cases will verify that the module correctly
+writes the data from the internal structure into a file, ensuring the output
+file contains the expected sequence.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
+
+\subsubsection{Error Handler Module (ErrHandlerTest)}
+
+The Error Handler Module is responsible for catching and logging exceptions.
+This test will verify that the module correctly handles exceptions and generates
+appropriate log messages.
+
+\begin{enumerate}
+
+\item{UT-10: ErrTest\\}
+
+Type: Functional, Automatic
+					
+Initial State: Exception mechanism set up in the system
+					
+Input: An exception (e.g., a divide-by-zero error or a file-not-found error)
+					
+Output: A log entry containing the exception details
+
+Test Case Derivation: The test cases will simulate exceptions being thrown, and
+the test will verify that the module correctly logs the exception message with
+the appropriate details.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
+
+\subsubsection{Logger Module (LoggerTest)}
+
+The Error Handler Module is responsible for catching and logging exceptions.
+This test will verify that the module correctly handles exceptions and generates
+appropriate log messages.
+
+\begin{enumerate}
+
+\item{UT-11: outputTest\\}
+
+Type: Functional, Automatic
+					
+Initial State: Logger initialized with a specified log file
+
+Input: Log message and severity level (e.g., "HIGH", "LOW")
+
+Output: The log message written to a log file with the correct severity level
+
+Test Case Derivation: The test will verify that the module correctly logs the
+message with the specified severity level to the output file. It will check that
+the log file contains the expected message in the correct format.
+
+How test will be performed: Using the GoogleTest framework.
+    
+\end{enumerate}
 
 % \subsubsection{Module 2}
 
