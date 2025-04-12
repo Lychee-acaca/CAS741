@@ -42,8 +42,6 @@ April 11, 2025 & 1.0 & Creation\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
-
 \newpage
 
 \tableofcontents
@@ -63,25 +61,50 @@ This document ...
 \section{Nonfunctional Requirements Evaluation}
 
 \subsection{Usability}
-		
-\subsection{Performance}
-
-\subsection{etc.}
-	
-\section{Comparison to Existing Implementation}	
-
-This section will not be appropriate for every project.
 
 \section{Unit Testing}
 
+A comprehensive unit testing process was conducted to validate the
+functionality, robustness, and correctness of the system's core components. A
+total of 89 unit test cases were executed, covering modules including R-wave
+detection, I/O processing, general digital filtering, root mean square error
+(RMSE) evaluation, mathematical operations, and data structures.
+
+\begin{itemize}
+    \item \textbf{Total Test Cases:} 89
+    \item \textbf{Passed:} 89
+    \item \textbf{Failed:} 0
+    \item \textbf{Execution Time:} Approximately 2.18 seconds (with the longest
+    individual test taking about 1.89 seconds)
+\end{itemize}
+
+All unit tests passed successfully, demonstrating high reliability and stability
+of the implemented modules.
+
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from the
-supervisor (when one exists) shaped the final product.  In particular the
-feedback from the Rev 0 demo to the supervisor (or to potential users) should be
-highlighted.}
+Testing revealed the need for more accessible runtime information, leading to
+the addition of a logger module. To facilitate testing and debugging, the logger
+was configured to output messages to a file instead of standard output.
 
 \section{Automated Testing}
+
+Automated testing is integrated into the development workflow via GitHub
+Actions. The workflow is triggered on each push or pull request and performs the
+following checks:
+
+\begin{itemize}
+    \item \textbf{cpplint:} Checks adherence to the Google C++ Style Guide.
+    \item \textbf{cppcheck:} Performs static analysis to detect potential bugs
+    and code quality issues.
+    \item \textbf{Google Test:} Executes the full suite of unit tests described
+    previously.
+    \item \textbf{LCOV:} Generates code coverage reports to monitor test
+    completeness.
+\end{itemize}
+
+This automated setup ensures consistent code quality, early bug detection, and
+continuous test coverage monitoring throughout the development lifecycle.
 		
 \section{Trace to Requirements}
 		
