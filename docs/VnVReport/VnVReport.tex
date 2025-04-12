@@ -138,7 +138,9 @@ following checks:
 
 This automated setup ensures consistent code quality, early bug detection, and
 continuous test coverage monitoring throughout the development lifecycle.
-		
+
+\newpage
+
 \section{Trace to Requirements\label{sec:T2R}}
 
 \begin{table}[htbp!]
@@ -166,6 +168,33 @@ continuous test coverage monitoring throughout the development lifecycle.
 \end{table}
 		
 \section{Trace to Modules\label{sec:T2M}}		
+
+\begin{table}[htbp!]
+  \centering
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+      & M1& M2& M3& M4& M5& M6& M7& M8& M9& M10 \\
+    \hline
+    RegularizeTest              & & X& & & & & & & & \\ \hline
+    LfilterTestSuite            & & X& & & & & & & & \\ \hline
+    ButterTest                  & & & X& & & & & & & \\ \hline
+    RWaveDetectionTest          & & & & & X& & X& & & \\ \hline
+    calRMSESuite                & & & & & & X& & & & \\ \hline
+    RWaveDetectionFilterTest    & & & & & X& & X& & & \\ \hline
+    calSquareSuite              & & & & X& & & & & & \\ \hline
+    read                        &X & & & & & & & X& & \\ \hline
+    write                       &X & & & & & & & X& & \\ \hline
+    ErrTest                     & & & & & & & & & X& \\ \hline
+    outputTest                  & & & & & & & & & & X\\
+    \hline
+    \end{tabular}
+  }
+  \caption{Traceability Matrix Showing the Connections Between Unit Tests and Modules}
+  \label{Table:tc_trace}
+\end{table}
+
+\clearpage
 
 \section{Code Coverage Metrics}
 
@@ -208,28 +237,28 @@ project has been thoroughly tested.
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}
 
-\newpage{}
-\section*{Appendix --- Reflection}
+% \newpage{}
+% \section*{Appendix --- Reflection}
 
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Reflection.
+% The information in this section will be used to evaluate the team members on the
+% graduate attribute of Reflection.
 
-\input{../Reflection.tex}
+% \input{../Reflection.tex}
 
-\begin{enumerate}
-  \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how did
-    you resolve them?
-  \item Which parts of this document stemmed from speaking to your client(s) or
-  a proxy (e.g. your peers)? Which ones were not, and why?
-  \item In what ways was the Verification and Validation (VnV) Plan different
-  from the activities that were actually conducted for VnV?  If there were
-  differences, what changes required the modification in the plan?  Why did
-  these changes occur?  Would you be able to anticipate these changes in future
-  projects?  If there weren't any differences, how was your team able to clearly
-  predict a feasible amount of effort and the right tasks needed to build the
-  evidence that demonstrates the required quality?  (It is expected that most
-  teams will have had to deviate from their original VnV Plan.)
-\end{enumerate}
+% \begin{enumerate}
+%   \item What went well while writing this deliverable? 
+%   \item What pain points did you experience during this deliverable, and how did
+%     you resolve them?
+%   \item Which parts of this document stemmed from speaking to your client(s) or
+%   a proxy (e.g. your peers)? Which ones were not, and why?
+%   \item In what ways was the Verification and Validation (VnV) Plan different
+%   from the activities that were actually conducted for VnV?  If there were
+%   differences, what changes required the modification in the plan?  Why did
+%   these changes occur?  Would you be able to anticipate these changes in future
+%   projects?  If there weren't any differences, how was your team able to clearly
+%   predict a feasible amount of effort and the right tasks needed to build the
+%   evidence that demonstrates the required quality?  (It is expected that most
+%   teams will have had to deviate from their original VnV Plan.)
+% \end{enumerate}
 
 \end{document}
