@@ -3,13 +3,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=red,
-    urlcolor=blue
-}
+\hypersetup{ colorlinks, citecolor=black, filecolor=black, linkcolor=red,
+    urlcolor=blue }
 \usepackage[round]{natbib}
 
 \input{../Comments}
@@ -27,11 +22,10 @@
 
 \section{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X} \toprule {\bf Date} & {\bf Version}
+& {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+April 11, 2025 & 1.0 & Creation\\
 \bottomrule
 \end{tabularx}
 
@@ -82,10 +76,10 @@ This section will not be appropriate for every project.
 
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+\wss{This section should highlight how feedback from the users and from the
+supervisor (when one exists) shaped the final product.  In particular the
+feedback from the Rev 0 demo to the supervisor (or to potential users) should be
+highlighted.}
 
 \section{Automated Testing}
 		
@@ -94,6 +88,42 @@ should be highlighted.}
 \section{Trace to Modules}		
 
 \section{Code Coverage Metrics}
+
+Code coverage for this project is evaluated using the \texttt{lcov} tool.
+Automated coverage reports are generated and uploaded through GitHub Actions to
+Codecov. The coverage dashboard can be accessed at:
+
+\begin{center}
+\url{https://app.codecov.io/gh/Lychee-acaca/CAS741}
+\end{center}
+
+As of the current assessment, the overall test coverage is \textbf{95.01\%}. The
+coverage statistics for each major source file are summarized below:
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{File} & \textbf{Lines Covered / Total} & \textbf{Coverage (\%)} \\
+\hline
+\texttt{RwaveDetect.cpp}         & 15 / 15    & 100.00\% \\
+\texttt{annRMSE.cpp}             & 18 / 19    & 94.74\%  \\
+\texttt{annRMSE.hpp}             & 1 / 1      & 100.00\% \\
+\texttt{dataStructure.hpp}       & 91 / 94    & 96.81\%  \\
+\texttt{generalDigitalFilter.cpp}& 24 / 24    & 100.00\% \\
+\texttt{generalDigitalFilter.hpp}& 10 / 10    & 100.00\% \\
+\texttt{io\_processing.cpp}       & 49 / 55    & 89.09\%  \\
+\texttt{io\_processing.hpp}       & 3 / 3      & 100.00\% \\
+\texttt{logger.cpp}              & 33 / 37    & 89.19\%  \\
+\texttt{logger.hpp}              & 12 / 12    & 100.00\% \\
+\texttt{mmath.cpp}               & 50 / 52    & 96.15\%  \\
+\texttt{pantomp.cpp}             & 127 / 134  & 94.78\%  \\
+\texttt{pantomp.hpp}             & 5 / 5      & 100.00\% \\
+\hline
+\end{tabular}
+\end{center}
+
+This high level of coverage demonstrates that most of the critical logic in the
+project has been thoroughly tested.
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}
@@ -108,8 +138,8 @@ graduate attribute of Reflection.
 
 \begin{enumerate}
   \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how
-    did you resolve them?
+  \item What pain points did you experience during this deliverable, and how did
+    you resolve them?
   \item Which parts of this document stemmed from speaking to your client(s) or
   a proxy (e.g. your peers)? Which ones were not, and why?
   \item In what ways was the Verification and Validation (VnV) Plan different
