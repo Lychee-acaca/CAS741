@@ -159,26 +159,53 @@ potential users currently exist?}
 
 \section{Reflection on Project Management (LO24)}
 
-\plt{This question focuses on processes and tools used for project management.}
-
 \subsection{How Does Your Project Management Compare to Your Development Plan}
 
-\plt{Did you follow your Development plan, with respect to the team meeting
-plan, team communication plan, team member roles and workflow plan.  Did you use
-the technology you planned on using?}
+The project closely followed the initial development plan. The technologies
+outlined in the plan, such as Docker for containerization, Google Test for unit
+testing, GitHub Actions for continuous integration, \texttt{cpplint} for code
+style enforcement, and \texttt{cppcheck} for static code analysis, were all
+implemented as intended. These tools facilitated a streamlined development
+process and ensured code quality and consistency.
 
 \subsection{What Went Well?}
 
-\plt{What went well for your project management in terms of processes and
-technology?}
+Several aspects of the project management were successful:
+
+\begin{itemize}
+    \item \textbf{Tool Integration:} The integration of Docker, Google Test,
+    GitHub Actions, \texttt{cpplint}, and \texttt{cppcheck} into the workflow
+    enhanced development efficiency and code reliability.
+    \item \textbf{Continuous Integration:} GitHub Actions provided automated
+    testing and analysis, allowing for immediate feedback on code changes and
+    reducing the likelihood of introducing errors.
+\end{itemize}
 
 \subsection{What Went Wrong?}
 
-\plt{What went wrong in terms of processes and technology?}
+One challenge encountered was with the implementation of Git pre-commit hooks.
+Initially, pre-commit hooks were planned to automatically run tests before each
+commit. However, issues related to file read/write permissions prevented certain
+tests, especially those involving file operations, from executing correctly in
+the pre-commit context. Since the continuous integration pipeline via GitHub
+Actions already performed comprehensive testing, maintaining the pre-commit
+hooks was deemed redundant and subsequently removed from the workflow.
 
-\subsection{What Would you Do Differently Next Time?}
+\subsection{What Would You Do Differently Next Time?}
 
-\plt{What will you do differently for your next project?}
+In future projects, the following adjustments would be made:
+
+\begin{itemize}
+    \item \textbf{Evaluate Tool Redundancy:} Assess the necessity and potential
+    overlap of tools like pre-commit hooks and continuous integration pipelines
+    to avoid redundant efforts.
+    \item \textbf{Focus on Effective Tools:} Prioritize tools that offer the
+    most value and align with the workflow, ensuring that each tool serves a
+    distinct and necessary purpose.
+    \item \textbf{Early Testing of Tools:} Conduct thorough testing of all
+    planned tools in the early stages of the project to identify and address any
+    compatibility or functionality issues.
+\end{itemize}
 
 \section{Reflection on Capstone}
 
