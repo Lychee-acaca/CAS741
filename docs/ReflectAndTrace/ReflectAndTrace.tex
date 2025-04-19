@@ -134,13 +134,17 @@ been approved by the course instructor as included in your problem statement.}
 
 \section{Design Iteration (LO11 (PrototypeIterate))}
 
-\plt{Explain how you arrived at your final design and implementation.  How did
-the design evolve from the first version to the final version?} 
-
-\plt{Don't just say what you changed, say why you changed it.  The needs of the
-client should be part of the explanation.  For example, if you made changes in
-response to usability testing, explain what the testing found and what changes
-it led to.}
+The final design of the R-peak detection system retained the core structure of
+the Pan-Tompkins algorithm without modifications to its detection logic. The
+primary design iteration focused on handling abnormal or invalid input cases
+more effectively. During early testing, issues were identified when the system
+encountered empty, non-numeric, or improperly formatted ECG data, which could
+lead to runtime errors or undefined behavior. To address this, input validation
+and exception handling mechanisms were introduced, ensuring that the system
+could safely detect and report invalid inputs without interrupting execution.
+These adjustments improved the robustness and user safety of the application,
+aligning the implementation with practical usage scenarios where unexpected or
+corrupted input data might occur.
 
 \section{Design Decisions (LO12)}
 
