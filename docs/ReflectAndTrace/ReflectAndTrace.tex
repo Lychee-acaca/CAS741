@@ -2,6 +2,7 @@
 
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{float}
 
 \title{Reflection and Traceability Report on \progname}
 
@@ -16,54 +17,105 @@
 
 \maketitle
 
-\plt{Reflection is an important component of getting the full benefits from a
-learning experience.  Besides the intrinsic benefits of reflection, this
-document will be used to help the TAs grade how well your team responded to
-feedback.  Therefore, traceability between Revision 0 and Revision 1 is and
-important part of the reflection exercise.  In addition, several CEAB (Canadian
-Engineering Accreditation Board) Learning Outcomes (LOs) will be assessed based
-on your reflections.}
-
 \section{Changes in Response to Feedback}
 
-\plt{Summarize the changes made over the course of the project in response to
-feedback from TAs, the instructor, teammates, other teams, the project
-supervisor (if present), and from user testers.}
-
-\plt{For those teams with an external supervisor, please highlight how the feedback 
-from the supervisor shaped your project.  In particular, you should highlight the 
-supervisor's response to your Rev 0 demonstration to them.}
-
-\plt{Version control can make the summary relatively easy, if you used issues
-and meaningful commits.  If you feedback is in an issue, and you responded in
-the issue tracker, you can point to the issue as part of explaining your
-changes.  If addressing the issue required changes to code or documentation, you
-can point to the specific commit that made the changes.  Although the links are
-helpful for the details, you should include a label for each item of feedback so
-that the reader has an idea of what each item is about without the need to click
-on everything to find out.}
-
-\plt{If you were not organized with your commits, traceability between feedback
-and commits will not be feasible to capture after the fact.  You will instead
-need to spend time writing down a summary of the changes made in response to
-each item of feedback.}
-
-\plt{You should address EVERY item of feedback.  A table or itemized list is
-recommended.  You should record every item of feedback, along with the source of
-that feedback and the change you made in response to that feedback.  The
-response can be a change to your documentation, code, or development process.
-The response can also be the reason why no changes were made in response to the
-feedback.  To make this information manageable, you will record the feedback and
-response separately for each deliverable in the sections that follow.}
-
-\plt{If the feedback is general or incomplete, the TA (or instructor) will not
-be able to grade your response to feedback.  In that case your grade on this
-document, and likely the Revision 1 versions of the other documents will be
-low.} 
+The following subsections organize the feedback received throughout the project
+according to the corresponding deliverables: the Software Requirements
+Specification (SRS) and Hazard Analysis, the Design and Design Documentation,
+and the Verification and Validation (VnV) Plan and Report.
 
 \subsection{SRS and Hazard Analysis}
 
+This section summarizes the modifications made to the SRS document in response
+to the feedback received. The revisions primarily focused on improving document
+structure and enhancing content clarity, as recommended by Dr. Smith in issue
+\href{https://github.com/Lychee-acaca/CAS741/issues/13}{\#13}.
+
+As shown in Table \ref{tab:SRSChanges}, the following changes were made in
+response to the feedback received.
+
+\begin{table}[ht] 
+\centering
+\begin{tabular}{|p{8cm}|p{2.5cm}|}
+\hline
+\textbf{Feedback Description} & \textbf{PR Number} \\
+\hline
+Refine the description of intended readers to better reflect their academic and
+technical background. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline
+Clarify the scope of requirements by explicitly defining what is included and
+excluded from the project. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline
+Improve clarity in the description of system constraints, specifically the
+requirement for low-performance embedded devices. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline
+Clarify the terminology and definitions, such as for QRS complex and R-wave. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline
+Refactor functional and nonfunctional requirements to ensure consistency and
+clarity. & \href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline
+\end{tabular}
+\caption{Summary of Changes for SRS and Hazard Analysis}
+\label{tab:SRSChanges}
+\end{table}
+
 \subsection{Design and Design Documentation}
+
+This section summarizes the modifications made to the MG and MIS document in
+response to the feedback received. The revisions primarily focused on improving
+the clarity of the module hierarchy and enhancing the explanation of each
+module's functionality, as Dr. Smith recommended in issue
+\href{https://github.com/Lychee-acaca/CAS741/issues/21}{\#21}. In addition,
+Domain Expert Baptiste raised an issue related to document hyperlinks in
+\href{https://github.com/Lychee-acaca/CAS741/issues/25}{\#25}., which made the
+document easier to read.
+
+As shown in Table \ref{tab:MG}, the following changes were made in response to
+the feedback received according to the MG Document.
+
+\begin{table}[ht] \centering \begin{tabular}{|p{8cm}|p{2.5cm}|} \hline
+\textbf{Feedback Description} & \textbf{PR Number} \\
+\hline Refactor the module hierarchy to improve clarity and structure. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline Clarify the services provided by the different modules, especially the
+Rwave Detect and Math modules. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline
+Improve the description of implementation methods and algorithms used in the
+Pan-Tompkins Algorithm and Specified IIR Filter modules. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline Refine the explanations of the Input Output Processing and Error Handler
+modules. & \href{https://github.com/Lychee-acaca/CAS741/pull/35}{\#35} \\
+\hline
+\end{tabular} \caption{Summary of Changes for MG Document} \label{tab:MG}
+\end{table}
+
+As shown in Table \ref{tab:MIS}, the following changes were made in response to
+the feedback received according to the MIS Document.
+
+\begin{table}[ht] 
+\centering 
+\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+\hline
+\textbf{Feedback Description} & \textbf{PR Number} \\
+\hline 
+Add previously missing Environment Variables for certain modules. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/37}{\#37} \\
+\hline 
+Correct the transition semantics in the Access Routine section. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/37}{\#37} \\
+\hline 
+Add several hyperlinks to improve navigation between modules. &
+\href{https://github.com/Lychee-acaca/CAS741/pull/26}{\#26} \\
+\hline 
+\end{tabular} 
+\caption{Summary of Changes for MIS Document} 
+\label{tab:MIS}
+\end{table}
 
 \subsection{VnV Plan and Report}
 
@@ -82,13 +134,17 @@ been approved by the course instructor as included in your problem statement.}
 
 \section{Design Iteration (LO11 (PrototypeIterate))}
 
-\plt{Explain how you arrived at your final design and implementation.  How did
-the design evolve from the first version to the final version?} 
-
-\plt{Don't just say what you changed, say why you changed it.  The needs of the
-client should be part of the explanation.  For example, if you made changes in
-response to usability testing, explain what the testing found and what changes
-it led to.}
+The final design of the R-peak detection system retained the core structure of
+the Pan-Tompkins algorithm without modifications to its detection logic. The
+primary design iteration focused on handling abnormal or invalid input cases
+more effectively. During early testing, issues were identified when the system
+encountered empty, non-numeric, or improperly formatted ECG data, which could
+lead to runtime errors or undefined behavior. To address this, input validation
+and exception handling mechanisms were introduced, ensuring that the system
+could safely detect and report invalid inputs without interrupting execution.
+These adjustments improved the robustness and user safety of the application,
+aligning the implementation with practical usage scenarios where unexpected or
+corrupted input data might occur.
 
 \section{Design Decisions (LO12)}
 
@@ -98,47 +154,92 @@ it led to.}
 
 \section{Economic Considerations (LO23)}
 
-\plt{Is there a market for your product? What would be involved in marketing your 
-product? What is your estimate of the cost to produce a version that you could 
-sell?  What would you charge for your product?  How many units would you have to 
-sell to make money? If your product isn't something that would be sold, like an 
-open source project, how would you go about attracting users?  How many potential 
-users currently exist?}
+This project is a reimplementation of the Pan-Tompkins algorithm for R-peak
+detection in ECG signals and is intended as an open-source tool rather than a
+commercial product. There are no associated production costs or pricing
+considerations. The project will be shared on a public repository platform with
+clear documentation and example usage to attract developers, students, and
+researchers in biomedical signal processing. Its value lies in providing a
+reliable, accessible, and well-documented implementation for educational use and
+integration into other health-related applications.
 
 \section{Reflection on Project Management (LO24)}
 
-\plt{This question focuses on processes and tools used for project management.}
-
 \subsection{How Does Your Project Management Compare to Your Development Plan}
 
-\plt{Did you follow your Development plan, with respect to the team meeting plan, 
-team communication plan, team member roles and workflow plan.  Did you use the 
-technology you planned on using?}
+The project closely followed the initial development plan. The technologies
+outlined in the plan, such as Docker for containerization, Google Test for unit
+testing, GitHub Actions for continuous integration, \texttt{cpplint} for code
+style enforcement, and \texttt{cppcheck} for static code analysis, were all
+implemented as intended. These tools facilitated a streamlined development
+process and ensured code quality and consistency.
 
 \subsection{What Went Well?}
 
-\plt{What went well for your project management in terms of processes and 
-technology?}
+Several aspects of the project management were successful:
+
+\begin{itemize}
+    \item \textbf{Tool Integration:} The integration of Docker, Google Test,
+    GitHub Actions, \texttt{cpplint}, and \texttt{cppcheck} into the workflow
+    enhanced development efficiency and code reliability.
+    \item \textbf{Continuous Integration:} GitHub Actions provided automated
+    testing and analysis, allowing for immediate feedback on code changes and
+    reducing the likelihood of introducing errors.
+\end{itemize}
 
 \subsection{What Went Wrong?}
 
-\plt{What went wrong in terms of processes and technology?}
+One challenge encountered was with the implementation of Git pre-commit hooks.
+Initially, pre-commit hooks were planned to automatically run tests before each
+commit. However, issues related to file read/write permissions prevented certain
+tests, especially those involving file operations, from executing correctly in
+the pre-commit context. Since the continuous integration pipeline via GitHub
+Actions already performed comprehensive testing, maintaining the pre-commit
+hooks was deemed redundant and subsequently removed from the workflow.
 
-\subsection{What Would you Do Differently Next Time?}
+\subsection{What Would You Do Differently Next Time?}
 
-\plt{What will you do differently for your next project?}
+In future projects, the following adjustments would be made:
+
+\begin{itemize}
+    \item \textbf{Evaluate Tool Redundancy:} Assess the necessity and potential
+    overlap of tools like pre-commit hooks and continuous integration pipelines
+    to avoid redundant efforts.
+    \item \textbf{Focus on Effective Tools:} Prioritize tools that offer the
+    most value and align with the workflow, ensuring that each tool serves a
+    distinct and necessary purpose.
+    \item \textbf{Early Testing of Tools:} Conduct thorough testing of all
+    planned tools in the early stages of the project to identify and address any
+    compatibility or functionality issues.
+\end{itemize}
 
 \section{Reflection on Capstone}
 
-\plt{This question focuses on what you learned during the course of the capstone project.}
+This section summarizes the relevant academic courses and additional technical
+skills that contributed to the successful completion of the R-wave detection
+project.
 
 \subsection{Which Courses Were Relevant}
 
-\plt{Which of the courses you have taken were relevant for the capstone project?}
+The capstone project for R-peak detection primarily drew on knowledge from
+several relevant courses. The \textit{C++ Programming} course provided essential
+skills for system implementation, including memory management, modular
+programming, and testing frameworks. Additionally, the \textit{Digital Signal
+Processing} and \textit{Signals and Systems} courses were directly applicable,
+as they covered the theoretical foundation of ECG signal processing, filtering
+techniques, and time-domain analysis, which are critical components of the
+Pan-Tompkins algorithm.
 
 \subsection{Knowledge/Skills Outside of Courses}
 
-\plt{What skills/knowledge did you need to acquire for your capstone project
-that was outside of the courses you took?}
+Beyond coursework, several additional skills were required for this project.
+Experience with continuous integration tools, such as GitHub Actions, was
+necessary to establish automated testing and analysis pipelines. Knowledge of
+Docker was also acquired to manage a consistent development environment.
+Furthermore, familiarity with code analysis tools like \texttt{cpplint} and
+\texttt{cppcheck} was developed to ensure code quality and compliance with C++
+standards. These tools and practices, although not covered in previous courses,
+were essential for maintaining a reliable and maintainable codebase in a modern
+software development workflow.
 
 \end{document}
